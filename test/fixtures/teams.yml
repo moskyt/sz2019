@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  number: 1
+  district: 1
+  stage: MyString
+  ts_registered: 2019-05-15 15:34:40
+  ts_rules_submitted: 2019-05-15 15:34:40
+  ts_about_submitted: 2019-05-15 15:34:40
+  ts_departed: 2019-05-15 15:34:40
+  ts_arrived: 2019-05-15 15:34:40
+  participants_json: MyText
+  points: 1
+  points_about: 1
+  points_rules: 1
+  preference_departure: MyString
+  preference_hotspot: 1
+  departure: MyString
+  trail: MyString
+  hotspot: 1
+  points_dinner: 1
+  points_cleanup: 1
+
+two:
+  name: MyString
+  number: 1
+  district: 1
+  stage: MyString
+  ts_registered: 2019-05-15 15:34:40
+  ts_rules_submitted: 2019-05-15 15:34:40
+  ts_about_submitted: 2019-05-15 15:34:40
+  ts_departed: 2019-05-15 15:34:40
+  ts_arrived: 2019-05-15 15:34:40
+  participants_json: MyText
+  points: 1
+  points_about: 1
+  points_rules: 1
+  preference_departure: MyString
+  preference_hotspot: 1
+  departure: MyString
+  trail: MyString
+  hotspot: 1
+  points_dinner: 1
+  points_cleanup: 1
