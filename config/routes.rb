@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   
   root 'dashboard#home'
   
-  get '/team/:uid' => "teams#dashboard"
+  get "/update-time-widget/:id" => "dashboard#update_time_widget"
+  
+  get '/team/:uid' => "teams#dashboard", as: :dashboard
   get '/team/:uid/initial_info' => "teams#dashboard"
 
   get '/team/:uid/choose_transport' => "teams#choose_transport"
@@ -12,8 +14,8 @@ Rails.application.routes.draw do
   post '/team/:uid/rule_test' => "teams#rule_test_submit"
   get '/team/:uid/rule_test_results' => "teams#rule_test_results"
 
-  get '/team/:uid/rule_test' => "teams#dashboard"
-  post '/team/:uid/rule_test' => "teams#dashboard"
+  get '/team/:uid/about_poster' => "teams#about_poster"
+  post '/team/:uid/about_poster' => "teams#about_poster_submit"
   get '/team/:uid/rule_test_results' => "teams#dashboard"
   
   namespace :admin do

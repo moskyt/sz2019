@@ -1,34 +1,23 @@
 source 'https://rubygems.org'
 
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11'
-# Use sqlite3 as the database for Active Record
-gem 'mysql2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
+gem "bootstrap-datepicker-rails"
+gem "bootstrap-sass"
+gem "bootstrap_form", "~> 2.7"
+gem "rubyXL"
 gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-gem 'jquery-rails'
+gem 'haml'
 gem 'jbuilder', '~> 2.0'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'jquery-rails'
+gem 'mysql2'
+gem 'rails', '4.2.11'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.0'
   gem 'byebug'
+  gem "annotate"
 end
 
 group :development do
@@ -39,3 +28,6 @@ group :development do
   # gem 'spring'
 end
 
+group :production do
+  gem 'execjs'
+end

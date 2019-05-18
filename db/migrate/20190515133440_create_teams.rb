@@ -3,7 +3,7 @@ class CreateTeams < ActiveRecord::Migration
     create_table :teams do |t|
       t.string :name
       t.integer :number
-      t.integer :district
+      t.string :district
       t.string :stage
       t.datetime :ts_registered
       t.datetime :ts_rules_submitted

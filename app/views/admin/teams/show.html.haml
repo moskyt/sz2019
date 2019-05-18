@@ -1,0 +1,49 @@
+%h1 Hlídka #{@team.name} [#{@team.number}]
+
+%table.table
+  %tbody
+    %tr
+      %th Středisko / oddíl
+      %td= @team.district
+      
+%table.table
+  %tbody 
+    %tr
+      %th Body celkem
+      %td= @team.points
+    %tr
+      %th Čas (konečná)
+      %td= @team.time_end.strftime("%d. %m. %Y %H:%M:%S")
+    %tr
+      %th Čas (zbývá)
+      %td
+        = format_time_left @team.time_left
+        %br
+        = time_widget @team
+
+%table.table
+  %tbody
+    %tr.bg-primary
+      %th(colspan=3) Před závodem
+    %tr
+      %th Představení družiny
+      %td= @team.points_about
+      %td 48
+    %tr
+      %th Registrace na SZ
+      %td= @team.points_register
+      %td 18
+    %tr
+      %th Test z pravidel
+      %td= @team.points_rules
+      %td 36
+    %tr
+      %th Doprava na závod
+      %td= @team.points_transport
+      %td 36
+    %tr
+      %th Celkem
+      %td= @team.sum_before
+      %td= 48+18+36+36
+      
+      

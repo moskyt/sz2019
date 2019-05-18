@@ -1,0 +1,8 @@
+cs: 
+  activerecord:
+    attributes:
+      team:
+        number: "Číslo"
+        name: "Název"
+        district: "Okres+středisko+oddíl"
+        category: "Kategorie"

@@ -11,6 +11,26 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require time_widget
+
+function after_load() {
+
+  // attributes = Trix.config.blockAttributes
+  // attributes["heading1"].tagName = "h2"
+
+  $('body').tooltip({selector: '[data-show=tooltip]', container: "body"});
+  $('body').popover({selector: '[data-show=popover]', html: true});
+
+  // $('a.colorbox').colorbox({scalePhotos: true, maxHeight: "90%", maxWidth: "90%", transition: 'fade'})
+
+}
+
+$(document).on('nested:fieldAdded', function(event){
+  after_load();
+});
+
+$(function() {
+  after_load();
+});
