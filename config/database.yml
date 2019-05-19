@@ -20,4 +20,4 @@ test:
 production:
   <<: *default
   username: sz2019
-  password: abcdef
+  password: W9uNpRdPBBZh5XzT
