@@ -19,7 +19,7 @@
     %p Představení vaší družiny jsme dostali a po uzávěrce jej vyhodnotíme.
     %p Náhled nahrané fotky.
   - else 
-    %p Představení vaší družiny zatím nemáme, až ho budete mít, nahrajte fotku pomocí formuláře níže. Čas máte do #{Team.about_deadline.strftime("%d. %m. %Y %H:%M")}.
+    %p Představení vaší družiny zatím nemáme, až ho budete mít, nahrajte fotku pomocí formuláře níže. Čas máte do #{Team.about_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.about_deadline)}.
   %div.well.well-sm
     Nahrát fotku - formulář.
 - else Time.now < Team.about_deadline 
@@ -40,7 +40,7 @@
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a po uzávěrce je vyhodnotíme.
   - else 
-    %p Test z pravidel závodu jste ještě nevyplnili, máte čas do #{Team.rules_deadline.strftime("%d. %m. %Y %H:%M")}.
+    %p Test z pravidel závodu jste ještě nevyplnili, máte čas do #{Team.rules_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.rules_deadline)}.
     %div.well.well-sm
       %p
         Pozor, jakmile se do testu pustíte, máte půl hodiny na jeho vyplnění a máte jenom jeden pokus.

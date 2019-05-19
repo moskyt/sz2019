@@ -42,7 +42,7 @@ class Team < ActiveRecord::Base
   end
   
   def self.time1
-    DateTime.new(2019, 6,  8, 12, 0, 0)
+    DateTime.new(2019, 6, 10, 12, 0, 0)
   end
   
   def self.time2

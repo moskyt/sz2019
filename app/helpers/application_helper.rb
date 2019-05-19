@@ -11,21 +11,34 @@ module ApplicationHelper
   def time_widget(team)
     sss = team.time_left
     d = sss.floor
-    h = ((sss          ).frac * 24).round
-    m = ((sss * 24     ).frac * 60).round
-    s = ((sss * 24 * 60).frac * 60).round
+    h = ((sss          ).frac * 24).floor
+    m = ((sss * 24     ).frac * 60).floor
+    s = ((sss * 24 * 60).frac * 60).floor
     
     content_tag :span, class: "time-widget", data: {team_id: team.id, d: d, h: h, m: m, s: s, n: 0} do
       format_time_left(sss)
-    end
+    end    
+  end
+
+  def test_time_widget(time_end)
+    sss = time_end.to_datetime - Time.now.to_datetime
+    # sss /= 24*3600
+
+    d = sss.floor
+    h = ((sss          ).frac * 24).floor
+    m = ((sss * 24     ).frac * 60).floor
+    s = ((sss * 24 * 60).frac * 60).floor
     
+    content_tag :span, class: "time-widget", data: {done_url: nil, d: d, h: h, m: m, s: s, n: 0} do
+      format_time_left(sss)
+    end    
   end
   
   def format_time_left(sss)    
     d = sss.floor
-    h = ((sss          ).frac * 24).round
-    m = ((sss * 24     ).frac * 60).round
-    s = ((sss * 24 * 60).frac * 60).round
+    h = ((sss          ).frac * 24).floor
+    m = ((sss * 24     ).frac * 60).floor
+    s = ((sss * 24 * 60).frac * 60).floor
     "" + (d > 0 ? "#{d}d " : "") + "%02d:%02d:%02d" % [h,m,s]
   end
 

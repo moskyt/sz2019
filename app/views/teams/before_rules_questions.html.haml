@@ -1,6 +1,6 @@
 %h1 Modul Před závodem :: test z pravidel SZ
 
-%p Test začal v #{@team.ts_rules_started.strftime("%H:%M:%S")}
+%p Test začal v #{@team.ts_rules_started.strftime("%H:%M:%S")}, končí v #{(@team.ts_rules_started + 30.minutes).strftime("%H:%M:%S")}, zbývá #{test_time_widget(@team.ts_rules_started + 30.minutes)}
 
 - Team.rules_questions.each_with_index do |q, qi|
   %p= q

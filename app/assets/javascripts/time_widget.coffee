@@ -38,7 +38,7 @@ updateTimers = ->
     $(this).attr("data-n", n)
     $(this).html((if d > 0 then "" + d + "d " else "") + (if h > 9 then "" else "0") + h + ":" + (if m > 9 then "" else "0") + m + ":" + (if s > 9 then "" else "0") + s)
     
-    if n > 120
+    if n > 120 && id && ((id + 0) > 0)
       $(this).attr("data-n", 0)
       $(this).data("n", 0)
       console.log("Updating via ajax - " + id)
