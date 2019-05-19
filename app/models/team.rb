@@ -38,23 +38,27 @@ class Team < ActiveRecord::Base
   validates_attachment_content_type :about_photo, content_type: /\Aimage\/.*\z/
   
   def self.time0
-    DateTime.new(2019, 5, 15, 12, 0, 0)    
+    DateTime.civil_from_format(:local, 2019, 5, 15, 12, 0, 0)    
   end
   
   def self.time1
-    DateTime.new(2019, 6, 10, 12, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 6, 10, 12, 0, 0)
   end
   
   def self.time2
-    DateTime.new(2019, 9, 15, 12, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 9, 15, 12, 0, 0)
   end
   
   def self.about_deadline
-    DateTime.new(2019, 6, 3, 20, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 6, 3, 20, 0, 0)
   end
   
   def self.rules_deadline
-    DateTime.new(2019, 6, 3, 12, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 6, 3, 12, 0, 0)
+  end
+  
+  def self.register_deadline
+    DateTime.civil_from_format(:local, 2019, 6, 2, 20, 0, 0)
   end
   
   def self.max_points

@@ -2,9 +2,32 @@
 
 %p Popsat modul před závodem.
 
-%p Zdůraznit tři disciplíny.
+%p Zdůraznit tři disciplíny před odjezdem + doprava co se vyhodnotí později.
 
 %p Obecné info k dalším dvěma modulům.
+
+%h2 Registrace na SZ
+
+- if @team.points_register
+  %p Vyhodnoceno. Získali jste #{@team.points_register} / #{Team.points_register_max} b.
+- elsif Time.now < Team.register_deadline 
+  %p Zadání.
+
+  %p Maximum za tuto disciplínu je #{Team.points_register_max} bodů.
+
+  - if !@team.replies_register.blank?
+    %p Vaši přihlášku jsme dostali a po uzávěrce ji vyhodnotíme.
+  - else 
+    %p Přihlášku na závod jste ještě nevyplnili, máte čas do #{Team.register_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.register_deadline)}.
+    %div.well.well-sm
+      %p
+        link na registrační formulář
+        /= link_to "Vyplnit přihlášku na závod", before_register_start_team_path(uid: @team.uid), class: "btn btn-success"
+- else Time.now < Team.register_deadline 
+  - if !@team.replies_register.blank?
+    %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.
+  - else 
+    %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_register_max} bodů.
 
 %h2 Představení družiny
 

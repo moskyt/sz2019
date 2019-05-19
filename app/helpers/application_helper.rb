@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def test_time_widget(time_end)
-    sss = time_end.to_datetime - Time.now.to_datetime
+    sss = time_end.to_datetime - Time.now.localtime.to_datetime
     # sss /= 24*3600
 
     d = sss.floor
