@@ -5,19 +5,20 @@ Rails.application.routes.draw do
   get "/update-time-widget/:id" => "dashboard#update_time_widget"
   
   get '/team/:uid' => "teams#dashboard", as: :dashboard
-  get '/team/:uid/initial_info' => "teams#dashboard"
 
-  get '/team/:uid/choose_transport' => "teams#choose_transport"
-  post '/team/:uid/choose_transport' => "teams#choose_transport_submit"
+  get '/team/:uid/before_rules_start' => "teams#before_rules_start", as: :before_rules_start_team
 
-  get '/team/:uid/rule_test' => "teams#rule_test"
-  post '/team/:uid/rule_test' => "teams#rule_test_submit"
-  get '/team/:uid/rule_test_results' => "teams#rule_test_results"
-
-  get '/team/:uid/about_poster' => "teams#about_poster"
-  post '/team/:uid/about_poster' => "teams#about_poster_submit"
-  get '/team/:uid/rule_test_results' => "teams#dashboard"
-  
+  # get '/team/:uid/choose_transport' => "teams#choose_transport"
+  # post '/team/:uid/choose_transport' => "teams#choose_transport_submit"
+  #
+  # get '/team/:uid/rule_test' => "teams#rule_test"
+  # post '/team/:uid/rule_test' => "teams#rule_test_submit"
+  # get '/team/:uid/rule_test_results' => "teams#rule_test_results"
+  #
+  # get '/team/:uid/about_poster' => "teams#about_poster"
+  # post '/team/:uid/about_poster' => "teams#about_poster_submit"
+  # get '/team/:uid/rule_test_results' => "teams#dashboard"
+    
   get "/admin" => "admin/admin#dashboard", as: :admin
   namespace :admin do
     resources :teams do

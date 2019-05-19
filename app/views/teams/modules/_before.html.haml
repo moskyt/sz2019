@@ -8,13 +8,13 @@
 
 %h2 Představení družiny
 
-%p Zadání.
-
-%p Maximum za tuto disciplínu je #{Team.points_about_max} bodů.
-
 - if @team.points_about
   %p Vyhodnoceno. Získali jste #{@team.points_about} / #{Team.points_about_max} b.
 - elsif Time.now < Team.about_deadline 
+  %p Zadání.
+
+  %p Maximum za tuto disciplínu je #{Team.points_about_max} bodů.
+
   - if @team.about_photo.file?
     %p Představení vaší družiny jsme dostali a po uzávěrce jej vyhodnotíme.
     %p Náhled nahrané fotky.
@@ -30,21 +30,22 @@
 
 %h2 Test z pravidel SZ
 
-%p Zadání.
-
-%p Maximum za tuto disciplínu je #{Team.points_rules_max} bodů.
-
 - if @team.points_rules
   %p Vyhodnoceno. Získali jste #{@team.points_rules} / #{Team.points_rules_max} b.
 - elsif Time.now < Team.rules_deadline 
+  %p Zadání.
+
+  %p Maximum za tuto disciplínu je #{Team.points_rules_max} bodů.
+
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a po uzávěrce je vyhodnotíme.
   - else 
     %p Test z pravidel závodu jste ještě nevyplnili, máte čas do #{Team.rules_deadline.strftime("%d. %m. %Y %H:%M")}.
     %div.well.well-sm
-      Pozor, jakmile se do testu pustíte, máte půl hodiny na jeho vyplnění a máte jenom jeden pokus.
-      %br
-      Odkaz na formulář.
+      %p
+        Pozor, jakmile se do testu pustíte, máte půl hodiny na jeho vyplnění a máte jenom jeden pokus.
+      %p
+        = link_to "Vyplnit test z pravidel", before_rules_start_team_path(uid: @team.uid), class: "btn btn-success"
 - else Time.now < Team.rules_deadline 
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.
