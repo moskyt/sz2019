@@ -89,8 +89,13 @@ class Team < ActiveRecord::Base
     ]
   end
   
+  def self.time_per_point
+    # 1 / Team.max_points.to_f * (Team.time2 - Team.time1) 
+    3.0 / 24.0
+  end
+  
   def time_end
-    Team.time1 + points.to_f / Team.max_points * (Team.time2 - Team.time1) 
+    Team.time1 + points.to_f * Team.time_per_point
   end
   
   def time_left
