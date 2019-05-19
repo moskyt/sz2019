@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   
   get '/team/:uid' => "teams#dashboard", as: :dashboard
 
+  get '/team/:uid/module_before' => "teams#module_before", as: :module_before_team
+  get '/team/:uid/module_survival' => "teams#module_survival", as: :module_survival_team
+  get '/team/:uid/module_race' => "teams#module_race", as: :module_race_team
+  get '/team/:uid/module_results' => "teams#module_results", as: :module_results_team
+
   get '/team/:uid/before_rules_start' => "teams#before_rules_start", as: :before_rules_start_team
 
   # get '/team/:uid/choose_transport' => "teams#choose_transport"

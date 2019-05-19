@@ -118,6 +118,7 @@ class Team < ActiveRecord::Base
   end
   
   def current_module
+
     m = "before"
     if 7 > 8
       m = "survival"

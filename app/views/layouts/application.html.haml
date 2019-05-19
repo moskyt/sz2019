@@ -21,17 +21,38 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to :root, :class => 'navbar-brand' do
-            %div
-              InTime
-              - if @team
+          - if @team
+            = link_to dashboard_path(uid: @team.uid), :class => 'navbar-brand' do
+              %div
+                InTime
                 = ":: #{@team.name}"
+          - else
+            = link_to "InTime", :root, :class => 'navbar-brand'
               
 
         %div.collapse.navbar-collapse#aer-navbar-collapse
           - if @team
             %ul.nav.navbar-nav
-              %li= link_to "Přehled", dashboard_path(uid: @team.uid)
+              %li
+                - if %w{before survival race results}.include?(@team.current_module)
+                  = link_to "Před závodem", module_before_team_path(uid: @team.uid)
+                - else
+                  = link_js "Před závodem", disabled: true
+              %li
+                - if %w{survival race results}.include?(@team.current_module)
+                  = link_to "Přežití", module_survival_team_path(uid: @team.uid)
+                - else
+                  = link_js "Přežití", disabled: true
+              %li
+                - if %w{race results}.include?(@team.current_module)
+                  = link_to "Závod", module_race_team_path(uid: @team.uid)
+                - else
+                  = link_js "Závod", disabled: true
+              %li
+                - if %w{results}.include?(@team.current_module)
+                  = link_to "Výsledky", module_results_team_path(uid: @team.uid)
+                - else
+                  = link_js "Výsledky", disabled: true
             %ul.nav.navbar-nav.navbar-right
               %li.time
                 %a
