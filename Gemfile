@@ -19,6 +19,8 @@ gem "RedCloth"
 gem "rinku"
 
 group :development, :test do
+  gem "capistrano", "~> 2.0"
+  gem "capistrano-mysqldump", "1.1.1", :require => false
   gem 'sqlite3', '~> 1.3.0'
   gem 'byebug'
   gem "annotate"

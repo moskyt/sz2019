@@ -77,6 +77,18 @@ class Team < ActiveRecord::Base
     36
   end
   
+  def self.rules_questions
+    [
+      "Kolik je na světě myší?",
+      "Jsou psi jeleni?",
+      "Má pivo pivo?",
+      "Kdo se nakrájel pozítří?",
+      "Kdo je moje stáří?",
+      "Smí shnilci do ulic?",
+      "Je existence zrušena?",      
+    ]
+  end
+  
   def time_end
     Team.time1 + points.to_f / Team.max_points * (Team.time2 - Team.time1) 
   end
