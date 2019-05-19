@@ -10,5 +10,5 @@ class Admin::TeamsController < Admin::AdminController
   def show
     @team = Team.find(params[:id])
   end
-  
+    
 end

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/team/:uid/module_results' => "teams#module_results", as: :module_results_team
 
   get '/team/:uid/before_rules_start' => "teams#before_rules_start", as: :before_rules_start_team
+  post '/team/:uid/before_rules_start' => "teams#before_rules_go"
+  get '/team/:uid/before_rules_questions' => "teams#before_rules_questions", as: :before_rules_questions_team
 
   # get '/team/:uid/choose_transport' => "teams#choose_transport"
   # post '/team/:uid/choose_transport' => "teams#choose_transport_submit"
