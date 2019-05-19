@@ -42,17 +42,17 @@
                 - if %w{survival race results}.include?(@team.current_module)
                   = link_to "Přežití", module_survival_team_path(uid: @team.uid)
                 - else
-                  = link_js "Přežití", disabled: true
+                  = link_js "Přežití", class: "disabled"
               %li
                 - if %w{race results}.include?(@team.current_module)
                   = link_to "Závod", module_race_team_path(uid: @team.uid)
                 - else
-                  = link_js "Závod", disabled: true
+                  = link_js "Závod", class: "disabled"
               %li
                 - if %w{results}.include?(@team.current_module)
                   = link_to "Výsledky", module_results_team_path(uid: @team.uid)
                 - else
-                  = link_js "Výsledky", disabled: true
+                  = link_js "Výsledky", class: "disabled"
             %ul.nav.navbar-nav.navbar-right
               %li.time
                 %a

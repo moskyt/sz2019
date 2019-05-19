@@ -19,3 +19,10 @@
 @import "brands.min";
 @import "solid.min";
 
+.navbar-inverse .navbar-nav > li > a.disabled {
+  color: #777;
+}
+
+.navbar-inverse .navbar-nav > li > a.disabled:hover {
+  color: #777;
+}

@@ -20,4 +20,8 @@ class TeamsController < ApplicationController
     @team = Team.where(uid: params[:uid]).first
   end
   
+  def before_rules_start
+    @team = Team.where(uid: params[:uid]).first
+  end
+  
 end
