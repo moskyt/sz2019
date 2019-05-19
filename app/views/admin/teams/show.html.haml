@@ -1,12 +1,21 @@
 %h1 Hlídka #{@team.name} [#{@team.number}]
 
 %table.table
+  %colgroup
+    %col.col-sm-4
+    %col.col-sm-8
   %tbody
     %tr
       %th Středisko / oddíl
       %td= @team.district
+    %tr
+      %th UID
+      %td= @team.uid
       
 %table.table
+  %colgroup
+    %col.col-sm-4
+    %col.col-sm-8
   %tbody 
     %tr
       %th Body celkem
@@ -22,28 +31,40 @@
         = time_widget @team
 
 %table.table
+  %colgroup
+    %col.col-sm-4
+    %col.col-sm-4
+    %col.col-sm-4
   %tbody
     %tr.bg-primary
       %th(colspan=3) Před závodem
     %tr
       %th Představení družiny
       %td= @team.points_about
-      %td 48
+      %td= Team.points_about_max
     %tr
       %th Registrace na SZ
       %td= @team.points_register
-      %td 18
+      %td= Team.points_register_max
     %tr
       %th Test z pravidel
       %td= @team.points_rules
-      %td 36
+      %td= Team.points_rules_max
     %tr
       %th Doprava na závod
       %td= @team.points_transport
-      %td 36
+      %td= Team.points_transport_max
     %tr
       %th Celkem
       %td= @team.sum_before
-      %td= 48+18+36+36
+      %td= Team.points_register_max+Team.points_transport_max+Team.points_rules_max+Team.points_about_max
       
       
+%h5 Odkazy / QR
+
+%table.table
+  %tbody
+    %tr
+      %th Hlavní stránka
+      %td= link_to dashboard_url(uid: @team.uid), dashboard_url(uid: @team.uid)
+      %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe

@@ -34,6 +34,8 @@
 class Team < ActiveRecord::Base
   
   before_save :set_uid, :eval_points
+  has_attached_file :about_photo
+  validates_attachment_content_type :about_photo, content_type: /\Aimage\/.*\z/
   
   def self.time0
     DateTime.new(2019, 5, 15, 12, 0, 0)    
@@ -47,8 +49,32 @@ class Team < ActiveRecord::Base
     DateTime.new(2019, 9, 15, 12, 0, 0)
   end
   
+  def self.about_deadline
+    DateTime.new(2019, 6, 3, 20, 0, 0)
+  end
+  
+  def self.rules_deadline
+    DateTime.new(2019, 6, 3, 12, 0, 0)
+  end
+  
   def self.max_points
-    (18+48+36+36) + 4 * 36 + 13 * 36
+    (points_register_max+points_transport_max+points_about_max+points_rules_max) + 4 * 36 + 13 * 36
+  end
+  
+  def self.points_about_max
+    48
+  end
+  
+  def self.points_register_max
+    18
+  end
+  
+  def self.points_transport_max
+    36
+  end
+  
+  def self.points_rules_max
+    36
   end
   
   def time_end
@@ -72,6 +98,20 @@ class Team < ActiveRecord::Base
       require 'digest/md5'
       Digest::MD5.hexdigest("sz 2019 #{id}")[0..10]
     end
+  end
+  
+  def current_module
+    m = "before"
+    if 7 > 8
+      m = "survival"
+      if 7 > 8
+        m = "race"
+        if 7 > 8
+          m = "results"
+        end
+      end
+    end
+    m
   end
   
 end

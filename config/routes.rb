@@ -18,8 +18,15 @@ Rails.application.routes.draw do
   post '/team/:uid/about_poster' => "teams#about_poster_submit"
   get '/team/:uid/rule_test_results' => "teams#dashboard"
   
+  get "/admin" => "admin/admin#dashboard", as: :admin
   namespace :admin do
     resources :teams do
+      collection do
+        get :race
+        get :before
+        get :survival
+        get :results
+      end
     end
   end
   

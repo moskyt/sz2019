@@ -8,7 +8,6 @@
     %link{rel: "icon", href: favicon_path, type: "image/x-icon"}
     %link{rel: "shortcut icon", href: favicon_path, type: "image/x-icon"}
     = stylesheet_link_tag :application, :media => "all"
-    = stylesheet_link_tag :teams, :media => "all"
     = javascript_include_tag :application
     = csrf_meta_tags
     = yield(:head)
@@ -21,21 +20,17 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to :root, :class => 'navbar-brand' do
+          = link_to :admin, :class => 'navbar-brand' do
             %div
-              InTime
-              - if @team
-                = ":: #{@team.name}"
-              
+              InTime / ADMIN
 
         %div.collapse.navbar-collapse#aer-navbar-collapse
-          - if @team
-            %ul.nav.navbar-nav
-              %li= link_to "Přehled", dashboard_path(uid: @team.uid)
-            %ul.nav.navbar-nav.navbar-right
-              %li.time
-                %a
-                  = time_widget(@team)
+          %ul.nav.navbar-nav
+            %li= link_to "Hlídky", [:admin, :teams]
+            %li= link_to "Před závodem", [:before, :admin, :teams]
+            %li= link_to "Přežití", [:survival, :admin, :teams]
+            %li= link_to "Závod", [:race, :admin, :teams]
+            %li= link_to "Výsledky", [:results, :admin, :teams]
           
     %div.container#content
       %div(style="padding-top:60px;padding-bottom:20px")

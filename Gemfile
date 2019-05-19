@@ -11,8 +11,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mysql2'
 gem 'rails', '4.2.11'
+gem "rqrcode"
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem "paperclip"
+gem "RedCloth"
+gem "rinku"
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.0'
