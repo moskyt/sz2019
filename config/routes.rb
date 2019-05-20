@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  
+
   root 'dashboard#home'
-  
+
   get "/update-time-widget/:id" => "dashboard#update_time_widget"
-  
+
   get '/team/:uid' => "teams#dashboard", as: :dashboard
 
   get '/team/:uid/module_before' => "teams#module_before", as: :module_before_team
@@ -20,6 +20,10 @@ Rails.application.routes.draw do
 
   get '/team/:uid/before_register_start' => "teams#before_register_start", as: :before_register_start_team
 
+  post '/team/:uid/before_about_upload' => "teams#before_about_upload", as: :before_about_upload_team
+  get '/team/:uid/before_about_ok' => "teams#before_about_ok", as: :before_about_ok_team
+  get '/team/:uid/before_about_failed' => "teams#before_about_failed", as: :before_about_failed_team
+
   # get '/team/:uid/choose_transport' => "teams#choose_transport"
   # post '/team/:uid/choose_transport' => "teams#choose_transport_submit"
   #
@@ -30,7 +34,7 @@ Rails.application.routes.draw do
   # get '/team/:uid/about_poster' => "teams#about_poster"
   # post '/team/:uid/about_poster' => "teams#about_poster_submit"
   # get '/team/:uid/rule_test_results' => "teams#dashboard"
-    
+
   get "/admin" => "admin/admin#dashboard", as: :admin
   namespace :admin do
     resources :teams do
@@ -42,7 +46,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,21 +1,22 @@
 updateTimers = ->
   console.dir("Updating timers")
   $(".time-widget").each ->
-    
+
     id = $(this).data("team-id")
-    
+    url = $(this).data("done-url")
+
     h0 = $(this).data("h")
     m0 = $(this).data("m")
     s0 = $(this).data("s")
     d0 = $(this).data("d")
     n0 = $(this).data("n")
-    
+
     d = d0
     h = h0
     m = m0
     s = s0 - 1
     n = n0 + 1
-    
+
     if (s < 0)
       s += 60
       m -= 1
@@ -25,7 +26,7 @@ updateTimers = ->
     if (h < 0)
       h += 24
       d -= 1
-    
+
     $(this).data("h", h)
     $(this).data("m", m)
     $(this).data("s", s)
@@ -37,7 +38,10 @@ updateTimers = ->
     $(this).attr("data-d", d)
     $(this).attr("data-n", n)
     $(this).html((if d > 0 then "" + d + "d " else "") + (if h > 9 then "" else "0") + h + ":" + (if m > 9 then "" else "0") + m + ":" + (if s > 9 then "" else "0") + s)
-    
+
+    if d < 0 && url?.length
+      window.location = url
+
     if n > 120 && id && ((id + 0) > 0)
       $(this).attr("data-n", 0)
       $(this).data("n", 0)
@@ -52,6 +56,6 @@ updateTimers = ->
         success: (data, textStatus, jqXHR) ->
           console.log "Successful AJAX call: #{data}"
           e.replaceWith data
-      
+
 $ ->
   window.setInterval(updateTimers, 1000)

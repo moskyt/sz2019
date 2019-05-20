@@ -8,7 +8,7 @@
 = form_tag do
   = hidden_field_tag "n", @n
   %p= q
-  %p= text_field_tag "reply", @r, style: "width:100%"
+  %p= text_field_tag "reply", @r, style: "width:100%", autocomplete: "off"
   %div.row
     %div.col-xs-4.text-center
       - if @n > 1
@@ -18,4 +18,3 @@
         = submit_tag "Další", name: "next", class: "btn btn-primary"
     %div.col-xs-4.text-center
       = submit_tag "Ukončit", name: "close", class: "btn btn-danger", data: {confirm: "Opravdu chceš ukončit test?"}
-      

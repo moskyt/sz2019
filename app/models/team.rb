@@ -39,55 +39,55 @@
 #
 
 class Team < ActiveRecord::Base
-  
+
   before_save :set_uid, :eval_points
   has_attached_file :about_photo
-  validates_attachment_content_type :about_photo, content_type: /\Aimage\/.*\z/
-  
+  validates_attachment_content_type :about_photo, :content_type => ['application/pdf']
+
   def self.time0
-    DateTime.civil_from_format(:local, 2019, 5, 15, 12, 0, 0)    
+    DateTime.civil_from_format(:local, 2019, 5, 15, 12, 0, 0)
   end
-  
+
   def self.time1
     DateTime.civil_from_format(:local, 2019, 6, 10, 12, 0, 0)
   end
-  
+
   def self.time2
     DateTime.civil_from_format(:local, 2019, 9, 15, 12, 0, 0)
   end
-  
+
   def self.about_deadline
     DateTime.civil_from_format(:local, 2019, 6, 3, 20, 0, 0)
   end
-  
+
   def self.rules_deadline
     DateTime.civil_from_format(:local, 2019, 6, 3, 12, 0, 0)
   end
-  
+
   def self.register_deadline
     DateTime.civil_from_format(:local, 2019, 6, 2, 20, 0, 0)
   end
-  
+
   def self.max_points
     (points_register_max+points_transport_max+points_about_max+points_rules_max) + 4 * 36 + 13 * 36
   end
-  
+
   def self.points_about_max
     48
   end
-  
+
   def self.points_register_max
     18
   end
-  
+
   def self.points_transport_max
     36
   end
-  
+
   def self.points_rules_max
     36
   end
-  
+
   def self.rules_questions
     [
       "Kolik je na světě myší?",
@@ -96,32 +96,32 @@ class Team < ActiveRecord::Base
       "Kdo se nakrájel pozítří?",
       "Kdo je moje stáří?",
       "Smí shnilci do ulic?",
-      "Je existence zrušena?",      
+      "Je existence zrušena?",
     ]
   end
-  
+
   def self.time_per_point
-    # 1 / Team.max_points.to_f * (Team.time2 - Team.time1) 
+    # 1 / Team.max_points.to_f * (Team.time2 - Team.time1)
     3.0 / 24.0
   end
-  
+
   def time_end
     Team.time1 + points.to_f * Team.time_per_point
   end
-  
+
   def time_left
     time_end - Time.now.to_datetime
   end
-  
+
   def eval_points
     self.points = sum_before
   end
-  
+
   def sum_before
     (points_transport || 0) + (points_about || 0) + (points_rules || 0) + (points_register || 0)
   end
-  
-  def set_uid    
+
+  def set_uid
     self.uid ||= begin
       if id
         require 'digest/md5'
@@ -131,7 +131,7 @@ class Team < ActiveRecord::Base
       end
     end
   end
-  
+
   def current_module
 
     m = "before"
@@ -146,7 +146,7 @@ class Team < ActiveRecord::Base
     end
     m
   end
-  
+
   def replies_rules_
     if replies_rules.blank?
       {}
@@ -154,5 +154,5 @@ class Team < ActiveRecord::Base
       JSON[replies_rules]
     end
   end
-  
+
 end

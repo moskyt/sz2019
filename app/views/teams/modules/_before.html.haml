@@ -1,6 +1,6 @@
 %h1 Modul Před závodem
 
-%p Popsat modul před závodem.
+%p V tomto modulu budete moci prokázat vlastní připravenost na vlastní závod. Hodnocené součásti vidíte níže. Je bezpodmínečně nutné, abyste zde uvedené úkoly dokončili do níže uvedeného času, jinak nebudete moci závodit ani přistoupit k plnění úkolů v modulu Přežití.
 
 %p Zdůraznit tři disciplíny před odjezdem + doprava co se vyhodnotí později.
 
@@ -10,66 +10,75 @@
 
 - if @team.points_register
   %p Vyhodnoceno. Získali jste #{@team.points_register} / #{Team.points_register_max} b.
-- elsif Time.now < Team.register_deadline 
+- elsif Time.now < Team.register_deadline
   %p Zadání.
 
   %p Maximum za tuto disciplínu je #{Team.points_register_max} bodů.
 
   - if !@team.replies_register.blank?
     %p Vaši přihlášku jsme dostali a po uzávěrce ji vyhodnotíme.
-  - else 
+  - else
     %p Přihlášku na závod jste ještě nevyplnili, máte čas do #{Team.register_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.register_deadline)}.
     %div.well.well-sm
       %p
         link na registrační formulář
         /= link_to "Vyplnit přihlášku na závod", before_register_start_team_path(uid: @team.uid), class: "btn btn-success"
-- else Time.now < Team.register_deadline 
+- else Time.now < Team.register_deadline
   - if !@team.replies_register.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.
-  - else 
+  - else
     %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_register_max} bodů.
 
 %h2 Představení družiny
 
 - if @team.points_about
   %p Vyhodnoceno. Získali jste #{@team.points_about} / #{Team.points_about_max} b.
-- elsif Time.now < Team.about_deadline 
-  %p Zadání.
+- elsif Time.now < Team.about_deadline
+  %p Vytvořte fotoprezentaci v programu #{link_to "Prezentace od Googlu", "https://www.google.com/intl/cs_cz/slides/about/"} své závodní hlídky ze základního kola, ze které bude vidět, jak se jmenujete, jak vypadáte, co máte rádi, nebo zkrátka cokoli, co byste o sobě chtěli říci. Nemáte-li google účet, založte si jej přes skautis zdarma (požádejte o pomoc svého střediskového administrátora Skautisu o pomoc).
 
   %p Maximum za tuto disciplínu je #{Team.points_about_max} bodů.
 
   - if @team.about_photo.file?
     %p Představení vaší družiny jsme dostali a po uzávěrce jej vyhodnotíme.
-    %p Náhled nahrané fotky.
-  - else 
+    %p
+      - if @team.about_photo.file?
+        %strong Nahraná prezentace:
+        = link_to File.basename(@team.about_photo.path), @team.about_photo.url
+        = "[%.1f kB]" % (@team.about_photo.size / 1000)
+
+  - else
     %p Představení vaší družiny zatím nemáme, až ho budete mít, nahrajte fotku pomocí formuláře níže. Čas máte do #{Team.about_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.about_deadline)}.
   %div.well.well-sm
-    Nahrát fotku - formulář.
-- else Time.now < Team.about_deadline 
+    Nahrát prezentaci ve formátu PDF.
+    = form_tag before_about_upload_team_path(uid: @team.uid), {multipart: true, method: :post} do
+      = file_field_tag "about_pdf" #, "PDF prezentace"
+      %br
+      = submit_tag "Nahrát", class: "btn btn-primary"
+- else Time.now < Team.about_deadline
   - if @team.about_photo.file?
     %p Představení vaší družiny máme a pracujeme na jeho vyhodnocení.
-  - else 
+  - else
     %p Už je po uzávěrce a představení družiny jste nedodali – škoda, mohli jste mít až #{Team.points_about_max} bodů.
 
 %h2 Test z pravidel SZ
 
 - if @team.points_rules
   %p Vyhodnoceno. Získali jste #{@team.points_rules} / #{Team.points_rules_max} b.
-- elsif Time.now < Team.rules_deadline 
-  %p Zadání.
+- elsif @team.ts_rules_started and (@team.ts_rules_started + 30.minutes).to_datetime < Time.now.to_datetime
+  %p Test jste spustili a čas vám vypršel v #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%d. %m. %Y %H:%M")} – škoda, mohli jste mít až #{Team.points_rules_max} bodů.
+- elsif Time.now < Team.rules_deadline
+  %p Seznamte se s #{link_to "pravidly Svojsíkova závodu", "https://krizovatka.skaut.cz/zpravodajstvi/4120-pravidla-svojsikova-zavodu-2019?autologin=1"}. Seznámení věnujte čas podle potřeby, při samotném vyplňování testu však s pravidly už nepracujte. Budete tázáni na 18 otázek, na odpovědi máte 30 minut. Buďte fair.
 
   %p Maximum za tuto disciplínu je #{Team.points_rules_max} bodů.
 
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a po uzávěrce je vyhodnotíme.
-  - else 
+  - else
     %p Test z pravidel závodu jste ještě nevyplnili, máte čas do #{Team.rules_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.rules_deadline)}.
     %div.well.well-sm
       - if @team.ts_rules_started
-        - if (@team.ts_rules_started + 30.minutes).to_datetime < Time.now.to_datetime
-          %p Test jste spustili a čas vám vypršel #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%H:%M")}.
-        - else
-          %p 
+        - if (@team.ts_rules_started + 30.minutes).to_datetime > Time.now.to_datetime
+          %p
             Test už jste spustili a máte čas ho dokončit do #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%H:%M:%S")} - zbývá #{test_time_widget(@team.ts_rules_started + 30.minutes)}
           %p
             = link_to "Otevřít test z pravidel", before_rules_questions_team_path(uid: @team.uid), class: "btn btn-success"
@@ -78,10 +87,10 @@
           Pozor, jakmile se do testu pustíte, máte půl hodiny na jeho vyplnění a máte jenom jeden pokus.
         %p
           = link_to "Vyplnit test z pravidel", before_rules_start_team_path(uid: @team.uid), class: "btn btn-success"
-- else Time.now < Team.rules_deadline 
+- else Time.now < Team.rules_deadline
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.
-  - else 
+  - else
     %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_rules_max} bodů.
 
 %h2 Doprava na SZ
