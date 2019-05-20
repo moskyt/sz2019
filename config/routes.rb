@@ -14,10 +14,11 @@ Rails.application.routes.draw do
   get '/team/:uid/before_rules_start' => "teams#before_rules_start", as: :before_rules_start_team
   post '/team/:uid/before_rules_start' => "teams#before_rules_go"
   get '/team/:uid/before_rules_questions' => "teams#before_rules_questions", as: :before_rules_questions_team
+  post '/team/:uid/before_rules_questions' => "teams#before_rules_questions"
+  get '/team/:uid/before_rules_done' => "teams#before_rules_done", as: :before_rules_done_team
+  get '/team/:uid/before_rules_expired' => "teams#before_rules_expired", as: :before_rules_expired_team
 
   get '/team/:uid/before_register_start' => "teams#before_register_start", as: :before_register_start_team
-  post '/team/:uid/before_register_start' => "teams#before_register_go"
-  get '/team/:uid/before_register_questions' => "teams#before_register_questions", as: :before_register_questions_team
 
   # get '/team/:uid/choose_transport' => "teams#choose_transport"
   # post '/team/:uid/choose_transport' => "teams#choose_transport_submit"

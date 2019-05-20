@@ -65,10 +65,19 @@
   - else 
     %p Test z pravidel závodu jste ještě nevyplnili, máte čas do #{Team.rules_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.rules_deadline)}.
     %div.well.well-sm
-      %p
-        Pozor, jakmile se do testu pustíte, máte půl hodiny na jeho vyplnění a máte jenom jeden pokus.
-      %p
-        = link_to "Vyplnit test z pravidel", before_rules_start_team_path(uid: @team.uid), class: "btn btn-success"
+      - if @team.ts_rules_started
+        - if (@team.ts_rules_started + 30.minutes).to_datetime < Time.now.to_datetime
+          %p Test jste spustili a čas vám vypršel #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%H:%M")}.
+        - else
+          %p 
+            Test už jste spustili a máte čas ho dokončit do #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%H:%M:%S")} - zbývá #{test_time_widget(@team.ts_rules_started + 30.minutes)}
+          %p
+            = link_to "Otevřít test z pravidel", before_rules_questions_team_path(uid: @team.uid), class: "btn btn-success"
+      - else
+        %p
+          Pozor, jakmile se do testu pustíte, máte půl hodiny na jeho vyplnění a máte jenom jeden pokus.
+        %p
+          = link_to "Vyplnit test z pravidel", before_rules_start_team_path(uid: @team.uid), class: "btn btn-success"
 - else Time.now < Team.rules_deadline 
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.

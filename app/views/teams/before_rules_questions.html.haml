@@ -1,7 +1,21 @@
 %h1 Modul Před závodem :: test z pravidel SZ
 
-%p Test začal v #{@team.ts_rules_started.strftime("%H:%M:%S")}, končí v #{(@team.ts_rules_started + 30.minutes).strftime("%H:%M:%S")}, zbývá #{test_time_widget(@team.ts_rules_started + 30.minutes)}
+%p Test začal v #{@team.ts_rules_started.strftime("%H:%M:%S")}, končí v #{(@team.ts_rules_started + 30.minutes).strftime("%H:%M:%S")}, zbývá #{test_time_widget(@team.ts_rules_started + 30.minutes, before_rules_expired_team_path(uid: @team.uid))}
 
-- Team.rules_questions.each_with_index do |q, qi|
+%h5 Otázka #{@n} z #{@nn}
+- q = Team.rules_questions[@n-1]
+
+= form_tag do
+  = hidden_field_tag "n", @n
   %p= q
-  %p= text_field_tag "rules[q#{qi+1}]"
+  %p= text_field_tag "reply", @r, style: "width:100%"
+  %div.row
+    %div.col-xs-4.text-center
+      - if @n > 1
+        = submit_tag "Předchozí", name: "prev", class: "btn btn-default"
+    %div.col-xs-4.text-center
+      - if @n < @nn
+        = submit_tag "Další", name: "next", class: "btn btn-primary"
+    %div.col-xs-4.text-center
+      = submit_tag "Ukončit", name: "close", class: "btn btn-danger", data: {confirm: "Opravdu chceš ukončit test?"}
+      

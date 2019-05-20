@@ -1,4 +1,6 @@
-%h1 Hlídka #{@team.name} [#{@team.number}]
+%h1 
+  Hlídka #{@team.name} [#{@team.number}]
+  = link_to icon("edit", "upravit"), [:edit, :admin, @team]
 
 %table.table
   %colgroup
@@ -70,3 +72,24 @@
       %th Hlavní stránka
       %td= link_to dashboard_url(uid: @team.uid), dashboard_url(uid: @team.uid)
       %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
+      
+      
+      
+%h5 Test z pravidel
+
+- if @team.ts_rules_started
+  %p Začátek: #{@team.ts_rules_started.strftime("%d. %m. %Y %H:%M:%S")}
+- else
+  %p Zatím nezačali vyplňovat.
+
+- if @team.replies_rules.blank?
+  %p Nevyplnili.
+- else 
+  %table.table
+    %tbody
+      - data = @team.replies_rules_
+      - Team.rules_questions.each_with_index do |q,qi|
+        %tr
+          %td= qi+1
+          %td= q
+          %td= data["q#{qi+1}"]

@@ -42,5 +42,6 @@ Sýkorky	středisko STOVKA Praha	148. oddíl skautů a skautek RYS	8	dívčí	-	
       raise "pizau #{row.inspect}"
     end 
     t.save
+    t.save
   end
 end

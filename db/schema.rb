@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190519174958) do
+ActiveRecord::Schema.define(version: 20190520060824) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",                     limit: 255
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20190519174958) do
     t.text     "replies_register",         limit: 65535
     t.text     "replies_rules",            limit: 65535
     t.datetime "ts_rules_started"
+    t.datetime "ts_rules_done"
   end
 
 end

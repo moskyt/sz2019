@@ -20,7 +20,7 @@ module ApplicationHelper
     end    
   end
 
-  def test_time_widget(time_end)
+  def test_time_widget(time_end, done_url = nil)
     sss = time_end.to_datetime - Time.now.localtime.to_datetime
     # sss /= 24*3600
 
@@ -29,7 +29,7 @@ module ApplicationHelper
     m = ((sss * 24     ).frac * 60).floor
     s = ((sss * 24 * 60).frac * 60).floor
     
-    content_tag :span, class: "time-widget", data: {done_url: nil, d: d, h: h, m: m, s: s, n: 0} do
+    content_tag :span, class: "time-widget", data: {done_url: done_url, d: d, h: h, m: m, s: s, n: 0} do
       format_time_left(sss)
     end    
   end

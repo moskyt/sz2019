@@ -27,8 +27,10 @@
         %td
           - if team.points_rules
             #{team.points_rules} b
+          - elsif team.ts_rules_started and !team.ts_rules_done and team.ts_rules_started + 30.minutes > Time.now  
+            = icon("play", "začali vyplňovat v #{team.ts_rules_started}")
           - elsif !team.replies_rules.blank?
-            = icon("circle", "vyplnili, vyhodnotit!")
+            = icon("circle", "vyplnili (#{team.ts_rules_done}), vyhodnotit!")
           - else
             = icon("times", "zatím nevyplnili")
         %td
