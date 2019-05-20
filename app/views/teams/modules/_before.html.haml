@@ -19,13 +19,12 @@
     %p Vaši přihlášku jsme dostali a po uzávěrce ji vyhodnotíme.
   - else
     %p Přihlášku na závod jste ještě nevyplnili, máte čas do #{Team.register_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.register_deadline)}.
-    %div.well.well-sm
-      %p
-        link na registrační formulář
-        /= link_to "Vyplnit přihlášku na závod", before_register_start_team_path(uid: @team.uid), class: "btn btn-success"
+  %div.well.well-sm
+    %p
+      = link_to((@team.replies_register.blank? ? "Vyplnit přihlášku na závod" : "Upravit přihlášku na závod"), before_register_team_path(uid: @team.uid), class: "btn btn-success")
 - else Time.now < Team.register_deadline
   - if !@team.replies_register.blank?
-    %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.
+    %p Vaši přihlášku jsme dostali a pracujeme na jejím vyhodnocení.
   - else
     %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_register_max} bodů.
 

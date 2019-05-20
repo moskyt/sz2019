@@ -24,6 +24,18 @@ class TeamsController < ApplicationController
     @team = Team.where(uid: params[:uid]).first
   end
 
+  def before_register
+    @team = Team.where(uid: params[:uid]).first
+    @data = @team.replies_register_
+  end
+
+  def before_register_submit
+    flash[:notice] = "Přihláška uložena."
+    @team = Team.where(uid: params[:uid]).first
+    @team.update_attribute :replies_register, params[:register].to_json
+    redirect_to module_before_team_path(uid: @team.uid)
+  end
+
   def before_rules_go
     @team = Team.where(uid: params[:uid]).first
     unless @team.ts_rules_started

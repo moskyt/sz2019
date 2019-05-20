@@ -155,4 +155,12 @@ class Team < ActiveRecord::Base
     end
   end
 
+  def replies_register_
+    if replies_register.blank?
+      {}
+    else
+      JSON[replies_register]
+    end
+  end
+
 end

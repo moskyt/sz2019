@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   get '/team/:uid/before_rules_done' => "teams#before_rules_done", as: :before_rules_done_team
   get '/team/:uid/before_rules_expired' => "teams#before_rules_expired", as: :before_rules_expired_team
 
-  get '/team/:uid/before_register_start' => "teams#before_register_start", as: :before_register_start_team
+  get '/team/:uid/before_register' => "teams#before_register", as: :before_register_team
+  post '/team/:uid/before_register_submit' => "teams#before_register_submit", as: :before_register_submit_team
 
   post '/team/:uid/before_about_upload' => "teams#before_about_upload", as: :before_about_upload_team
   get '/team/:uid/before_about_ok' => "teams#before_about_ok", as: :before_about_ok_team

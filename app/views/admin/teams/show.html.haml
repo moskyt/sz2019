@@ -1,4 +1,4 @@
-%h1 
+%h1
   Hlídka #{@team.name} [#{@team.number}]
   = link_to icon("edit", "upravit"), [:edit, :admin, @team]
 
@@ -13,12 +13,12 @@
     %tr
       %th UID
       %td= @team.uid
-      
+
 %table.table
   %colgroup
     %col.col-sm-4
     %col.col-sm-8
-  %tbody 
+  %tbody
     %tr
       %th Body celkem
       %td= @team.points
@@ -62,8 +62,8 @@
       %th Celkem
       %td= @team.sum_before
       %td= Team.points_register_max+Team.points_transport_max+Team.points_rules_max+Team.points_about_max
-      
-      
+
+
 %h5 Odkazy / QR
 
 %table.table
@@ -72,9 +72,9 @@
       %th Hlavní stránka
       %td= link_to dashboard_url(uid: @team.uid), dashboard_url(uid: @team.uid)
       %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
-      
-      
-      
+
+
+
 %h5 Test z pravidel
 
 - if @team.ts_rules_started
@@ -84,7 +84,7 @@
 
 - if @team.replies_rules.blank?
   %p Nevyplnili.
-- else 
+- else
   %table.table
     %tbody
       - data = @team.replies_rules_
@@ -93,3 +93,22 @@
           %td= qi+1
           %td= q
           %td= data["q#{qi+1}"]
+
+%h5 Prezentace družiny
+
+- if @team.about_photo.file?
+  %p= link_to File.basename(@team.about_photo.path), @team.about_photo.url
+- else
+  %p Nevyplnili.
+
+%h5 Registrace na závod
+
+- if @team.replies_register.blank?
+  %p Nevyplnili.
+- else
+  - data = @team.replies_register_
+  %pre= data.inspect
+
+%h5 Doprava na SZ
+
+%p TBD

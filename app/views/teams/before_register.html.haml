@@ -1,0 +1,22 @@
+= bootstrap_form_tag url: before_register_submit_team_path(uid: @team.uid) do |f|
+  = f.form_group do
+    = f.label "name"
+    %br
+    = @team.name
+  = f.form_group do
+    = f.label :district, "Středisko / oddíl"
+    %br
+    = @team.district
+  %h4 Doprovod (rover / vedoucí)
+  %p Uveďte kontakt na doprovod, který s vámi bude absolvovat modul Přežití.
+  = f.text_field "register[supervisor_name]", label: "Jméno", value: @data["supervisor_name"]
+  = f.text_field "register[supervisor_email]", label: "E-mail", value: @data["supervisor_email"]
+  = f.text_field "register[supervisor_phone]", label: "Telefon", value: @data["supervisor_phone"]
+  %h4 Rádce družiny
+  = f.text_field "register[head_name]", label: "Jméno", value: @data["head_name"]
+  = f.text_field "register[head_email]", label: "E-mail", value: @data["head_email"]
+  = f.text_field "register[head_phone]", label: "Telefon", value: @data["head_phone"]
+  %h5 Další členové
+  - (1..7).each do |i|
+    = f.text_field "register[name#{i}]", label: "(#{i}) jméno", value: @data["name#{i}"]
+  = submit_tag "Uložit", class: "btn btn-success"
