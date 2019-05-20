@@ -55,13 +55,9 @@
       %td= @team.points_rules
       %td= Team.points_rules_max
     %tr
-      %th Doprava na závod
-      %td= @team.points_transport
-      %td= Team.points_transport_max
-    %tr
       %th Celkem
       %td= @team.sum_before
-      %td= Team.points_register_max+Team.points_transport_max+Team.points_rules_max+Team.points_about_max
+      %td= Team.points_register_max+Team.points_rules_max+Team.points_about_max
 
 
 %h5 Odkazy / QR
