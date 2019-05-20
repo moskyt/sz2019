@@ -38,12 +38,16 @@ Rails.application.routes.draw do
 
   get "/admin" => "admin/admin#dashboard", as: :admin
   namespace :admin do
+    get "/parameters" => "parameters#index", as: :parameters
+    post "/parameters" => "parameters#update"
     resources :teams do
       collection do
         get :race
         get :before
         get :survival
         get :results
+        get :grade_before_rules
+        post :grade_before_rules
       end
     end
   end

@@ -1,0 +1,29 @@
+%h1 Bodování :: před závodem :: test z pravidel
+
+= form_tag do
+  %table.table
+    - Team.all.each do |team|
+      - if team.should_grade_before_rules?
+        %thead
+          %tr
+            %th(colspan=1)= team.number
+            %th(colspan=4)= team.name
+          %tr
+            %th= "#" 
+            %th otázka
+            %th odpověď
+            %th správná
+            %th body
+        %tbody
+          - data = team.replies_rules_
+          - Team.rules_questions.each_with_index do |qqa,qi|
+            %tr
+              %td= qi+1
+              %td= qqa[0]
+              %td= data["q#{qi+1}"]
+              %td= qqa[1]
+              %td
+                = text_field_tag "points_rules[#{team.id}][]", "", autocomplete: "off"
+                (max=3)
+  = submit_tag "Uložit", class: "btn btn-primary"
+      

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190520120313) do
+ActiveRecord::Schema.define(version: 20190520135451) do
+
+  create_table "parameters", force: :cascade do |t|
+    t.string   "key",        limit: 255
+    t.string   "value",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",                     limit: 255

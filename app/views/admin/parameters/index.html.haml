@@ -1,0 +1,9 @@
+= bootstrap_form_tag do |f|
+  = f.form_group do
+    %div.col-sm-4
+      = f.label "Aktuální modul"
+    %div.col-sm-4
+      = hidden_field_tag "key", "current_module"
+      = select_tag "value", options_for_select([["Před závodem", "before"], ["Přežití", "survival"], ["Závod", "race"], ["Výsledky", "results"]],  Parameter["current_module"])
+    %div.col-sm-4
+      = submit_tag "Nastavit", class: "btn btn-default"

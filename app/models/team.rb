@@ -90,13 +90,13 @@ class Team < ActiveRecord::Base
 
   def self.rules_questions
     [
-      "Kolik je na světě myší?",
-      "Jsou psi jeleni?",
-      "Má pivo pivo?",
-      "Kdo se nakrájel pozítří?",
-      "Kdo je moje stáří?",
-      "Smí shnilci do ulic?",
-      "Je existence zrušena?",
+      ["Kolik je na světě myší?","13"],
+      ["Jsou psi jeleni?","dva"],
+      ["Má pivo pivo?","ne"],
+      ["Kdo se nakrájel pozítří?","trochu asi"],
+      ["Kdo je moje stáří?","já"],
+      ["Smí shnilci do ulic?","vždycky"],
+      ["Je existence zrušena?","napořád"],
     ]
   end
 
@@ -132,21 +132,6 @@ class Team < ActiveRecord::Base
     end
   end
 
-  def current_module
-
-    m = "before"
-    if 7 > 8
-      m = "survival"
-      if 7 > 8
-        m = "race"
-        if 7 > 8
-          m = "results"
-        end
-      end
-    end
-    m
-  end
-
   def replies_rules_
     if replies_rules.blank?
       {}
@@ -161,6 +146,14 @@ class Team < ActiveRecord::Base
     else
       JSON[replies_register]
     end
+  end
+  
+  def should_grade_before_rules?
+    return false if points_rules
+    return true if !replies_rules.blank?
+    return true if Team.rules_deadline < Time.now.to_datetime
+    return true if self.ts_rules_started and self.ts_rules_started + 30.minutes < Time.now.to_datetime
+    false
   end
 
 end

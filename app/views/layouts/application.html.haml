@@ -34,22 +34,22 @@
           - if @team
             %ul.nav.navbar-nav
               %li
-                - if %w{before survival race results}.include?(@team.current_module)
+                - if %w{before survival race results}.include?(Parameter["current_module"])
                   = link_to "Před závodem", module_before_team_path(uid: @team.uid)
                 - else
                   = link_js "Před závodem", disabled: true
               %li
-                - if %w{survival race results}.include?(@team.current_module)
+                - if %w{survival race results}.include?(Parameter["current_module"])
                   = link_to "Přežití", module_survival_team_path(uid: @team.uid)
                 - else
                   = link_js "Přežití", class: "disabled"
               %li
-                - if %w{race results}.include?(@team.current_module)
+                - if %w{race results}.include?(Parameter["current_module"])
                   = link_to "Závod", module_race_team_path(uid: @team.uid)
                 - else
                   = link_js "Závod", class: "disabled"
               %li
-                - if %w{results}.include?(@team.current_module)
+                - if %w{results}.include?(Parameter["current_module"])
                   = link_to "Výsledky", module_results_team_path(uid: @team.uid)
                 - else
                   = link_js "Výsledky", class: "disabled"

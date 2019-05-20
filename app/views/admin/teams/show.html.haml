@@ -77,6 +77,11 @@
 
 %h5 Test z pravidel
 
+- if @team.points_rules
+  %p Body: #{@team.points_rules}
+- else
+  %p Zatím neobodováno.
+
 - if @team.ts_rules_started
   %p Začátek: #{@team.ts_rules_started.strftime("%d. %m. %Y %H:%M:%S")}
 - else
@@ -88,18 +93,19 @@
   %table.table
     %tbody
       - data = @team.replies_rules_
-      - Team.rules_questions.each_with_index do |q,qi|
+      - Team.rules_questions.each_with_index do |qqa,qi|
         %tr
           %td= qi+1
-          %td= q
+          %td= qqa[0]
           %td= data["q#{qi+1}"]
+          %td= qqa[1]
 
 %h5 Prezentace družiny
 
 - if @team.about_photo.file?
   %p= link_to File.basename(@team.about_photo.path), @team.about_photo.url
 - else
-  %p Nevyplnili.
+  %p Nenahráli.
 
 %h5 Registrace na závod
 
