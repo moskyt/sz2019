@@ -1,5 +1,18 @@
 = render partial: "teams/time"   
 
-%p Mrdky.
- 
+- if Parameter["current_module"] == "before"
+
+  %p Drahé vítězné hlídky,
+
+  %p od dne, kdy jste vyhrály základní kola, již uběhlo mnoho času. Na zemi došlo k velkým změnám a nikdo si není jistý, zda dožije dalšího dne, jelikož vše je závislé na tom, kolik ČASU kdo má. Lidé chodí do práce, kde pracují nějaký čas  a jedinou odměnou jim je  opět čas, který mají jak na přežití, tak i na pokrytí všech svých potřeb.  Panuje názor, že není možné si vydělat dostatek času na přežití do 19.9. za jeden víkend. Rozhodl jsem se udělat drobný experiment. Vítězným hlídkám nabídnu tolik práce, aby si zvládly vydělat dostatek času na pohodové přežití do září. Sejdeme se v pátek 7.6. nedaleko Prahy, kde Vám ve svých podnicích nabídnu dostatečnou práci.
+  
+  %p Doufám, že se připravíte svědomitě na tento pracovní víkend a nebudete dělat ostudu!
+
+  %p 
+    Těším se na brzké osobní setkání, 
+    %br
+    John Green
+    %br
+    majitel společnosti Pear company a.s.
+
 = render partial: "teams/modules/#{Parameter["current_module"]}"  

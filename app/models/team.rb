@@ -69,7 +69,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.max_points
-    (points_register_max+points_transport_max+points_about_max+points_rules_max) + 4 * 36 + 13 * 36
+    (points_register_max+points_about_max+points_rules_max) + 4 * 36 + 13 * 36
   end
 
   def self.points_about_max
@@ -78,10 +78,6 @@ class Team < ActiveRecord::Base
 
   def self.points_register_max
     18
-  end
-
-  def self.points_transport_max
-    36
   end
 
   def self.points_rules_max
@@ -164,7 +160,7 @@ class Team < ActiveRecord::Base
   end
 
   def sum_before
-    (points_transport || 0) + (points_about || 0) + (points_rules || 0) + (points_register || 0)
+    (points_about || 0) + (points_rules || 0) + (points_register || 0)
   end
 
   def set_uid

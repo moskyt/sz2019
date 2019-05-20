@@ -8,7 +8,6 @@
       %th= link_to "Reg.", [:grade_before_register, :admin, :teams]
       %th= link_to "Test", [:grade_before_rules, :admin, :teams]
       %th= link_to "Družina", [:grade_before_about, :admin, :teams]
-      %th Doprava
       %th Vybrali si
       %th Spoj
       %th Značka
@@ -41,5 +40,4 @@
             = icon("circle", "odevzdali, vyhodnotit!")
           - else
             = icon("times", "zatím neodevzdali")
-        %td TBD
         %td= team.preference_departure

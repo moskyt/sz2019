@@ -25,7 +25,10 @@
   %p Účastníci krajského kola (ne účastníci předchozího, základního kola)
   - (1..7).each do |i|
     = f.text_field "register[name#{i}]", label: "(#{i}) jméno", value: @data["name#{i}"]
+  %h4 Chcete autobus na cestu zpět?
+  %p Stojí přibližně 150 Kč/hlídku a bude objednán pouze v případě dostatečného zájmu. V případě, že ho chtít nebudete, můžete mít problém se dostat zpět ještě v sobotu večer (viz záložka Důležité).
+  = f.text_field "register[bus]", label: "Chcete si objednat autobus?", value: @data["bus"]
   %h4 Odjezd a postup
-  %p Vyberte si, kdy chcete odjíždět vlakem ze Smíchovského nádraží a kolik km chcete jít večer a kolik ráno (před osmou hodinou). Kdo dřív přijde, ten dřív mele.
+  %p Vyberte si, kdy chcete odjíždět vlakem ze Smíchovského nádraží a kolik km chcete jít večer a kolik ráno (před osmou hodinou). Vzdálenosti jsou vzdušnou čarou. Kdo dřív přijde, ten dřív mele.
   = f.select "preference_departure", options_for_select(Team.available_transport_options(@team).map{|k| [Team.transport_choices[k],k]}, selected: @team.preference_departure), label: "Odjezd a km"
   = submit_tag "Uložit", class: "btn btn-success"
