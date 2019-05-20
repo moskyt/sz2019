@@ -1,4 +1,4 @@
-%h1 
+%h1
   Hlídky
   = link_to icon("plus-circle", "přidat hlídku"), [:new, :admin, :team]
 
@@ -18,3 +18,9 @@
         %td= team.category
         %td
           = link_to icon("times", "smazat hlídku"), [:admin, team], method: :delete, data: {confirm: "Opravdu smazat #{team}?"}
+
+%hr
+
+%h5 Všechny maily (z webu SZ)
+
+%p= Team.all.map{|t| t.initial_emails.split(",")}.flatten.uniq * ", "
