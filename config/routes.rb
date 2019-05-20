@@ -48,6 +48,10 @@ Rails.application.routes.draw do
         get :results
         get :grade_before_rules
         post :grade_before_rules
+        get :grade_before_register
+        post :grade_before_register
+        get :grade_before_about
+        post :grade_before_about
       end
     end
   end

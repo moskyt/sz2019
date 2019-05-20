@@ -5,9 +5,9 @@
     %tr 
       %th
       %th Hlídka  
-      %th Reg.
+      %th= link_to "Reg.", [:grade_before_register, :admin, :teams]
       %th= link_to "Test", [:grade_before_rules, :admin, :teams]
-      %th Družina
+      %th= link_to "Družina", [:grade_before_about, :admin, :teams]
       %th Doprava
       %th Spoj
       %th Značka

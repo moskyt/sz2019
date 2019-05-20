@@ -22,8 +22,7 @@
               %td= qqa[0]
               %td= data["q#{qi+1}"]
               %td= qqa[1]
-              %td
-                = text_field_tag "points_rules[#{team.id}][]", "", autocomplete: "off"
-                (max=3)
+              %td= text_field_tag "points_rules[#{team.id}][]", "", autocomplete: "off"
+              %td(max=3)
   = submit_tag "Uložit", class: "btn btn-primary"
       

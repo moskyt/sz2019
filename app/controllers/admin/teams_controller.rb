@@ -29,5 +29,14 @@ class Admin::TeamsController < Admin::AdminController
       redirect_to action: :before
     end
   end
+  
+  def grade_before_register
+    if request.post?
+      params["points_register"].each do |tid, tx|
+        Team.find(tid).update_attribute :points_register, tx.map(&:to_i).inject(0,:+)
+      end
+      redirect_to action: :before
+    end
+  end
     
 end

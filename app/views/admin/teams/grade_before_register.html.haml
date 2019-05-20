@@ -1,1 +1,41 @@
 %h1 Bodování :: před závodem :: registrace
+
+= form_tag do
+  - Team.all.each do |team|
+    - if team.should_grade_before_register?
+      - data = team.replies_register_
+      %h3
+        = team.number
+        |
+        = team.name
+      %div.row
+        %div.col-sm-12.col-lg-5
+          %table.table
+            %tbody
+              - data.each do |k,v|
+                %tr
+                  %th= k
+                  %td= v
+        %div.col-sm-12.col-lg-7
+          %table.table
+            %tbody
+              %tr
+                %th Jsou dementi
+                %td= text_field_tag "points_register[#{team.id}][]", "", autocomplete: "off"
+                %td (max=3)
+              %tr
+                %th Jsou dementi
+                %td= text_field_tag "points_register[#{team.id}][]", "", autocomplete: "off"
+                %td (max=3)
+              %tr
+                %th Jsou dementi
+                %td= text_field_tag "points_register[#{team.id}][]", "", autocomplete: "off"
+                %td (max=3)
+              %tr
+                %th Jsou dementi
+                %td= text_field_tag "points_register[#{team.id}][]", "", autocomplete: "off"
+                %td (max=3)
+        
+
+  = submit_tag "Uložit", class: "btn btn-primary"
+      

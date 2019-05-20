@@ -156,4 +156,18 @@ class Team < ActiveRecord::Base
     false
   end
 
+  def should_grade_before_register?
+    return false if points_register
+    return true if !replies_register.blank?
+    return true if Team.register_deadline < Time.now.to_datetime
+    false
+  end
+
+  def should_grade_before_about?
+    return false if points_about
+    return true if about_photo.file?
+    return true if Team.about_deadline < Time.now.to_datetime
+    false
+  end
+
 end

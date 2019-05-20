@@ -1,0 +1,33 @@
+%h1 Bodování :: před závodem :: představení družiny
+
+= form_tag do
+  - Team.all.each do |team|
+    - if team.should_grade_before_about?
+      - data = team.replies_about_
+      %h5
+        = team.number
+        |
+        = team.name
+      %pre= data.inspect
+      %table.table
+        %tbody
+          %tr
+            %th Jsou dementi
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=3)
+          %tr
+            %th Jsou dementi
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=3)
+          %tr
+            %th Jsou dementi
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=3)
+          %tr
+            %th Jsou dementi
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=3)
+        
+
+  = submit_tag "Uložit", class: "btn btn-primary"
+      
