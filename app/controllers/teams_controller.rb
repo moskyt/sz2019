@@ -4,6 +4,10 @@ class TeamsController < ApplicationController
     @team = Team.where(uid: params[:uid]).first
   end
 
+  def info
+    @team = Team.where(uid: params[:uid]).first
+  end
+  
   def module_before
     @team = Team.where(uid: params[:uid]).first
   end
@@ -30,10 +34,19 @@ class TeamsController < ApplicationController
   end
 
   def before_register_submit
-    flash[:notice] = "Přihláška uložena."
     @team = Team.where(uid: params[:uid]).first
     @team.update_attribute :replies_register, params[:register].to_json
-    redirect_to module_before_team_path(uid: @team.uid)
+    preference_departure = params[:preference_departure]
+    if Team.available_transport_options(@team).include?(preference_departure)
+      flash[:notice] = "Přihláška uložena."
+      @team.update_attribute :preference_departure, preference_departure
+      redirect_to module_before_team_path(uid: @team.uid)
+    else
+      flash[:error] = "Vybraný odjezd/cíl mezitím vybral někdo jiný, zkus to znovu."
+      @data = @team.replies_register_
+      @team.preference_departure = nil
+      render :before_register
+    end
   end
 
   def before_rules_go

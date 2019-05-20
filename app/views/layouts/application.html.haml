@@ -34,6 +34,8 @@
           - if @team
             %ul.nav.navbar-nav
               %li
+                = link_to "Důležité", info_team_path(uid: @team.uid)              
+              %li
                 - if %w{before survival race results}.include?(Parameter["current_module"])
                   = link_to "Před závodem", module_before_team_path(uid: @team.uid)
                 - else

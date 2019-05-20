@@ -12,11 +12,20 @@
   = f.text_field "register[supervisor_name]", label: "Jméno", value: @data["supervisor_name"]
   = f.text_field "register[supervisor_email]", label: "E-mail", value: @data["supervisor_email"]
   = f.text_field "register[supervisor_phone]", label: "Telefon", value: @data["supervisor_phone"]
+  %h4 Záložní kontakt (rover / vedoucí)
+  %p Uveďte kontakt na jiného vedoucího (pro případ obtíží, chybějícího doprovodu apod.)
+  = f.text_field "register[backup_name]", label: "Jméno", value: @data["backup_name"]
+  = f.text_field "register[backup_email]", label: "E-mail", value: @data["backup_email"]
+  = f.text_field "register[backup_phone]", label: "Telefon", value: @data["backup_phone"]
   %h4 Rádce družiny
   = f.text_field "register[head_name]", label: "Jméno", value: @data["head_name"]
   = f.text_field "register[head_email]", label: "E-mail", value: @data["head_email"]
   = f.text_field "register[head_phone]", label: "Telefon", value: @data["head_phone"]
-  %h5 Další členové
+  %h4 Další členové
+  %p Účastníci krajského kola (ne účastníci předchozího, základního kola)
   - (1..7).each do |i|
     = f.text_field "register[name#{i}]", label: "(#{i}) jméno", value: @data["name#{i}"]
+  %h4 Odjezd a postup
+  %p Vyberte si, kdy chcete odjíždět vlakem ze Smíchovského nádraží a kolik km chcete jít večer a kolik ráno (před osmou hodinou). Kdo dřív přijde, ten dřív mele.
+  = f.select "preference_departure", options_for_select(Team.available_transport_options(@team).map{|k| [Team.transport_choices[k],k]}, selected: @team.preference_departure), label: "Odjezd a km"
   = submit_tag "Uložit", class: "btn btn-success"

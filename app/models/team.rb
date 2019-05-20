@@ -87,16 +87,62 @@ class Team < ActiveRecord::Base
   def self.points_rules_max
     36
   end
+  
+  def self.available_transport_options(team)
+    tx = Team.transport_choices.keys.dup
+    Team.find_each do |t|
+      unless t.id == team.id 
+        tx.delete(t.preference_departure)
+      end
+    end
+    tx
+  end
+  
+  def self.transport_choices 
+    {
+      "vlak 1, HS 1"  =>  "odjezd 16:28 / 8km večer / 3km ráno",
+      "vlak 1, HS 2"  =>  "odjezd 16:28 / 8km večer / 3km ráno",
+      "vlak 1, HS 3"  =>  "odjezd 16:28 / 8km večer / 2km ráno",
+      "vlak 1, HS 4"  =>  "odjezd 16:28 / 7km večer / 2km ráno",
+      "vlak 1, HS 5"  =>  "odjezd 16:28 / 8km večer / 0km ráno",
+      "vlak 2, HS 6"  =>  "odjezd 16:38 / 7km večer / 3km ráno",
+      "vlak 2, HS 7"  =>  "odjezd 16:38 / 6km večer / 3km ráno",
+      "vlak 2, HS 8"  =>  "odjezd 16:38 / 6km večer / 3km ráno",
+      "vlak 2, HS 9"  =>  "odjezd 16:38 / 6km večer / 4km ráno",
+      "vlak 2, HS 6"  =>  "odjezd 16:38 / 7km večer / 3km ráno",
+      "vlak 3, HS 1"  =>  "odjezd 16:58 / 8km večer / 3km ráno",
+      "vlak 3, HS 2"  =>  "odjezd 16:58 / 8km večer / 3km ráno",
+      "vlak 3, HS 3"  =>  "odjezd 16:58 / 8km večer / 2km ráno",
+      "vlak 3, HS 4"  =>  "odjezd 16:58 / 7km večer / 2km ráno",
+      "vlak 3, HS 5"  =>  "odjezd 16:58 / 8km večer / 0km ráno",
+      "vlak 3, HS 6"  =>  "odjezd 16:58 / 7km večer / 3km ráno",
+      "vlak 4, HS 7"  =>  "odjezd 17:08 / 6km večer / 3km ráno",
+      "vlak 4, HS 8"  =>  "odjezd 17:08 / 6km večer / 3km ráno",
+      "vlak 4, HS 9"  =>  "odjezd 17:08 / 6km večer / 4km ráno",
+      "vlak 4, HS 10" =>  "odjezd 17:08 / 6km večer / 4km ráno",
+      "vlak 4, HS 1"  =>  "odjezd 17:08 / 8km večer / 3km ráno",
+      "vlak 5, HS 7"  =>  "odjezd 17:28 / 6km večer / 3km ráno",
+      "vlak 5, HS 3"  =>  "odjezd 17:28 / 8km večer / 2km ráno",
+      "vlak 5, HS 4"  =>  "odjezd 17:28 / 7km večer / 2km ráno",
+      "vlak 5, HS 9"  =>  "odjezd 17:28 / 6km večer / 4km ráno",
+      "vlak 5, HS 10" =>  "odjezd 17:28 / 6km večer / 4km ráno",     
+    }
+  end
 
   def self.rules_questions
     [
-      ["Kolik je na světě myší?","13"],
-      ["Jsou psi jeleni?","dva"],
-      ["Má pivo pivo?","ne"],
-      ["Kdo se nakrájel pozítří?","trochu asi"],
-      ["Kdo je moje stáří?","já"],
-      ["Smí shnilci do ulic?","vždycky"],
-      ["Je existence zrušena?","napořád"],
+      ["S jakým závodem se obrok střídá Svojsíkův závod?", "ZVAS"],
+      ["Uveďte jeden až tři z hlavních cílů Svojsíkova závodu (svými slovy)", "fungování, využití, zpětná, motivace"],
+      ["Kolik může být soutěžících v jedné postupové hlídce?", "4-8"],
+      ["Uveďte tři z důvodů diskvalifikace.", "předpisy, bezpečnost, bojkot, pravidla, pomáhání"],
+      ["Proč je zaveden tzv. Postupový klíč?", "Upravuje počet postupujících družin"],
+      ["Co určuje vítězství hlídky v rámci kola?", "Nejvyšší počet bodů"],
+      ["Kdo podává protest a komu?", "Rádce družinu hlavnímu rozhodčímu"],
+      ["Na co se zaměřují disciplíny modulu závod?", "Spolupráce družiny a týmové řešení úkolů"],
+      ["Kolik kol má Svojsíkův závod?", "3"],
+      ["Po kom se jmenuje Svojsíkův závod? Kdo to byl?", "ABS"],
+      ["Co je úkolem ústředního štábu SZ (svými slovy)", "pravidla, materiály+web, podoba KK, celostátní, rozhdování"],
+      ["Uveďte dvě kategorie postupových hlídek.", "Chlapecká a dívčí"],
     ]
   end
 
