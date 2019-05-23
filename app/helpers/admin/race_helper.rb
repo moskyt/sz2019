@@ -1,0 +1,2 @@
+module Admin::RaceHelper
+end

@@ -61,6 +61,22 @@ class Team < ActiveRecord::Base
   has_attached_file :about_photo
   validates_attachment_content_type :about_photo, :content_type => ['application/pdf']
 
+  RACEPOINTS = {
+    1 =>  ["Na pile",                     36],
+    2 =>  ["Redakce",                     36],
+    3 =>  ["Logistické centrum",          36],
+    4 =>  ["Čínská restaurace",           36],
+    5 =>  ["Dispečink záchranné služby",  36],
+    6 =>  ["Televizní stanice",           36],
+    7 =>  ["scénická krize",              36],
+    8 =>  ["Dopravní policie",            36],
+    9 =>  ["Seznamovací agentura",        36],
+    10 => ["Doručovací služba",           36],
+    11 => ["Stavba?",                     36],
+    12 => ["teoretická krize",            36],
+    13 => ["1188",                        36],
+  }
+
   def self.time0
     DateTime.civil_from_format(:local, 2019, 5, 15, 12, 0, 0)
   end
@@ -86,13 +102,13 @@ class Team < ActiveRecord::Base
   end
 
   def self.max_points
-    points_before_max + 4 * 36 + 13 * 36
+    points_before_max + 4 * 36 + RACEPOINTS.values.map{|x| x[1]}.inject(:+)
   end
 
   def self.points_before_max
     (points_before_register_max+points_before_about_max+points_before_rules_max)
   end
-  
+
   def self.points_before_about_max
     48
   end
@@ -104,33 +120,17 @@ class Team < ActiveRecord::Base
   def self.points_before_rules_max
     36
   end
-  
+
   def self.available_transport_options(team)
     tx = Team.transport_choices.keys.dup
     Team.find_each do |t|
-      unless t.id == team.id 
+      unless t.id == team.id
         tx.delete(t.preference_departure)
       end
     end
     tx
   end
-  
-  RACEPOINTS = {
-    1 =>  ["Na pile",                     36],
-    2 =>  ["Redakce",                     36],
-    3 =>  ["Logistické centrum",          36],
-    4 =>  ["Čínská restaurace",           36],
-    5 =>  ["Dispečink záchranné služby",  36],
-    6 =>  ["Televizní stanice",           36],
-    7 =>  ["scénická krize",              36],
-    8 =>  ["Dopravní policie",            36],
-    9 =>  ["Seznamovací agentura",        36],
-    10 => ["Doručovací služba",           36],
-    11 => ["Stavba?",                     36],
-    12 => ["teoretická krize",            36],
-    13 => ["1188",                        36],
-  }
-  
+
   TRAINS = {
     1 => {
       departure: "16:28",
@@ -158,7 +158,7 @@ class Team < ActiveRecord::Base
       number: "Os 8856",
     },
   }
-    
+
   HOTSPOTS = {
     1 => {
       name: "Vrahův kemp",
@@ -221,22 +221,22 @@ class Team < ActiveRecord::Base
       detail: "pod lavicí"
     },
   }
-  
+
   def train
     if m = self.preference_departure&.match(/^vlak (\d+), HS (\d+)$/)
-      n = m[1].to_i      
+      n = m[1].to_i
       {number: n}.merge(TRAINS[n])
     end
   end
-  
+
   def hotspot
     if m = self.preference_departure&.match(/^vlak (\d+), HS (\d+)$/)
-      n = m[2].to_i      
+      n = m[2].to_i
       {number: n}.merge(HOTSPOTS[n])
     end
-  end    
-  
-  def self.transport_choices 
+  end
+
+  def self.transport_choices
     {
       "vlak 1, HS 1"  =>  "odjezd 16:28 / 8km večer / 3km ráno",
       "vlak 1, HS 2"  =>  "odjezd 16:28 / 8km večer / 3km ráno",
@@ -263,11 +263,11 @@ class Team < ActiveRecord::Base
       "vlak 5, HS 3"  =>  "odjezd 17:28 / 8km večer / 2km ráno",
       "vlak 5, HS 4"  =>  "odjezd 17:28 / 7km večer / 2km ráno",
       "vlak 5, HS 9"  =>  "odjezd 17:28 / 6km večer / 4km ráno",
-      "vlak 5, HS 10" =>  "odjezd 17:28 / 6km večer / 4km ráno",     
+      "vlak 5, HS 10" =>  "odjezd 17:28 / 6km večer / 4km ráno",
     }
   end
 
-  def trail 
+  def trail
     {
       "vlak 1, HS 1"  =>  "žlutá",
       "vlak 1, HS 2"  =>  "žlutá",
@@ -294,7 +294,7 @@ class Team < ActiveRecord::Base
       "vlak 5, HS 3"  =>  "zelená",
       "vlak 5, HS 4"  =>  "zelená",
       "vlak 5, HS 9"  =>  "žlutá",
-      "vlak 5, HS 10" =>  "žlutá",     
+      "vlak 5, HS 10" =>  "žlutá",
       }[preference_departure]
   end
 
@@ -335,26 +335,34 @@ class Team < ActiveRecord::Base
   def sum_before
     (points_before_about || 0) + (points_before_rules || 0) + (points_before_register || 0)
   end
-  
+
   def sum_survival
-    (points_survival_travel || 0) + (points_survival_dinner || 0) + 
+    (points_survival_travel || 0) + (points_survival_dinner || 0) +
     sum_survival_night
   end
-  
+
   def sum_survival_night
     (points_survival_night_spot || 0) + (points_survival_night_tent || 0) + (points_survival_night_cleanup || 0) + (points_survival_night_packing || 0) + (points_survival_night_gps || 0) + (points_survival_night_moral || 0)
   end
-  
+
   def points_survival_night
     points_survival_night_spot || points_survival_night_tent || points_survival_night_cleanup || points_survival_night_packing || points_survival_night_gps || points_survival_night_moral
   end
-  
+
   def sum_race
-    (1..13).map do |i|
+    RACEPOINTS.keys.map do |i|
       self.send("points_race_%02d" % i) || 0
     end.inject(:+)
   end
-  
+
+  def self.racepoint_uid(i)
+    "%08x" % (i ** 7 + 7981375)
+  end
+
+  def self.uid_to_racepoint(x)
+    ((x.to_i(16) - 7981375) ** (1.0/7)).round
+  end
+
   def self.uid_to_survival(s)
     ss = ""
     s.chars.each do |c|
@@ -415,7 +423,7 @@ class Team < ActiveRecord::Base
       JSON[replies_register]
     end
   end
-  
+
   def should_grade_before_rules?
     return false if points_before_rules
     return true if !replies_rules.blank?

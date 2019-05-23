@@ -3,7 +3,6 @@ class TeamsController < ApplicationController
   before_filter :load_team
 
   def dashboard
-<<<<<<< Updated upstream
   end
 
   def info
@@ -25,45 +24,10 @@ class TeamsController < ApplicationController
   end
 
   def before_register
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def info
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def module_before
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def module_survival
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def module_race
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def module_results
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def before_rules_start
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def before_register
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     @data = @team.replies_register_
   end
 
   def before_register_submit
-<<<<<<< Updated upstream
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     @team.update_attribute :replies_register, params[:register].to_json
     preference_departure = params[:preference_departure]
     if Team.available_transport_options(@team).include?(preference_departure)
@@ -79,10 +43,6 @@ class TeamsController < ApplicationController
   end
 
   def before_rules_go
-<<<<<<< Updated upstream
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     unless @team.ts_rules_started
       # set start
       @team.ts_rules_started = Time.now
@@ -98,27 +58,15 @@ class TeamsController < ApplicationController
   end
 
   def before_rules_done
-<<<<<<< Updated upstream
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     @team.update_attribute :ts_rules_done, Time.now.to_datetime
   end
 
   def before_rules_expired
-<<<<<<< Updated upstream
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     @team.update_attribute :ts_rules_done, Time.now.to_datetime
     # save or ...
   end
 
   def before_rules_questions
-<<<<<<< Updated upstream
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     unless @team.ts_rules_started
       # set start
       @team.ts_rules_started = Time.now
@@ -148,24 +96,12 @@ class TeamsController < ApplicationController
   end
 
   def before_about_ok
-<<<<<<< Updated upstream
   end
 
   def before_about_failed
   end
 
   def before_about_upload
-=======
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def before_about_failed
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
-  end
-
-  def before_about_upload
-    @team = Team.where(uid: params[:uid]).first or redirect_to :root
->>>>>>> Stashed changes
     if params[:about_pdf]
       @team.about_photo = params[:about_pdf]
       if @team.save

@@ -23,17 +23,13 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to survival_dashboard_url(suid: @team.survival_uid), :class => 'navbar-brand' do
+          = link_to race_point_url(rpuid: Team.racepoint_uid(@racepoint)), :class => 'navbar-brand' do
             %div
-              InTime / PŘEŽITÍ / #{@team.name} [#{@team.number}]
+              InTime / ZÁVOD / #{@racepoint} / #{Team::RACEPOINTS[@racepoint][0]}
 
         %div.collapse.navbar-collapse#aer-navbar-collapse
           %ul.nav.navbar-nav
-            %li= link_to "Přehled", survival_dashboard_url(suid: @team.survival_uid)
-            %li= link_to "Info", survival_info_url(suid: @team.survival_uid)
-            %li= link_to "Doprovod / odchod", survival_supervisor_url(suid: @team.survival_uid)
-            %li= link_to "Večeře", survival_dinner_url(suid: @team.survival_uid)
-            %li= link_to "Přespání", survival_night_url(suid: @team.survival_uid)
+            / %li= link_to "Výsledky", race_point_url(rpuid: Team.racepoint_uid(@racepoint))
 
     %div.container#content
       %div(style="padding-top:60px;padding-bottom:20px")

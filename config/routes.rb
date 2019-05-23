@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   get '/survival/:suid/night' => "admin/survival#night", as: :survival_night
   get '/survival/:suid/travel' => "admin/survival#travel", as: :survival_travel
 
+  get '/race/point/:rpuid' => "admin/race#point", as: :race_point
+  post '/race/point/:rpuid' => "admin/race#point"
+
   # get '/team/:uid/choose_transport' => "teams#choose_transport"
   # post '/team/:uid/choose_transport' => "teams#choose_transport_submit"
   #

@@ -1,1 +1,25 @@
 %h1 Modul Závod
+
+%table.table
+  %thead
+    %tr
+      %th
+      %th Hlídka
+      - Team::RACEPOINTS.each do |i, sx|
+        %th= sx[0]
+  %tbody
+    - Team.order(:name).each do |team|
+      %tr
+        %td= team.number
+        %td= link_to team.name, [:admin, team]
+        - Team::RACEPOINTS.each do |i, s|
+          %td= team.send("points_race_%02d" % i) || "---"
+
+
+%table.table
+  - Team::RACEPOINTS.each do |i, s|
+    %tr
+      %td= i
+      %td= s[0]
+      %td= link_to race_point_url(rpuid: Team.racepoint_uid(i)), race_point_url(rpuid: Team.racepoint_uid(i))
+      %td= RQRCode::QRCode.new(race_point_url(rpuid: Team.racepoint_uid(i))).as_svg(module_size: 4).html_safe

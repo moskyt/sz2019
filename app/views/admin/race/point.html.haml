@@ -1,0 +1,15 @@
+%table.table
+  %thead
+    %tr
+      %th
+      %th Hlídka
+      %td Body
+  %tbody
+    - Team.order(:name).each do |team|
+      %tr
+        = form_tag do
+          %td= team.number
+          %td= team.name
+          %td= team.district
+          %td= text_field_tag "points[#{team.id}]", team.send("points_race_%02d" % @racepoint)
+          %td= submit_tag "Uložit", class: "btn btn-default"

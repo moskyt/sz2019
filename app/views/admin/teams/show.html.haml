@@ -67,10 +67,11 @@
     %tr
       %th Hlavní stránka
       %td= link_to dashboard_url(uid: @team.uid), dashboard_url(uid: @team.uid)
+      %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
     %tr
       %th Modul přežití -- DOPROVODY
       %td= link_to survival_dashboard_url(suid: @team.survival_uid), survival_dashboard_url(suid: @team.survival_uid)
-      / %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
+      %td= RQRCode::QRCode.new(survival_dashboard_url(suid: @team.survival_uid)).as_svg(module_size: 4).html_safe
 
 
 
@@ -131,17 +132,17 @@
 
 - if @team.preference_departure.blank?
   %p Nevybrali.
-- else  
+- else
 
   %table.table
     %colgroup
       %col.col-sm-4
       %col.col-sm-8
-    %tbody  
+    %tbody
       %tr
         %th
         %td= @team.preference_departure
-      - if @team.train  
+      - if @team.train
         %tr
           %th Číslo spoje
           %td= @team.train[:number]
@@ -163,14 +164,14 @@
           %td= @team.hotspot[:detail]
         %tr
           %th Souřadnice
-          %td 
+          %td
             #{@team.hotspot[:lat]}, #{@team.hotspot[:lng]}
-            %div#mapa(style="height:380px")      
+            %div#mapa(style="height:380px")
             :javascript
               $(function() {
-          
+
                 var center = SMap.Coords.fromWGS84(#{@team.hotspot[:lng]},#{@team.hotspot[:lat]});
                 var m = new SMap(JAK.gel("mapa"), center, 14, SMap.DEF_TURIST);
-                m.addMarker(center);            
+                m.addMarker(center);
               });
-    
+
