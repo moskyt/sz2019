@@ -4,7 +4,4 @@
   = f.text_field :name
   = f.text_field :district
   = f.select :category, %w{H D}
-  = f.text_field :points_rules
-  = f.text_field :points_about
-  = f.text_field :points_register
   = f.submit(f.object.new_record? ? "Vytvořit" : "Uložit změny")

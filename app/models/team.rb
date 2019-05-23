@@ -2,40 +2,57 @@
 #
 # Table name: teams
 #
-#  id                       :integer          not null, primary key
-#  name                     :string(255)
-#  number                   :integer
-#  district                 :string(255)
-#  stage                    :string(255)
-#  ts_registered            :datetime
-#  ts_rules_submitted       :datetime
-#  ts_about_submitted       :datetime
-#  ts_departed              :datetime
-#  ts_arrived               :datetime
-#  participants_json        :text(65535)
-#  points                   :integer
-#  points_about             :integer
-#  points_rules             :integer
-#  preference_departure     :string(255)
-#  preference_hotspot       :integer
-#  departure                :string(255)
-#  trail                    :string(255)
-#  hotspot                  :integer
-#  points_dinner            :integer
-#  points_cleanup           :integer
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  uid                      :string(255)
-#  category                 :string(255)
-#  points_register          :integer
-#  points_transport         :integer
-#  about_photo_file_name    :string(255)
-#  about_photo_content_type :string(255)
-#  about_photo_file_size    :bigint
-#  about_photo_updated_at   :datetime
-#  replies_register         :text(65535)
-#  replies_rules            :text(65535)
-#  ts_rules_started         :datetime
+#  id                            :integer          not null, primary key
+#  name                          :string(255)
+#  number                        :integer
+#  district                      :string(255)
+#  stage                         :string(255)
+#  ts_registered                 :datetime
+#  ts_rules_submitted            :datetime
+#  ts_about_submitted            :datetime
+#  ts_departed                   :datetime
+#  ts_arrived                    :datetime
+#  participants_json             :text(65535)
+#  points                        :integer
+#  preference_departure          :string(255)
+#  hotspot                       :integer
+#  points_before_about           :integer
+#  points_before_rules           :integer
+#  points_before_register        :integer
+#  points_survival_travel        :integer
+#  points_survival_dinner        :integer
+#  points_survival_night_spot    :integer
+#  points_survival_night_tent    :integer
+#  points_survival_night_cleanup :integer
+#  points_survival_night_packing :integer
+#  points_survival_night_gps     :integer
+#  points_survival_night_moral   :integer
+#  points_race_01                :integer
+#  points_race_02                :integer
+#  points_race_03                :integer
+#  points_race_04                :integer
+#  points_race_05                :integer
+#  points_race_06                :integer
+#  points_race_07                :integer
+#  points_race_08                :integer
+#  points_race_09                :integer
+#  points_race_10                :integer
+#  points_race_11                :integer
+#  points_race_12                :integer
+#  points_race_13                :integer
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  uid                           :string(255)
+#  category                      :string(255)
+#  about_photo_file_name         :string(255)
+#  about_photo_content_type      :string(255)
+#  about_photo_file_size         :bigint
+#  about_photo_updated_at        :datetime
+#  replies_register              :text(65535)
+#  replies_rules                 :text(65535)
+#  ts_rules_started              :datetime
+#  ts_rules_done                 :datetime
+#  initial_emails                :string(255)
 #
 
 class Team < ActiveRecord::Base
@@ -69,18 +86,22 @@ class Team < ActiveRecord::Base
   end
 
   def self.max_points
-    (points_register_max+points_about_max+points_rules_max) + 4 * 36 + 13 * 36
+    points_before_max + 4 * 36 + 13 * 36
   end
 
-  def self.points_about_max
+  def self.points_before_max
+    (points_before_register_max+points_before_about_max+points_before_rules_max)
+  end
+  
+  def self.points_before_about_max
     48
   end
 
-  def self.points_register_max
+  def self.points_before_register_max
     18
   end
 
-  def self.points_rules_max
+  def self.points_before_rules_max
     36
   end
   
@@ -246,7 +267,7 @@ class Team < ActiveRecord::Base
     }
   end
 
-  def self.trail 
+  def trail 
     {
       "vlak 1, HS 1"  =>  "žlutá",
       "vlak 1, HS 2"  =>  "žlutá",
@@ -274,7 +295,7 @@ class Team < ActiveRecord::Base
       "vlak 5, HS 4"  =>  "zelená",
       "vlak 5, HS 9"  =>  "žlutá",
       "vlak 5, HS 10" =>  "žlutá",     
-    }
+      }[preference_departure]
   end
 
   def self.rules_questions
@@ -308,11 +329,30 @@ class Team < ActiveRecord::Base
   end
 
   def eval_points
-    self.points = sum_before
+    self.points = sum_before + sum_survival + sum_race
   end
 
   def sum_before
-    (points_about || 0) + (points_rules || 0) + (points_register || 0)
+    (points_before_about || 0) + (points_before_rules || 0) + (points_before_register || 0)
+  end
+  
+  def sum_survival
+    (points_survival_travel || 0) + (points_survival_dinner || 0) + 
+    sum_survival_night
+  end
+  
+  def sum_survival_night
+    (points_survival_night_spot || 0) + (points_survival_night_tent || 0) + (points_survival_night_cleanup || 0) + (points_survival_night_packing || 0) + (points_survival_night_gps || 0) + (points_survival_night_moral || 0)
+  end
+  
+  def points_survival_night
+    points_survival_night_spot || points_survival_night_tent || points_survival_night_cleanup || points_survival_night_packing || points_survival_night_gps || points_survival_night_moral
+  end
+  
+  def sum_race
+    (1..13).map do |i|
+      self.send("points_race_%02d" % i) || 0
+    end.inject(:+)
   end
   
   def self.uid_to_survival(s)
@@ -377,7 +417,7 @@ class Team < ActiveRecord::Base
   end
   
   def should_grade_before_rules?
-    return false if points_rules
+    return false if points_before_rules
     return true if !replies_rules.blank?
     return true if Team.rules_deadline < Time.now.to_datetime
     return true if self.ts_rules_started and self.ts_rules_started + 30.minutes < Time.now.to_datetime
@@ -385,14 +425,14 @@ class Team < ActiveRecord::Base
   end
 
   def should_grade_before_register?
-    return false if points_register
+    return false if points_before_register
     return true if !replies_register.blank?
     return true if Team.register_deadline < Time.now.to_datetime
     false
   end
 
   def should_grade_before_about?
-    return false if points_about
+    return false if points_before_about
     return true if about_photo.file?
     return true if Team.about_deadline < Time.now.to_datetime
     false

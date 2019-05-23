@@ -6,12 +6,12 @@
 
 %h2 Registrace na SZ
 
-- if @team.points_register
-  %p Vyhodnoceno. Získali jste #{@team.points_register} / #{Team.points_register_max} b.
+- if @team.points_before_register
+  %p Vyhodnoceno. Získali jste #{@team.points_before_register} / #{Team.points_before_register_max} b.
 - elsif Time.now < Team.register_deadline
   %p Zadání.
 
-  %p Maximum za tuto disciplínu je #{Team.points_register_max} bodů.
+  %p Maximum za tuto disciplínu je #{Team.points_before_register_max} bodů.
 
   - if !@team.replies_register.blank?
     %p Vaši přihlášku jsme dostali a po uzávěrce ji vyhodnotíme.
@@ -24,16 +24,16 @@
   - if !@team.replies_register.blank?
     %p Vaši přihlášku jsme dostali a pracujeme na jejím vyhodnocení.
   - else
-    %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_register_max} bodů.
+    %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_before_register_max} bodů.
 
 %h2 Představení družiny
 
-- if @team.points_about
-  %p Vyhodnoceno. Získali jste #{@team.points_about} / #{Team.points_about_max} b.
+- if @team.points_before_about
+  %p Vyhodnoceno. Získali jste #{@team.points_before_about} / #{Team.points_before_about_max} b.
 - elsif Time.now < Team.about_deadline
   %p Vytvořte fotoprezentaci v programu #{link_to "Prezentace od Googlu", "https://www.google.com/intl/cs_cz/slides/about/"} své závodní hlídky ze základního kola, ze které bude vidět, jak se jmenujete, jak vypadáte, co máte rádi, nebo zkrátka cokoli, co byste o sobě chtěli říci. Nemáte-li google účet, založte si jej přes skautis zdarma (požádejte o pomoc svého střediskového administrátora Skautisu o pomoc).
 
-  %p Maximum za tuto disciplínu je #{Team.points_about_max} bodů.
+  %p Maximum za tuto disciplínu je #{Team.points_before_about_max} bodů.
 
   - if @team.about_photo.file?
     %p Představení vaší družiny jsme dostali a po uzávěrce jej vyhodnotíme.
@@ -55,18 +55,18 @@
   - if @team.about_photo.file?
     %p Představení vaší družiny máme a pracujeme na jeho vyhodnocení.
   - else
-    %p Už je po uzávěrce a představení družiny jste nedodali – škoda, mohli jste mít až #{Team.points_about_max} bodů.
+    %p Už je po uzávěrce a představení družiny jste nedodali – škoda, mohli jste mít až #{Team.points_before_about_max} bodů.
 
 %h2 Test z pravidel SZ
 
-- if @team.points_rules
-  %p Vyhodnoceno. Získali jste #{@team.points_rules} / #{Team.points_rules_max} b.
+- if @team.points_before_rules
+  %p Vyhodnoceno. Získali jste #{@team.points_before_rules} / #{Team.points_before_rules_max} b.
 - elsif @team.ts_rules_started and (@team.ts_rules_started + 30.minutes).to_datetime < Time.now.to_datetime
-  %p Test jste spustili a čas vám vypršel v #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%d. %m. %Y %H:%M")} – škoda, mohli jste mít až #{Team.points_rules_max} bodů.
+  %p Test jste spustili a čas vám vypršel v #{(@team.ts_rules_started + 30.minutes).to_datetime.strftime("%d. %m. %Y %H:%M")} – škoda, mohli jste mít až #{Team.points_before_rules_max} bodů.
 - elsif Time.now < Team.rules_deadline
   %p Seznamte se s #{link_to "pravidly Svojsíkova závodu", "https://krizovatka.skaut.cz/zpravodajstvi/4120-pravidla-svojsikova-zavodu-2019?autologin=1"}. Seznámení věnujte čas podle potřeby, při samotném vyplňování testu však s pravidly už nepracujte. Budete tázáni na 18 otázek, na odpovědi máte 30 minut. Buďte fair.
 
-  %p Maximum za tuto disciplínu je #{Team.points_rules_max} bodů.
+  %p Maximum za tuto disciplínu je #{Team.points_before_rules_max} bodů.
 
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a po uzávěrce je vyhodnotíme.
@@ -88,5 +88,5 @@
   - if !@team.replies_rules.blank?
     %p Vaše odpovědi na test z pravidel závodu jsme dostali a pracujeme na jejich vyhodnocení.
   - else
-    %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_rules_max} bodů.
+    %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_before_rules_max} bodů.
 

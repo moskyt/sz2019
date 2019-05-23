@@ -1,1 +1,38 @@
 %h1 Modul Přežití
+
+%table.table
+  %thead
+    %tr 
+      %th
+      %th Hlídka  
+      %th Doprava
+      %th Doprovod
+      %th Checkin
+      %th Večeře
+      %th Hotspot
+      %th Přespání
+      %th Na shromaždišti
+  %tbody
+    - Team.order(:name).each do |team|
+      %tr
+        %td= team.number
+        %td= link_to team.name, [:admin, team]
+        %td        
+          - if team.points_survival_travel
+            #{team.points_survival_travel} b
+          - else
+            = "---"
+        %td XXX
+        %td XXX
+        %td
+          - if team.points_survival_dinner
+            #{team.points_survival_dinner} b
+          - else
+            = "---"                
+        %td XXX
+        %td
+          - if team.points_survival_night
+            #{team.points_survival_night} b
+          - else
+            = "---"                
+        %td XXX

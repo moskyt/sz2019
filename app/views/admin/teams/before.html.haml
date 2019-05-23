@@ -8,7 +8,6 @@
       %th= link_to "Reg.", [:grade_before_register, :admin, :teams]
       %th= link_to "Test", [:grade_before_rules, :admin, :teams]
       %th= link_to "Družina", [:grade_before_about, :admin, :teams]
-      %th Vybrali si
       %th Spoj
       %th Značka
       %th Hotspot
@@ -18,15 +17,15 @@
         %td= team.number
         %td= link_to team.name, [:admin, team]
         %td
-          - if team.points_register
-            #{team.points_register} b
+          - if team.points_before_register
+            #{team.points_before_register} b
           - elsif !team.replies_register.blank?
             = icon("circle", "vyplnili, vyhodnotit!")
           - else
             = icon("times", "zatím nevyplnili")
         %td
-          - if team.points_rules
-            #{team.points_rules} b
+          - if team.points_before_rules
+            #{team.points_before_rules} b
           - elsif team.ts_rules_started and !team.ts_rules_done and team.ts_rules_started + 30.minutes > Time.now  
             = icon("play", "začali vyplňovat v #{team.ts_rules_started}")
           - elsif !team.replies_rules.blank?
@@ -34,10 +33,13 @@
           - else
             = icon("times", "zatím nevyplnili")
         %td
-          - if team.points_about
-            #{team.points_about} b
+          - if team.points_before_about
+            #{team.points_before_about} b
           - elsif team.about_photo.file?
             = icon("circle", "odevzdali, vyhodnotit!")
           - else
             = icon("times", "zatím neodevzdali")
-        %td= team.preference_departure
+        %td= team.train ? "#{team.train[:departure]}-#{team.train[:arrival]}" : "---"
+        %td= team.trail || "---"
+        %td= team.hotspot ? link_to(team.hotspot[:name], "https://mapy.cz/zakladni?vlastni-body&x=#{team.hotspot[:lng]}&y=#{team.hotspot[:lat]}&z=15", target: "_blank") : "---"
+        

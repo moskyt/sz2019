@@ -44,23 +44,23 @@
       %th max
     %tr
       %th Představení družiny
-      %td= @team.points_about
-      %td= Team.points_about_max
+      %td= @team.points_before_about
+      %td= Team.points_before_about_max
     %tr
       %th Registrace na SZ
-      %td= @team.points_register
-      %td= Team.points_register_max
+      %td= @team.points_before_register
+      %td= Team.points_before_register_max
     %tr
       %th Test z pravidel
-      %td= @team.points_rules
-      %td= Team.points_rules_max
+      %td= @team.points_before_rules
+      %td= Team.points_before_rules_max
     %tr
       %th Celkem
       %td= @team.sum_before
-      %td= Team.points_register_max+Team.points_rules_max+Team.points_about_max
+      %td= Team.points_before_max
 
 
-%h5 Odkazy
+%h4 Odkazy
 
 %table.table
   %tbody
@@ -74,10 +74,10 @@
 
 
 
-%h5 Test z pravidel
+%h4 Test z pravidel
 
-- if @team.points_rules
-  %p Body: #{@team.points_rules}
+- if @team.points_before_rules
+  %p Body: #{@team.points_before_rules}
 - else
   %p Zatím neobodováno.
 
@@ -99,14 +99,19 @@
           %td= data["q#{qi+1}"]
           %td= qqa[1]
 
-%h5 Prezentace družiny
+%h4 Prezentace družiny
+
+- if @team.points_before_about
+  %p Body: #{@team.points_before_about}
+- else
+  %p Zatím neobodováno.
 
 - if @team.about_photo.file?
   %p= link_to File.basename(@team.about_photo.path), @team.about_photo.url
 - else
   %p Nenahráli.
 
-%h5 Registrace na závod
+%h4 Registrace na závod
 
 - if @team.replies_register.blank?
   %p Nevyplnili.
@@ -122,44 +127,50 @@
           %th= k
           %td= v
 
-%h5 Odjezd a hotspot
+%h4 Odjezd a hotspot
 
-%table.table
-  %colgroup
-    %col.col-sm-4
-    %col.col-sm-8
-  %tbody  
-    %tr
-      %th
-      %td= @team.preference_departure
-    %tr
-      %th Číslo spoje
-      %td= @team.train[:number]
-    %tr
-      %th Odjezd ze Smíchova
-      %td= @team.train[:departure]
-    %tr
-      %th Příjezd do Řevnic
-      %td= @team.train[:arrival]
-    %tr
-      %th Číslo hotspotu
-      %td= @team.hotspot[:number]
-    %tr
-      %th Pracovní název
-      %td= @team.hotspot[:name]
-    %tr
-      %th Dohledávka
-      %td= @team.hotspot[:detail]
-    %tr
-      %th Souřadnice
-      %td 
-        #{@team.hotspot[:lat]}, #{@team.hotspot[:lng]}
-        %div#mapa(style="height:380px")      
-        :javascript
-          $(function() {
+- if @team.preference_departure.blank?
+  %p Nevybrali.
+- else  
+
+  %table.table
+    %colgroup
+      %col.col-sm-4
+      %col.col-sm-8
+    %tbody  
+      %tr
+        %th
+        %td= @team.preference_departure
+      - if @team.train  
+        %tr
+          %th Číslo spoje
+          %td= @team.train[:number]
+        %tr
+          %th Odjezd ze Smíchova
+          %td= @team.train[:departure]
+        %tr
+          %th Příjezd do Řevnic
+          %td= @team.train[:arrival]
+      - if @team.hotspot
+        %tr
+          %th Číslo hotspotu
+          %td= @team.hotspot[:number]
+        %tr
+          %th Pracovní název
+          %td= @team.hotspot[:name]
+        %tr
+          %th Dohledávka
+          %td= @team.hotspot[:detail]
+        %tr
+          %th Souřadnice
+          %td 
+            #{@team.hotspot[:lat]}, #{@team.hotspot[:lng]}
+            %div#mapa(style="height:380px")      
+            :javascript
+              $(function() {
           
-            var center = SMap.Coords.fromWGS84(#{@team.hotspot[:lng]},#{@team.hotspot[:lat]});
-            var m = new SMap(JAK.gel("mapa"), center, 14, SMap.DEF_TURIST);
-            m.addMarker(center);            
-          });
+                var center = SMap.Coords.fromWGS84(#{@team.hotspot[:lng]},#{@team.hotspot[:lat]});
+                var m = new SMap(JAK.gel("mapa"), center, 14, SMap.DEF_TURIST);
+                m.addMarker(center);            
+              });
     
