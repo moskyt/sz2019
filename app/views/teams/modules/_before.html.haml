@@ -19,7 +19,7 @@
     %p Přihlášku na závod jste ještě nevyplnili, máte čas do #{Team.register_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.register_deadline)}.
   %div.well.well-sm
     %p
-      = link_to((@team.replies_register.blank? ? "Vyplnit přihlášku na závod" : "Upravit přihlášku na závod"), before_register_team_path(uid: @team.uid), class: "btn btn-success")
+      = link_to((@team.replies_register.blank? ? "Vyplnit přihlášku na závod" : "Upravit přihlášku na závod"), before_register_team_path(uid: @team.uid), class: "btn btn-#{@team.replies_register.blank? ? "success" : "primary"}")
 - else Time.now < Team.register_deadline
   - if !@team.replies_register.blank?
     %p Vaši přihlášku jsme dostali a pracujeme na jejím vyhodnocení.
@@ -46,8 +46,8 @@
   - else
     %p Představení vaší družiny zatím nemáme, až ho budete mít, nahrajte fotku pomocí formuláře níže. Čas máte do #{Team.about_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.about_deadline)}.
   %div.well.well-sm
-    Nahrát prezentaci ve formátu PDF.
     = form_tag before_about_upload_team_path(uid: @team.uid), {multipart: true, method: :post} do
+      Nahrát prezentaci ve formátu PDF.
       = file_field_tag "about_pdf" #, "PDF prezentace"
       %br
       = submit_tag "Nahrát", class: "btn btn-primary"
