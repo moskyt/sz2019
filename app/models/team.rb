@@ -328,7 +328,7 @@ class Team < ActiveRecord::Base
   end
   
   def self.rules_minutes
-    15
+    20
   end
 
   def self.rules_questions

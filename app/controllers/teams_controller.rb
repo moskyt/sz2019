@@ -23,10 +23,10 @@ class TeamsController < ApplicationController
     cid = params[:cid]
     if cid == Team.center_uid
       if request.post?
-        flash[:notice] = "Potvrzen příchod na shromaždiště."
+        flash[:notice] = "Potvrzen příchod na shromaždiště. Modul přežití máte za sebou!"
         @team.ts_survival_center ||= Time.now
         @team.save
-        redirect_to dashboard_url(uid: @team.uid)
+        redirect_to module_race_url(uid: @team.uid)
       end
     else
       flash[:error] = "Špatné UID shromaždiště."
