@@ -15,7 +15,10 @@
 
   %p Pojedete vlakem #{@team.train[:number]}, který odjíždí v #{@team.train[:departure]} ze Smíchovského nádraží do Řevnic, kam přijíždí v #{@team.train[:arrival]}.
   
-  %p Zvolený vlakový spoj je povinný, musíte ho stihnout. V opačném případě můžete přijít o veškeré body z modulu přežití (tedy až #{Team.points_survival_max} bodů) a ztratili byste nezměrné množství času. Mějte proto při plánování odjezdu dostatečnou časovou rezervu. 
+  %p 
+    Zvolený vlakový spoj je povinný, musíte ho stihnout. V opačném případě můžete 
+    %strong přijít o veškeré body z modulu přežití (tedy až #{Team.points_survival_max} bodů) 
+    a ztratili byste nezměrné množství času. Mějte proto při plánování odjezdu dostatečnou časovou rezervu. 
   
   %p Za tuto disciplínu můžete získat až #{Team.points_survival_travel_max} bodů.
 
