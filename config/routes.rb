@@ -36,16 +36,16 @@ Rails.application.routes.draw do
   get '/team/:uid/before_about_ok' => "teams#before_about_ok", as: :before_about_ok_team
   get '/team/:uid/before_about_failed' => "teams#before_about_failed", as: :before_about_failed_team
 
-  get '/survival/:suid' => "admin/survival#dashboard", as: :survival_dashboard
-  get '/survival/:suid/info' => "admin/survival#info", as: :survival_info
-  get '/survival/:suid/supervisor' => "admin/survival#supervisor", as: :survival_supervisor
-  patch '/survival/:suid/supervisor' => "admin/survival#supervisor"
-  get '/survival/:suid/dinner' => "admin/survival#dinner", as: :survival_dinner
-  patch '/survival/:suid/dinner' => "admin/survival#dinner"
-  get '/survival/:suid/night' => "admin/survival#night", as: :survival_night
-  patch '/survival/:suid/night' => "admin/survival#night"
-  get '/survival/:suid/travel' => "admin/survival#travel", as: :survival_travel
-  patch '/survival/:suid/travel' => "admin/survival#travel"
+  get '/hps/:suid' => "admin/survival#dashboard", as: :survival_dashboard
+  get '/hps/:suid/info' => "admin/survival#info", as: :survival_info
+  get '/hps/:suid/supervisor' => "admin/survival#supervisor", as: :survival_supervisor
+  patch '/hps/:suid/supervisor' => "admin/survival#supervisor"
+  get '/hps/:suid/dinner' => "admin/survival#dinner", as: :survival_dinner
+  patch '/hps/:suid/dinner' => "admin/survival#dinner"
+  get '/hps/:suid/night' => "admin/survival#night", as: :survival_night
+  patch '/hps/:suid/night' => "admin/survival#night"
+  get '/hps/:suid/travel' => "admin/survival#travel", as: :survival_travel
+  patch '/hps/:suid/travel' => "admin/survival#travel"
 
   get '/race/point/:rpuid' => "admin/race#point", as: :race_point
   post '/race/point/:rpuid' => "admin/race#point"

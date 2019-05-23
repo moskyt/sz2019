@@ -409,7 +409,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.uid_to_survival(s)
-    "HPS" + s
+    s + "HPS"
     # ss = ""
     # s.chars.each do |c|
     #   ss += case c
@@ -425,7 +425,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.survival_to_uid(s)
-    s[0...3] == "HPS" ? s[3..-1] : nil
+    s[-3..-1] == "HPS" ? s[0...-3] : nil
     # ss = ""
     # s.chars.each do |c|
     #   ss += case c
