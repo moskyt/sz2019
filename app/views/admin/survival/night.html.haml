@@ -2,7 +2,7 @@
 
 %p Ráno po odchodu (nebo na shromaždišti) vyplň poslední část hodnocení modulu Přežití.
 
-%h5 Vybraný hotspot
+%h3 Vybraný hotspot
 
 - if @team.hotspot
   %table.table
@@ -34,21 +34,25 @@
 - else
   %p Zatím nevybráno.
 
-%h5 Hlídka zadala heslo z geokešky
+%h3 Hlídka zadala heslo z geokešky
 
-XXX TBD
+- if @team.ts_survival_hotspot
+  %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.
+- else
+  %p Zatím ne.
 
-%h5 Hodnocení přespání
+%h3 Hodnocení přespání
 
-= bootstrap_form_for @team, url: survival_travel_path(suid: @team.survival_uid) do |f|
+= bootstrap_form_for @team, url: survival_night_path(suid: @team.survival_uid) do |f|
   = f.text_field :points_survival_night_spot
   = f.text_field :points_survival_night_tent
   = f.text_field :points_survival_night_cleanup
   = f.text_field :points_survival_night_packing
   = f.text_field :points_survival_night_gps
   = f.text_field :points_survival_night_moral
+  = f.submit "Uložit", class: "btn btn-primary"
 
-%h5 Odchod na shromaždiště
+%h3 Odchod na shromaždiště
 
 %table.table
   %colgroup
@@ -73,4 +77,11 @@ XXX TBD
             var m = new SMap(JAK.gel("mapa-cil"), center, 14, SMap.DEF_TURIST);
             m.addMarker(center);
           });
+
+%h3 Příchod na shromaždiště
+
+- if @team.ts_survival_center
+  %p Příchod na místo přespání ověřen v #{@team.ts_survival_center}.
+- else
+  %p Zatím ne.
 

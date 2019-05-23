@@ -27,6 +27,17 @@ class Admin::SurvivalController < ApplicationController
     end
   end
 
+  def night
+    if request.patch?
+      @team.update_attribute :points_survival_night_spot,    params.dig(:team, :points_survival_night_spot)
+      @team.update_attribute :points_survival_night_tent,    params.dig(:team, :points_survival_night_tent)
+      @team.update_attribute :points_survival_night_cleanup, params.dig(:team, :points_survival_night_cleanup)
+      @team.update_attribute :points_survival_night_packing, params.dig(:team, :points_survival_night_packing)
+      @team.update_attribute :points_survival_night_gps,     params.dig(:team, :points_survival_night_gps)
+      @team.update_attribute :points_survival_night_moral,   params.dig(:team, :points_survival_night_moral)
+    end
+  end
+
   def dinner
     if request.patch?
       @team.update_attribute :points_survival_dinner, params.dig(:team, :points_survival_dinner)
