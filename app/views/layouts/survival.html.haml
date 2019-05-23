@@ -30,6 +30,7 @@
         %div.collapse.navbar-collapse#aer-navbar-collapse
           %ul.nav.navbar-nav
             %li= link_to "Info", survival_info_url(suid: @team.survival_uid)
+            %li= link_to "Cesta / MED", survival_travel_url(suid: @team.survival_uid)
             %li= link_to "Doprovod / odchod", survival_supervisor_url(suid: @team.survival_uid)
             %li= link_to "Večeře", survival_dinner_url(suid: @team.survival_uid)
             %li= link_to "Přespání", survival_night_url(suid: @team.survival_uid)

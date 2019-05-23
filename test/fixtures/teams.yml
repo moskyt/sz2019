@@ -53,6 +53,13 @@
 #  ts_rules_started              :datetime
 #  ts_rules_done                 :datetime
 #  initial_emails                :string(255)
+#  ts_survival_center            :datetime
+#  ts_survival_hotspot           :datetime
+#  checkin_photo_file_name       :string(255)
+#  checkin_photo_content_type    :string(255)
+#  checkin_photo_file_size       :bigint
+#  checkin_photo_updated_at      :datetime
+#  checkin_data                  :text(65535)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

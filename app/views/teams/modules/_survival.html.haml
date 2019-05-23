@@ -3,3 +3,22 @@
 %h2 Přípravy
 
 %p Sbalte si věci, které budete potřebovat na den a půl trvající akci (viz Důležité / vybavení) a buďte připraveni! Potřebujete si předem nakoupit suroviny na večeři pro celou hlídku (limit 400,- Kč na hlídku, z vlastních zdrojů), kterou budete vařit na vařiči na cestě. Večeře bude rovnoměrně hodnocena podle toho, jak budete spolupracovat při přípravě, jak chutného výsledku dosáhnete a jak zajímavý recept zvolíte.
+
+- if @team.train
+
+  %h2 Doprava
+
+  %p kecy o dopravě
+
+  %p= @team.train.inspect
+
+  %h2 Prezentace po příjezdu do Řevnic
+
+  %p nahrajte fotku, vyplnte jmena
+
+  - if @team.checkin_photo.file? and !@team.checkin_data.blank?
+
+    %h2 Večeře
+
+    %p zadani vecere
+

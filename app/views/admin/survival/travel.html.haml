@@ -1,7 +1,23 @@
 %h1 Cesta na Přežití :: hodnocení a zdravotní info
 
-%p 
+%p
   Ve vlaku zde vyplň hodnocení disciplíny cesta na SZ a také zdravotní omezení (např. léky, alergie, epilepsie, ...) jako informaci pro doprovod, který s hlídkou celý modul do zítřejšího rána absolvuje.
-  
+
 = bootstrap_form_for @team, url: survival_travel_path(suid: @team.survival_uid) do |f|
-  = f.text_field :points_travel_tickets
+  = f.text_field :points_survival_travel
+  = f.text_area :medical_data, rows: 10
+  = f.submit "Uložit", class: "btn btn-primary"
+
+%h3 Checkin foto hlídky z Řevnic
+
+%h5 Fotka
+- if @team.checkin_photo.file?
+  %p Nahráli.
+- else
+  %p Zatím nenahráli.
+
+%h5 Popis
+- if @team.checkin_data.blank?
+  %p Zatím nenahráli.
+- else
+  %p= @team.checkin_data

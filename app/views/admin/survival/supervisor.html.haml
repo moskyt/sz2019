@@ -1,3 +1,8 @@
 %h1 Odchod na Přežití :: registrace nového doprovodu
 
-%p Zde po odchodu z Řevnic vyplň kontaktní informace.
+%p Zde po odchodu z Řevnic vyplň kontaktní informace na sebe.
+
+= bootstrap_form_for @team, url: survival_supervisor_path(suid: @team.survival_uid) do |f|
+  = f.text_area :new_supervisor_data, rows: 10
+  = f.submit "Uložit", class: "btn btn-primary"
+

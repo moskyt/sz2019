@@ -53,6 +53,13 @@
 #  ts_rules_started              :datetime
 #  ts_rules_done                 :datetime
 #  initial_emails                :string(255)
+#  ts_survival_center            :datetime
+#  ts_survival_hotspot           :datetime
+#  checkin_photo_file_name       :string(255)
+#  checkin_photo_content_type    :string(255)
+#  checkin_photo_file_size       :bigint
+#  checkin_photo_updated_at      :datetime
+#  checkin_data                  :text(65535)
 #
 
 class Team < ActiveRecord::Base
@@ -60,6 +67,8 @@ class Team < ActiveRecord::Base
   before_save :set_uid, :eval_points
   has_attached_file :about_photo
   validates_attachment_content_type :about_photo, :content_type => ['application/pdf']
+  has_attached_file :checkin_photo
+  validates_attachment_content_type :checkin_photo, :content_type => /image/
 
   RACEPOINTS = {
     1 =>  ["Na pile",                     36],

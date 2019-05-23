@@ -1,4 +1,5 @@
 %h1 Hodnocení Přežití :: večeře
 
-= bootstrap_form_for @team, url: survival_travel_path(suid: @team.survival_uid) do |f|
+= bootstrap_form_for @team, url: survival_dinner_path(suid: @team.survival_uid) do |f|
   = f.text_field :points_survival_dinner
+  = f.submit "Uložit", class: "btn btn-primary"

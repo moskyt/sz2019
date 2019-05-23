@@ -12,3 +12,7 @@ cs:
         points_survival_night_packing: "Body / přežití / přespání / zabalit"
         points_survival_night_gps: "Body / přežití / přespání / GPS"
         points_survival_night_moral: "Body / přežití / přespání / morál"
+        new_supervisor_data: "Kontaktní data nového doprovodu na Přežití"
+        points_survival_travel: "Body / přežití / cesta"
+        points_survival_dinner: "Body / přežití / večeře"
+        medical_data: "Zdravotní omezení členů (léky, alergie, epilepsie apod.)"

@@ -3,16 +3,22 @@
 %table.table
   %tr
     %th Zadány informace původním doprovodem ve vlaku
-    %td XXX TBD
-  %tr
-    %th Check-in v Řevnicích
-    %td XXX TBD
+    %td= !@team.medical_data.blank? ? icon("check", "OK") : "---"
   %tr
     %th Body za dopravu
     %td= @team.points_survival_travel || "---"
   %tr
+    %th Check-in v Řevnicích - foto
+    %td= @team.checkin_photo.file? ? icon("check", "OK") : "---"
+  %tr
+    %th Check-in v Řevnicích - popis
+    %td= !@team.checkin_data.blank? ? icon("check", "OK") : "---"
+  %tr
+    %th Body z večeře
+    %td= @team.points_survival_dinner || "---"
+  %tr
     %th Kontaktní info nového doprovodu
-    %td XXX TBD
+    %td= !@team.new_supervisor_data.blank? ? icon("check", "OK") : "---"
   %tr
     %th Body z večeře
     %td= @team.points_survival_dinner || "---"
