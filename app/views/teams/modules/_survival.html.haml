@@ -10,15 +10,38 @@
 
   %p kecy o dopravě
 
-  %p= @team.train.inspect
+  %p Pojedete vlakem #{@team.train[:number]}, který odjíždí v #{@team.train[:departure]} ze Smíchovského nádraží do Řevnic, kam přijíždí v #{@team.train[:arrival]}.
 
   %h2 Prezentace po příjezdu do Řevnic
 
   %p nahrajte fotku, vyplnte jmena
 
-  - if @team.checkin_photo.file? and !@team.checkin_data.blank?
+  - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
+
+    %p Váš doprovod je #{@team.new_supervisor_data}.
 
     %h2 Večeře
 
     %p zadani vecere
 
+    - if @team.points_survival_dinner and @team.hotspot
+
+      %h2 Přespání
+
+      %p zadani k prespani
+
+      %p= @team.hotspot.inspect
+
+      - if @team.ts_survival_hotspot
+        %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.
+      - else
+        %p vyfotte qr
+
+      %h2 Příchod na shromaždiště závodu
+
+      %p zadani
+
+      - if @team.ts_survival_center
+        %p Příchod na místo přespání ověřen v #{@team.ts_survival_center}.
+      - else
+        %p vyfotte qr
