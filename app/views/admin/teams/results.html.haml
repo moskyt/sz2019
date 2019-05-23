@@ -1,0 +1,30 @@
+%h1 Výsledky
+
+- [["D","Dívčí"],["H","Chlapecká"]].each do |cat, ctitle|
+  %h2 #{ctitle} kategorie
+
+  %table.table
+    %colgroup
+      %col.col-sm-1
+      %col.col-sm-7
+      %col.col-sm-1
+      %col.col-sm-1
+      %col.col-sm-1
+      %col.col-sm-1
+    %thead
+      %tr
+        %th Místo
+        %th Hlídka
+        %th Před závodem
+        %th Přežití
+        %th Závod
+        %th Celkem
+    %tbody
+      - Team.where(category: cat).order(points: :desc).each_with_index do |team, ti|
+        %tr
+          %td= ti+1
+          %td= link_to team.name, [:admin, team]
+          %td= team.sum_before
+          %td= team.sum_survival
+          %td= team.sum_race
+          %td= team.points
