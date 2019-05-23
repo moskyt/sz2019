@@ -37,7 +37,7 @@ updateTimers = ->
     $(this).attr("data-s", s)
     $(this).attr("data-d", d)
     $(this).attr("data-n", n)
-    $(this).html((if d > 0 then "" + d + "d " else "") + (if h > 9 then "" else "0") + h + ":" + (if m > 9 then "" else "0") + m + ":" + (if s > 9 then "" else "0") + s)
+    $(this).children(".time").first().html((if d > 0 then "" + d + "d " else "") + (if h > 9 then "" else "0") + h + ":" + (if m > 9 then "" else "0") + m + ":" + (if s > 9 then "" else "0") + s)
 
     if d < 0 && url?.length
       window.location = url

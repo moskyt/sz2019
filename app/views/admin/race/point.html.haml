@@ -1,15 +1,12 @@
-%table.table
-  %thead
-    %tr
-      %th
-      %th Hlídka
-      %td Body
-  %tbody
-    - Team.order(:name).each do |team|
-      %tr
-        = form_tag do
-          %td= team.number
-          %td= team.name
-          %td= team.district
-          %td= text_field_tag "points[#{team.id}]", team.send("points_race_%02d" % @racepoint)
-          %td= submit_tag "Uložit", class: "btn btn-default"
+%div.row
+  %div.col-sm-1.col-xs-2 &nbsp;
+  %div.col-sm-5.col-xs-10 Hlídka
+  %div.col-sm-3.col-xs-8 Body
+  %div.col-sm-2.col-xs-4 &nbsp;
+- Team.order(:name).each do |team|
+  = form_tag do
+    %div.row(style="margin-top:0.1em;border-top: 1px solid #888;padding-top:0.1em;")
+      %div.col-sm-1.col-xs-2= team.number
+      %div.col-sm-5.col-xs-10= team.name
+      %div.col-sm-3.col-xs-8= text_field_tag "points[#{team.id}]", team.send("points_race_%02d" % @racepoint), style: "background-color: #ccc"
+      %div.col-sm-2.col-xs-4= submit_tag "Uložit", class: "btn btn-default"

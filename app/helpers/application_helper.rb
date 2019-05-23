@@ -7,18 +7,6 @@ module ApplicationHelper
   def link_js(text, options = {})
     link_to text, "javascript:void(0)", options
   end
-  
-  def time_widget(team)
-    sss = team.time_left
-    d = sss.floor
-    h = ((sss          ).frac * 24).floor
-    m = ((sss * 24     ).frac * 60).floor
-    s = ((sss * 24 * 60).frac * 60).floor
-    
-    content_tag :span, class: "time-widget", data: {team_id: team.id, d: d, h: h, m: m, s: s, n: 0} do
-      format_time_left(sss)
-    end    
-  end
 
   def test_time_widget(time_end, done_url = nil)
     sss = time_end.to_datetime - Time.now.localtime.to_datetime
@@ -28,13 +16,13 @@ module ApplicationHelper
     h = ((sss          ).frac * 24).floor
     m = ((sss * 24     ).frac * 60).floor
     s = ((sss * 24 * 60).frac * 60).floor
-    
+
     content_tag :span, class: "time-widget", data: {done_url: done_url, d: d, h: h, m: m, s: s, n: 0} do
       format_time_left(sss)
-    end    
+    end
   end
-  
-  def format_time_left(sss)    
+
+  def format_time_left(sss)
     d = sss.floor
     h = ((sss          ).frac * 24).floor
     m = ((sss * 24     ).frac * 60).floor

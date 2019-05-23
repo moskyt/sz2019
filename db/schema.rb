@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190523092749) do
+ActiveRecord::Schema.define(version: 20190523110603) do
 
   create_table "parameters", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -73,6 +73,10 @@ ActiveRecord::Schema.define(version: 20190523092749) do
     t.string   "initial_emails",                limit: 255
     t.datetime "ts_survival_center"
     t.datetime "ts_survival_hotspot"
+    t.string   "checkin_photo_file_name",       limit: 255
+    t.string   "checkin_photo_content_type",    limit: 255
+    t.integer  "checkin_photo_file_size",       limit: 8
+    t.datetime "checkin_photo_updated_at"
   end
 
 end

@@ -1,5 +1,45 @@
-%h1 Konečné výsledky
+%h1
+  - if Parameter["current_module"] == "results"
+    Konečné výsledky
+  - else
+    Průběžné výsledky
 
-%p Je po závodě.
-
-%p Získali jste celkem ...
+%table.table
+  %tbody
+    %tr.bg-primary
+      %th Modul Před závodem
+      %td= @team.sum_before
+    %tr
+      %th Registrace
+      %td= @team.points_before_register
+    %tr
+      %th Test z pravidel SZ
+      %td= @team.points_before_rules
+    %tr
+      %th Představení družiny
+      %td= @team.points_before_about
+  %tbody
+    %tr.bg-primary
+      %th Modul Přežití
+      %td= @team.sum_before
+    %tr
+      %th Doprava
+      %td= @team.points_survival_travel
+    %tr
+      %th Večeře
+      %td= @team.points_survival_dinner
+    %tr
+      %th Přespání
+      %td= @team.points_survival_night
+  %tbody
+    %tr.bg-primary
+      %th Modul Závod
+      %td= @team.sum_race
+    - Team::RACEPOINTS.each do |n, s|
+      %tr
+        %th= s[0]
+        %td= @team.send("points_race_%02d" % n) || "---"
+  %tbody
+    %tr.bg-primary
+      %th Celkem
+      %td= @team.points
