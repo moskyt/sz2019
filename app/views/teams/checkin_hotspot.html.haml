@@ -1,0 +1,16 @@
+%h1 Příchod na místo přespání
+
+%p
+  %strong Hlídka:
+  = @team.name
+
+%p
+  %strong Hotspot:
+  = @team.hotspot[:number]
+  = "/"
+  = @team.hotspot[:name]
+
+%p
+  = form_tag do
+    = hidden_field_tag :huid, Team.hotspot_uid(@team.hotspot[:number])
+    = submit_tag "Potvrdit", class: "btn btn-success"

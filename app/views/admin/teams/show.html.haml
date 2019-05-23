@@ -65,13 +65,26 @@
 %table.table
   %tbody
     %tr
+      - u = dashboard_url(uid: @team.uid)
       %th Hlavní stránka
-      %td= link_to dashboard_url(uid: @team.uid), dashboard_url(uid: @team.uid)
-      %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
+      %td= link_to u,u
+      %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
+    - if @team.hotspot
+      %tr
+        - u = survival_checkin_hotspot_team_url(huid: Team.hotspot_uid(@team.hotspot[:number]))
+        %th Checkin na hotspotu (*)
+        %td= link_to u,u
+        %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
     %tr
+      - u = survival_checkin_center_team_url(cid: Team.center_uid)
+      %th Checkin na shromaždišti (*)
+      %td= link_to u,u
+      %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
+    %tr
+      - u = survival_dashboard_url(suid: @team.survival_uid)
       %th Modul přežití -- DOPROVODY
-      %td= link_to survival_dashboard_url(suid: @team.survival_uid), survival_dashboard_url(suid: @team.survival_uid)
-      %td= RQRCode::QRCode.new(survival_dashboard_url(suid: @team.survival_uid)).as_svg(module_size: 4).html_safe
+      %td= link_to u,u
+      %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
 
 
 

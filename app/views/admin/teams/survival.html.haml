@@ -2,9 +2,9 @@
 
 %table.table
   %thead
-    %tr 
+    %tr
       %th
-      %th Hlídka  
+      %th Hlídka
       %th Doprava
       %th Doprovod
       %th Checkin
@@ -17,22 +17,14 @@
       %tr
         %td= team.number
         %td= link_to team.name, [:admin, team]
-        %td        
+        %td
           - if team.points_survival_travel
             #{team.points_survival_travel} b
           - else
             = "---"
         %td XXX
         %td XXX
-        %td
-          - if team.points_survival_dinner
-            #{team.points_survival_dinner} b
-          - else
-            = "---"                
-        %td XXX
-        %td
-          - if team.points_survival_night
-            #{team.points_survival_night} b
-          - else
-            = "---"                
-        %td XXX
+        %td= team.points_survival_dinner ? "#{team.points_survival_dinner} b" : "---"
+        %td= team.ts_survival_hotspot || "---"
+        %td= team.points_survival_night ? "#{team.points_survival_night} b" : "---"
+        %td= team.ts_survival_center || "---"

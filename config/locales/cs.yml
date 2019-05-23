@@ -1,4 +1,4 @@
-cs: 
+cs:
   activerecord:
     attributes:
       team:
@@ -6,3 +6,9 @@ cs:
         name: "Název"
         district: "Okres+středisko+oddíl"
         category: "Kategorie"
+        points_survival_night_spot: "Body / přežití / přespání / místo"
+        points_survival_night_tent: "Body / přežití / přespání / stan"
+        points_survival_night_cleanup: "Body / přežití / přespání / úklid"
+        points_survival_night_packing: "Body / přežití / přespání / zabalit"
+        points_survival_night_gps: "Body / přežití / přespání / GPS"
+        points_survival_night_moral: "Body / přežití / přespání / morál"

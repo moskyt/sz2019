@@ -363,6 +363,18 @@ class Team < ActiveRecord::Base
     ((x.to_i(16) - 7981375) ** (1.0/7)).round
   end
 
+  def self.hotspot_uid(i)
+    "%08x" % (i ** 6 + 5080981)
+  end
+
+  def self.uid_to_hotspot(x)
+    ((x.to_i(16) - 5080981) ** (1.0/6)).round
+  end
+
+  def self.center_uid
+    "f0f0b1b1"
+  end
+
   def self.uid_to_survival(s)
     ss = ""
     s.chars.each do |c|

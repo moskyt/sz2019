@@ -1,1 +1,27 @@
 %h1 Modul přežití :: #{@team.name} [#{@team.number}]
+
+%table.table
+  %tr
+    %th Zadány informace původním doprovodem ve vlaku
+    %td XXX TBD
+  %tr
+    %th Check-in v Řevnicích
+    %td XXX TBD
+  %tr
+    %th Body za dopravu
+    %td= @team.points_survival_travel || "---"
+  %tr
+    %th Kontaktní info nového doprovodu
+    %td XXX TBD
+  %tr
+    %th Body z večeře
+    %td= @team.points_survival_dinner || "---"
+  %tr
+    %th Check-in na hotspotu
+    %td= @team.ts_survival_hotspot || "---"
+  %tr
+    %th Body z přespání
+    %td= @team.points_survival_night || "---"
+  %tr
+    %th Check-in na shromaždišti
+    %td= @team.ts_survival_center || "---"

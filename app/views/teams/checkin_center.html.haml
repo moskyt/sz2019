@@ -1,0 +1,10 @@
+%h1 Příchod na shromaždiště
+
+%p
+  %strong Hlídka:
+  = @team.name
+
+%p
+  = form_tag do
+    = hidden_field_tag :cid, Team.center_uid
+    = submit_tag "Potvrdit", class: "btn btn-success"

@@ -1,6 +1,38 @@
 class TeamsController < ApplicationController
 
-  before_filter :load_team
+  before_filter :load_team, except: [:checkin_hotspot, :checkin_center]
+  before_filter :pop_team, only: [:checkin_hotspot, :checkin_center]
+
+  def checkin_hotspot
+    huid = params[:huid]
+    hotspot_number = huid && Team.uid_to_hotspot(huid)
+    if @team.hotspot and (hotspot_number == @team.hotspot[:number])
+      if request.post?
+        flash[:notice] = "Potvrzen příchod na hotspot."
+        @team.ts_survival_hotspot ||= Time.now
+        @team.save
+        redirect_to dashboard_url(uid: @team.uid)
+      end
+    else
+      flash[:error] = "Špatné UID hotspotu."
+      redirect_to dashboard_url(uid: @team.uid)
+    end
+  end
+
+  def checkin_center
+    cid = params[:cid]
+    if cid == Team.center_uid
+      if request.post?
+        flash[:notice] = "Potvrzen příchod na shromaždiště."
+        @team.ts_survival_center ||= Time.now
+        @team.save
+        redirect_to dashboard_url(uid: @team.uid)
+      end
+    else
+      flash[:error] = "Špatné UID shromaždiště."
+      redirect_to dashboard_url(uid: @team.uid)
+    end
+  end
 
   def dashboard
   end
@@ -119,6 +151,16 @@ class TeamsController < ApplicationController
   def load_team
     @team = Team.where(uid: params[:uid]).first
     if @team
+      session[:team_uid] = @team.uid
+      true
+    else
+      redirect_to :root
+      false
+    end
+  end
+
+  def pop_team
+    if session[:team_uid] and (@team = Team.where(uid: session[:team_uid]).first)
       true
     else
       redirect_to :root

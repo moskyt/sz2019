@@ -1,1 +1,12 @@
 %h1 Modul Závod
+
+%table.table
+  %tbody
+    - Team::RACEPOINTS.each do |n, s|
+      %tr
+        %th= n
+        %th= s[0]
+        %td= @team.send("points_race_%02d" % n) || "---"
+        %td= "/"
+        %td= s[1]
+        %td bodů

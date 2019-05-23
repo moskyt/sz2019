@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get '/team/:uid/before_rules_done' => "teams#before_rules_done", as: :before_rules_done_team
   get '/team/:uid/before_rules_expired' => "teams#before_rules_expired", as: :before_rules_expired_team
 
+  get '/team/checkin_hotspot/:huid' => "teams#checkin_hotspot", as: :survival_checkin_hotspot_team
+  post '/team/checkin_hotspot/:huid' => "teams#checkin_hotspot"
+  get '/team/checkin_center/:cid' => "teams#checkin_center", as: :survival_checkin_center_team
+  post '/team/checkin_center/:cid' => "teams#checkin_center"
+
   get '/team/:uid/before_register' => "teams#before_register", as: :before_register_team
   post '/team/:uid/before_register_submit' => "teams#before_register_submit", as: :before_register_submit_team
 
