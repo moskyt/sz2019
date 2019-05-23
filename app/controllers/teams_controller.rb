@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
         flash[:notice] = "Potvrzen příchod na hotspot."
         @team.ts_survival_hotspot ||= Time.now
         @team.save
-        redirect_to dashboard_url(uid: @team.uid)
+        redirect_to module_survival_team_url(uid: @team.uid)
       end
     else
       flash[:error] = "Špatné UID hotspotu."
@@ -26,7 +26,7 @@ class TeamsController < ApplicationController
         flash[:notice] = "Potvrzen příchod na shromaždiště. Modul přežití máte za sebou!"
         @team.ts_survival_center ||= Time.now
         @team.save
-        redirect_to module_race_url(uid: @team.uid)
+        redirect_to module_race_team_url(uid: @team.uid)
       end
     else
       flash[:error] = "Špatné UID shromaždiště."
