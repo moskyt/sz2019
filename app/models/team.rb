@@ -111,7 +111,11 @@ class Team < ActiveRecord::Base
   end
 
   def self.max_points
-    points_before_max + 4 * 36 + RACEPOINTS.values.map{|x| x[1]}.inject(:+)
+    points_before_max + points_survival_max + points_race_max
+  end
+
+  def self.points_race_max
+    RACEPOINTS.values.map{|x| x[1]}.inject(:+)
   end
 
   def self.points_before_max
@@ -128,6 +132,22 @@ class Team < ActiveRecord::Base
 
   def self.points_before_rules_max
     36
+  end
+
+  def self.points_survival_travel_max
+    36
+  end
+
+  def self.points_survival_dinner_max
+    36
+  end
+
+  def self.points_survival_night_max
+    36 * 6
+  end
+
+  def self.points_survival_max
+    points_survival_travel_max + points_survival_dinner_max + points_survival_night_max
   end
 
   def self.available_transport_options(team)
@@ -355,7 +375,7 @@ class Team < ActiveRecord::Base
   end
 
   def points_survival_night
-    points_survival_night_spot || points_survival_night_tent || points_survival_night_cleanup || points_survival_night_packing || points_survival_night_gps || points_survival_night_moral
+    (points_survival_night_spot || points_survival_night_tent || points_survival_night_cleanup || points_survival_night_packing || points_survival_night_gps || points_survival_night_moral) ? sum_survival_night : nil
   end
 
   def sum_race

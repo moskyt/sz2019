@@ -16,6 +16,24 @@
 
   %p nahrajte fotku, vyplnte jmena
 
+  - if @team.checkin_photo.file?
+    %p
+      %strong Nahraná fotka:
+      = link_to File.basename(@team.checkin_photo.path), @team.checkin_photo.url
+      = "[%.1f kB]" % (@team.checkin_photo.size / 1000)
+
+  %div.well.well-sm
+    = form_tag survival_checkin_upload_team_path(uid: @team.uid), {multipart: true, method: :post} do
+      %p
+        Nahrát fotku:
+        = file_field_tag "checkin_photo" #, "PDF prezentace"
+      %p
+        Jména členů hlídky na fotce zleva doprava:
+        %br
+        = text_field_tag "checkin_data", @team.checkin_data, style: "width: 100%"
+      %p
+        = submit_tag "Nahrát", class: "btn btn-primary"
+
   - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
 
     %p Váš doprovod je #{@team.new_supervisor_data}.
@@ -30,7 +48,13 @@
 
       %p zadani k prespani
 
-      %p= @team.hotspot.inspect
+      %p
+        %strong Souřadnice hotspotu:
+        #{@team.hotspot[:lat]}N, #{@team.hotspot[:lng]}E
+
+      %p
+        %strong Dohledávka geokešky:
+        #{@team.hotspot[:detail]}
 
       - if @team.ts_survival_hotspot
         %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.

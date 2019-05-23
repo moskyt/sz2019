@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   get '/team/:uid/before_register' => "teams#before_register", as: :before_register_team
   post '/team/:uid/before_register_submit' => "teams#before_register_submit", as: :before_register_submit_team
 
+  post '/team/:uid/survival_checkin_upload' => "teams#survival_checkin_upload", as: :survival_checkin_upload_team
+  get '/team/:uid/survival_checkin_ok' => "teams#survival_checkin_ok", as: :survival_checkin_ok_team
+  get '/team/:uid/survival_checkin_failed' => "teams#survival_checkin_failed", as: :survival_checkin_failed_team
+
   post '/team/:uid/before_about_upload' => "teams#before_about_upload", as: :before_about_upload_team
   get '/team/:uid/before_about_ok' => "teams#before_about_ok", as: :before_about_ok_team
   get '/team/:uid/before_about_failed' => "teams#before_about_failed", as: :before_about_failed_team

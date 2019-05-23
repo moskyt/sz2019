@@ -146,6 +146,26 @@ class TeamsController < ApplicationController
     end
   end
 
+  def survival_checkin_ok
+  end
+
+  def survival_checkin_failed
+  end
+
+  def survival_checkin_upload
+    if params[:checkin_photo] and params[:checkin_data]
+      @team.checkin_photo = params[:checkin_photo]
+      @team.checkin_data = params[:checkin_data]
+      if @team.save
+        redirect_to survival_checkin_ok_team_path(uid: @team.uid)
+      else
+        redirect_to survival_checkin_failed_team_path(uid: @team.uid)
+      end
+    else
+      redirect_to survival_checkin_failed_team_path(uid: @team.uid)
+    end
+  end
+
   protected
 
   def load_team

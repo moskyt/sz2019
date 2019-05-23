@@ -58,6 +58,43 @@
       %th Celkem
       %td= @team.sum_before
       %td= Team.points_before_max
+    %tr.bg-primary
+      %th(colspan) Přežití
+      %th body
+      %th max
+    %tr
+      %th Cesta
+      %td= @team.points_survival_travel
+      %td= Team.points_survival_travel_max
+    %tr
+      %th Večeře
+      %td= @team.points_survival_dinner
+      %td= Team.points_survival_dinner_max
+    %tr
+      %th Přespání
+      %td= @team.points_survival_night
+      %td= Team.points_survival_night_max
+    %tr
+      %th Celkem
+      %td= @team.sum_survival
+      %td= Team.points_survival_max
+    %tr.bg-primary
+      %th(colspan) Závod
+      %th body
+      %th max
+    - Team::RACEPOINTS.each do |n, s|
+      %tr
+        %th= s[0]
+        %td= @team.send("points_race_%02d" % n) || "---"
+        %td= s[1]
+    %tr
+      %th Celkem
+      %td= @team.sum_race
+      %td= Team.points_race_max
+    %tr.bg-danger
+      %th(colspan) Celkem
+      %th= @team.points
+      %th= Team.max_points
 
 
 %h4 Odkazy
