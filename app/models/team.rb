@@ -326,6 +326,10 @@ class Team < ActiveRecord::Base
       "vlak 5, HS 10" =>  "žlutá",
       }[preference_departure]
   end
+  
+  def self.rules_minutes
+    15
+  end
 
   def self.rules_questions
     [
@@ -469,7 +473,7 @@ class Team < ActiveRecord::Base
     return false if points_before_rules
     return true if !replies_rules.blank?
     return true if Team.rules_deadline < Time.now.to_datetime
-    return true if self.ts_rules_started and self.ts_rules_started + 30.minutes < Time.now.to_datetime
+    return true if self.ts_rules_started and self.ts_rules_started + Team.rules_minutes.minutes < Time.now.to_datetime
     false
   end
 

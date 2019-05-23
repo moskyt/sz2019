@@ -80,7 +80,7 @@ class TeamsController < ApplicationController
       @team.ts_rules_started = Time.now
       @team.save
     end
-    if @team.ts_rules_started + 30.minutes > Time.now
+    if @team.ts_rules_started + Team.rules_minutes.minutes > Time.now
       # redirect to questions
       redirect_to before_rules_questions_team_path(uid: @team.uid)
     else
@@ -105,7 +105,7 @@ class TeamsController < ApplicationController
       @team.save
     end
 
-    if @team.ts_rules_started + 30.minutes < Time.now
+    if @team.ts_rules_started + Team.rules_minutes.minutes < Time.now
       redirect_to before_rules_expired_team_path(uid: @team.uid)
       return
     end

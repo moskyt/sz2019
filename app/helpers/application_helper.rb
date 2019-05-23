@@ -18,7 +18,9 @@ module ApplicationHelper
     s = ((sss * 24 * 60).frac * 60).floor
 
     content_tag :span, class: "time-widget", data: {done_url: done_url, d: d, h: h, m: m, s: s, n: 0} do
-      format_time_left(sss)
+      content_tag :span, class: "time" do
+        format_time_left(sss)
+      end
     end
   end
 

@@ -22,6 +22,10 @@ function after_load() {
 
   $('body').tooltip({selector: '[data-show=tooltip]', container: "body"});
   $('body').popover({selector: '[data-show=popover]', html: true});
+  
+  $("body").on("change propertychange input paste", ".point-input", function(){
+    $(this).closest(".row").removeClass("saved");
+  });
 
   // $('a.colorbox').colorbox({scalePhotos: true, maxHeight: "90%", maxWidth: "90%", transition: 'fade'})
 

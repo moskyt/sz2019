@@ -1,7 +1,9 @@
 %h1 Modul Před závodem :: test z pravidel SZ
 
-%p Max 30 minut.
+%p Seznamte se s #{link_to "pravidly Svojsíkova závodu", "https://krizovatka.skaut.cz/zpravodajstvi/4120-pravidla-svojsikova-zavodu-2019?autologin=1"}. Seznámení věnujte čas podle potřeby, při samotném vyplňování testu pravidla můžete použít také. V testu je #{Team.rules_questions.size} otázek, na odpovědi máte #{Team.rules_minutes} minut. 
 
-%p Info o testu.
+%p Maximum za tuto disciplínu je #{Team.points_before_rules_max} bodů.
+
+%p Na vyplnění testu máte pouze jeden pokus.
 
 = link_to "Začít vyplňovat test", before_rules_start_team_path(uid: @team.uid), class: "btn btn-success", method: :post

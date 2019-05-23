@@ -4,17 +4,30 @@
 
 %p Sbalte si věci, které budete potřebovat na den a půl trvající akci (viz Důležité / vybavení) a buďte připraveni! Potřebujete si předem nakoupit suroviny na večeři pro celou hlídku (limit 400,- Kč na hlídku, z vlastních zdrojů), kterou budete vařit na vařiči na cestě. Večeře bude rovnoměrně hodnocena podle toho, jak budete spolupracovat při přípravě, jak chutného výsledku dosáhnete a jak zajímavý recept zvolíte.
 
+- unless @team.train
+  %p Poté, co vyplníte přihlášku na závod a zvolíte si vlakový spoj, se Vám níže zobrazí konkrétní informace o odjezdu na závod a první úkol po vystoupení z vlaku.
+
 - if @team.train
 
   %h2 Doprava
 
-  %p kecy o dopravě
+  %p Doprava na závod je první disciplínou modulu Přežití: ve vaší režii je plánování srazu a cesty na nádraží, nákup lístků i včasné a správné nalezení vašeho vlaku.
 
   %p Pojedete vlakem #{@team.train[:number]}, který odjíždí v #{@team.train[:departure]} ze Smíchovského nádraží do Řevnic, kam přijíždí v #{@team.train[:arrival]}.
+  
+  %p Zvolený vlakový spoj je povinný, musíte ho stihnout. V opačném případě byste přišli o spoustu bodů a ztratili byste nezměrné množství času. Mějte proto při plánování odkezdu dostatečnou časovou rezervu.
 
   %h2 Prezentace po příjezdu do Řevnic
 
-  %p nahrajte fotku, vyplnte jmena
+  %p 
+    Po vystoupení z vlaku vyfoťte skupinové selfie, na kterém budou všichni členové hlídky a rozpoznatelný nápis Řevnice (např. na staniční budově). Fotku nahrajte pomocí formuláře níže a do textového pole vyplňte jména všech členů na fotce zleva doprava. Tento úkol není bodovaný, ale slouží jako prezentace na závod a bez jeho splnění nebudete moci pokračovat dále.
+
+  %p 
+    V tuto chvíli se také rozloučíte až do zítřejšího rána se svým doprovodem a připojí se k vám doprovod jiné hlídky. Ten bude sloužit kromě bezpečnosti také jako rozhodčí pro hodnocení jednotlivých úkolů, které vás čekají.
+
+  - unless @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
+    %p
+      Po nahrání fotky a poté, co se pomocí webu zaregistruje váš nový doprovod, se na této stránce níže zobrazí pokyny pro další postup.
 
   - if @team.checkin_photo.file?
     %p
