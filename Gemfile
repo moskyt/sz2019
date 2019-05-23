@@ -17,6 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 gem "paperclip"
 gem "RedCloth"
 gem "rinku"
+gem "exception_notification"
+
 
 group :development, :test do
   gem "capistrano", "~> 2.0"
