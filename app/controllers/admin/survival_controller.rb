@@ -17,6 +17,7 @@ class Admin::SurvivalController < ApplicationController
   def supervisor
     if request.patch?
       @team.update_attribute :new_supervisor_data, params.dig(:team, :new_supervisor_data)
+      flash[:notice] = "Změny uloženy."
     end
   end
 
@@ -24,6 +25,7 @@ class Admin::SurvivalController < ApplicationController
     if request.patch?
       @team.update_attribute :points_survival_travel, params.dig(:team, :points_survival_travel)
       @team.update_attribute :medical_data, params.dig(:team, :medical_data)
+      flash[:notice] = "Změny uloženy."
     end
   end
 
@@ -35,6 +37,7 @@ class Admin::SurvivalController < ApplicationController
       @team.update_attribute :points_survival_night_packing, params.dig(:team, :points_survival_night_packing)
       @team.update_attribute :points_survival_night_gps,     params.dig(:team, :points_survival_night_gps)
       @team.update_attribute :points_survival_night_moral,   params.dig(:team, :points_survival_night_moral)
+      flash[:notice] = "Změny uloženy."
     end
   end
 
