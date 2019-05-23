@@ -27,6 +27,13 @@ Rails.application.routes.draw do
   get '/team/:uid/before_about_ok' => "teams#before_about_ok", as: :before_about_ok_team
   get '/team/:uid/before_about_failed' => "teams#before_about_failed", as: :before_about_failed_team
 
+  get '/survival/:suid' => "admin/survival#dashboard", as: :survival_dashboard
+  get '/survival/:suid/info' => "admin/survival#info", as: :survival_info
+  get '/survival/:suid/supervisor' => "admin/survival#supervisor", as: :survival_supervisor
+  get '/survival/:suid/dinner' => "admin/survival#dinner", as: :survival_dinner
+  get '/survival/:suid/night' => "admin/survival#night", as: :survival_night
+  get '/survival/:suid/travel' => "admin/survival#travel", as: :survival_travel
+
   # get '/team/:uid/choose_transport' => "teams#choose_transport"
   # post '/team/:uid/choose_transport' => "teams#choose_transport_submit"
   #

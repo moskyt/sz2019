@@ -25,16 +25,15 @@
             %span.icon-bar
           = link_to :admin, :class => 'navbar-brand' do
             %div
-              InTime / ADMIN
+              InTime / PŘEŽITÍ / #{@team.name} [#{@team.number}]
 
         %div.collapse.navbar-collapse#aer-navbar-collapse
           %ul.nav.navbar-nav
-            %li= link_to "Hlídky", [:admin, :teams]
-            %li= link_to "Před závodem", [:before, :admin, :teams]
-            %li= link_to "Přežití", [:survival, :admin, :teams]
-            %li= link_to "Závod", [:race, :admin, :teams]
-            %li= link_to "Výsledky", [:results, :admin, :teams]
-            %li= link_to "Nastavení", [:admin, :parameters]
+            %li= link_to "Přehled", survival_dashboard_url(suid: @team.survival_uid)
+            %li= link_to "Info", survival_info_url(suid: @team.survival_uid)
+            %li= link_to "Doprovod / odchod", survival_supervisor_url(suid: @team.survival_uid)
+            %li= link_to "Večeře", survival_dinner_url(suid: @team.survival_uid)
+            %li= link_to "Přespání", survival_night_url(suid: @team.survival_uid)
           
     %div.container#content
       %div(style="padding-top:60px;padding-bottom:20px")

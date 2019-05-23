@@ -12,15 +12,32 @@ class CreateTeams < ActiveRecord::Migration
       t.datetime :ts_arrived
       t.text :participants_json
       t.integer :points
-      t.integer :points_about
-      t.integer :points_rules
       t.string :preference_departure
-      t.integer :preference_hotspot
-      t.string :departure
-      t.string :trail
       t.integer :hotspot
-      t.integer :points_dinner
-      t.integer :points_cleanup
+      t.integer :points_before_about
+      t.integer :points_before_rules
+      t.integer :points_before_register
+      t.integer :points_survival_travel
+      t.integer :points_survival_dinner
+      t.integer :points_survival_night_spot
+      t.integer :points_survival_night_tent
+      t.integer :points_survival_night_cleanup
+      t.integer :points_survival_night_packing
+      t.integer :points_survival_night_gps
+      t.integer :points_survival_night_moral
+      t.integer :points_race_01
+      t.integer :points_race_02
+      t.integer :points_race_03
+      t.integer :points_race_04
+      t.integer :points_race_05
+      t.integer :points_race_06
+      t.integer :points_race_07
+      t.integer :points_race_08
+      t.integer :points_race_09
+      t.integer :points_race_10
+      t.integer :points_race_11
+      t.integer :points_race_12
+      t.integer :points_race_13
 
       t.timestamps null: false
     end

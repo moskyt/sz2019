@@ -60,14 +60,17 @@
       %td= Team.points_register_max+Team.points_rules_max+Team.points_about_max
 
 
-%h5 Odkazy / QR
+%h5 Odkazy
 
 %table.table
   %tbody
     %tr
       %th Hlavní stránka
       %td= link_to dashboard_url(uid: @team.uid), dashboard_url(uid: @team.uid)
-      %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
+    %tr
+      %th Modul přežití -- DOPROVODY
+      %td= link_to survival_dashboard_url(suid: @team.survival_uid), survival_dashboard_url(suid: @team.survival_uid)
+      / %td= RQRCode::QRCode.new(dashboard_url(uid: @team.uid)).as_svg(module_size: 4).html_safe
 
 
 
@@ -109,8 +112,54 @@
   %p Nevyplnili.
 - else
   - data = @team.replies_register_
-  %pre= data.inspect
+  %table.table
+    %colgroup
+      %col.col-sm-4
+      %col.col-sm-8
+    - data.each do |k, v|
+      - unless v.blank?
+        %tr
+          %th= k
+          %td= v
 
-%h5 Doprava na SZ
+%h5 Odjezd a hotspot
 
-%p TBD
+%table.table
+  %colgroup
+    %col.col-sm-4
+    %col.col-sm-8
+  %tbody  
+    %tr
+      %th
+      %td= @team.preference_departure
+    %tr
+      %th Číslo spoje
+      %td= @team.train[:number]
+    %tr
+      %th Odjezd ze Smíchova
+      %td= @team.train[:departure]
+    %tr
+      %th Příjezd do Řevnic
+      %td= @team.train[:arrival]
+    %tr
+      %th Číslo hotspotu
+      %td= @team.hotspot[:number]
+    %tr
+      %th Pracovní název
+      %td= @team.hotspot[:name]
+    %tr
+      %th Dohledávka
+      %td= @team.hotspot[:detail]
+    %tr
+      %th Souřadnice
+      %td 
+        #{@team.hotspot[:lat]}, #{@team.hotspot[:lng]}
+        %div#mapa(style="height:380px")      
+        :javascript
+          $(function() {
+          
+            var center = SMap.Coords.fromWGS84(#{@team.hotspot[:lng]},#{@team.hotspot[:lat]});
+            var m = new SMap(JAK.gel("mapa"), center, 14, SMap.DEF_TURIST);
+            m.addMarker(center);            
+          });
+    

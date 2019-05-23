@@ -1,0 +1,67 @@
+%h1 Hodnocení Přežití :: přespání
+
+%p Ráno po odchodu (nebo na shromaždišti) vyplň poslední část hodnocení modulu Přežití.
+
+%h5 Vybraný hotspot
+
+%table.table
+  %colgroup
+    %col.col-sm-4
+    %col.col-sm-8
+  %tbody  
+    %tr
+      %th Číslo hotspotu
+      %td= @team.hotspot[:number]
+    %tr
+      %th Pracovní název
+      %td= @team.hotspot[:name]
+    %tr
+      %th Dohledávka
+      %td= @team.hotspot[:detail]
+    %tr
+      %th Souřadnice
+      %td 
+        #{@team.hotspot[:lat]}, #{@team.hotspot[:lng]}
+        %div#mapa(style="height:380px")      
+        :javascript
+          $(function() {
+          
+            var center = SMap.Coords.fromWGS84(#{@team.hotspot[:lng]},#{@team.hotspot[:lat]});
+            var m = new SMap(JAK.gel("mapa"), center, 14, SMap.DEF_TURIST);
+            m.addMarker(center);            
+          });
+    
+= bootstrap_form_for @team, url: survival_travel_path(suid: @team.survival_uid) do |f|
+  = f.text_field :points_survival_night_spot
+  = f.text_field :points_survival_night_tent
+  = f.text_field :points_survival_night_cleanup
+  = f.text_field :points_survival_night_packing
+  = f.text_field :points_survival_night_gps
+  = f.text_field :points_survival_night_moral
+      
+%h5 Odchod na shromaždiště
+
+%table.table
+  %colgroup
+    %col.col-sm-4
+    %col.col-sm-8
+  %tbody  
+    %tr
+      %th Je potřeba tam být do
+      %td 7:00
+    %tr
+      %th Kde to je 
+      %td Na lesní křižovatce tvaru T nad Kytínem u velkého seníku, v mapě značeno jako "U Boudy"
+    %tr
+      %th Souřadnice
+      %td 
+        49.8527933N, 14.1914814E
+        %div#mapa-cil(style="height:380px")      
+        :javascript
+          $(function() {
+          
+            var center = SMap.Coords.fromWGS84(14.1914814, 49.8527933);
+            var m = new SMap(JAK.gel("mapa-cil"), center, 14, SMap.DEF_TURIST);
+            m.addMarker(center);            
+          });
+    

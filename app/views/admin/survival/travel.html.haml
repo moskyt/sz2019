@@ -1,0 +1,7 @@
+%h1 Cesta na Přežití :: hodnocení a zdravotní info
+
+%p 
+  Ve vlaku zde vyplň hodnocení disciplíny cesta na SZ a také zdravotní omezení (např. léky, alergie, epilepsie, ...) jako informaci pro doprovod, který s hlídkou celý modul do zítřejšího rána absolvuje.
+  
+= bootstrap_form_for @team, url: survival_travel_path(suid: @team.survival_uid) do |f|
+  = f.text_field :points_travel_tickets
