@@ -1,1 +1,1 @@
-$("#point_form_#{@team.id}").html("#{j render partial: "point_form", locals: {team: @team, racepoint: @racepoint}}");
+$("#point_form_#{@team.id}").html("#{j render partial: "point_form", locals: {failed: @failed, team: @team, racepoint: @racepoint}}");

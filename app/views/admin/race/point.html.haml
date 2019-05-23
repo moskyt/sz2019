@@ -5,4 +5,4 @@
   %div.col-sm-2.col-xs-4 &nbsp;
 - Team.order(:name).each do |team|
   %div{id: "point_form_#{team.id}"}
-    = render partial: "point_form", locals: {team: team, racepoint: @racepoint}
+    = render partial: "point_form", locals: {team: team, racepoint: @racepoint, failed: nil}

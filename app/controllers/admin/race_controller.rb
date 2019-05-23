@@ -14,6 +14,7 @@ class Admin::RaceController < ApplicationController
           @team.update_attribute("points_race_%02d" % @racepoint, pts)
           flash[:notice] = "#{@team.name} -- #{pts} / #{max} b"
         else
+          @failed = params[:points].values[0]
           flash[:error] = "Nejde nastavit body - #{params[:points].values[0].inspect} je mimo rozsah 0 - #{max}"
         end
       else

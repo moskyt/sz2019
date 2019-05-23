@@ -25,6 +25,7 @@ function after_load() {
   
   $("body").on("change propertychange input paste", ".point-input", function(){
     $(this).closest(".row").removeClass("saved");
+    $(this).closest(".row").removeClass("failed");
   });
 
   // $('a.colorbox').colorbox({scalePhotos: true, maxHeight: "90%", maxWidth: "90%", transition: 'fade'})

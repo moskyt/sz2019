@@ -1,6 +1,6 @@
 = form_tag nil, remote: true, class: "point-form" do
-  %div.row{style: "margin-top:0.1em;border-top: 1px solid #888;padding-top:0.1em;", class: (team.send("points_race_%02d" % racepoint) ? "saved" : "")}
+  %div.row{style: "margin-top:0.1em;border-top: 1px solid #888;padding-top:0.1em;", class: (failed ? "failed" : (team.send("points_race_%02d" % racepoint) ? "saved" : ""))}
     %div.col-sm-1.col-xs-2= team.number
     %div.col-sm-5.col-xs-10= team.name
-    %div.col-sm-3.col-xs-8= text_field_tag "points[#{team.id}]", team.send("points_race_%02d" % racepoint), class: "point-input", autocomplete: "off"
+    %div.col-sm-3.col-xs-8= text_field_tag "points[#{team.id}]", failed || team.send("points_race_%02d" % racepoint), class: "point-input", autocomplete: "off"
     %div.col-sm-2.col-xs-4= submit_tag "Uložit", class: "btn btn-default"
