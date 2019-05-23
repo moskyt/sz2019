@@ -109,12 +109,12 @@
     - if @team.hotspot
       %tr
         - u = survival_checkin_hotspot_team_url(huid: Team.hotspot_uid(@team.hotspot[:number]))
-        %th Checkin na hotspotu (*)
+        %th Check-in na hotspotu (*)
         %td= link_to u,u
         %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
     %tr
       - u = survival_checkin_center_team_url(cid: Team.center_uid)
-      %th Checkin na shromaždišti (*)
+      %th Check-in na shromaždišti (*)
       %td= link_to u,u
       %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
     %tr
@@ -123,7 +123,7 @@
       %td= link_to u,u
       %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
 
-
+%p Odkazy na check-in pro hlídky označené hvězdičkou jsou pochopitelně nespecifické pro danou hlídku. Je tedy potřeba nejdřív otevřít #{link_to "stránku hlídky", dashboard_url(uid: @team.uid)} a pak až daný check-in.
 
 %h4 Test z pravidel
 
