@@ -44,6 +44,7 @@ class Admin::SurvivalController < ApplicationController
   def dinner
     if request.patch?
       @team.update_attribute :points_survival_dinner, params.dig(:team, :points_survival_dinner)
+      flash[:notice] = "Změny uloženy. Za večeři #{@team.points_survival_dinner} b."
     end
   end
 
