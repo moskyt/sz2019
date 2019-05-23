@@ -106,12 +106,14 @@
       %th Hlavní stránka
       %td= link_to u,u
       %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
-    - if @team.hotspot
-      %tr
+    %tr
+      %th Check-in na hotspotu (*)
+      - if @team.hotspot
         - u = survival_checkin_hotspot_team_url(huid: Team.hotspot_uid(@team.hotspot[:number]))
-        %th Check-in na hotspotu (*)
         %td= link_to u,u
         %td= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe
+      - else
+        %td(colspan=2) hotspot zatím nevybrán
     %tr
       - u = survival_checkin_center_team_url(cid: Team.center_uid)
       %th Check-in na shromaždišti (*)
