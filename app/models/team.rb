@@ -409,33 +409,35 @@ class Team < ActiveRecord::Base
   end
 
   def self.uid_to_survival(s)
-    ss = ""
-    s.chars.each do |c|
-      ss += case c
-      when "0".."9"
-        ((c.to_i + 1)%10).to_s
-      when "a".."z"
-        c.upcase
-      else
-        c
-      end
-    end
-    ss
+    "HPS" + s
+    # ss = ""
+    # s.chars.each do |c|
+    #   ss += case c
+    #   when "0".."9"
+    #     ((c.to_i + 1)%10).to_s
+    #   when "a".."z"
+    #     c.upcase
+    #   else
+    #     c
+    #   end
+    # end
+    # ss
   end
 
   def self.survival_to_uid(s)
-    ss = ""
-    s.chars.each do |c|
-      ss += case c
-      when "0".."9"
-        ((c.to_i - 1)%10).to_s
-      when "A".."Z"
-        c.downcase
-      else
-        c
-      end
-    end
-    ss
+    s[0...3] == "HPS" ? s[3..-1] : nil
+    # ss = ""
+    # s.chars.each do |c|
+    #   ss += case c
+    #   when "0".."9"
+    #     ((c.to_i - 1)%10).to_s
+    #   when "A".."Z"
+    #     c.downcase
+    #   else
+    #     c
+    #   end
+    # end
+    # ss
   end
 
   def survival_uid
