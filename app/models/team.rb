@@ -217,7 +217,7 @@ class Team < ActiveRecord::Base
       name: "Vrahův kemp",
       lng: 14.1813342,
       lat: 49.8618503,
-      detail: "jáma s pařezem uprostřed",
+      detail: "pod lavicí v kempu",
       km: [8,3],
     },
     2 => {

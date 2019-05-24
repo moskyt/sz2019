@@ -41,7 +41,13 @@
       %tr
         %th= i
         %th= x[:name]
-        %td= x[:detail]
+        %td
+          = x[:detail]
+          %p
+            - Team.find_each do |t|
+              - if t.hotspot and t.hotspot[:number] == i
+                = link_to t.name, [:admin, t]
+                %br
         %td
           = "#{x[:lat]}N,#{x[:lng]}E"
           %div{id: "mapa-h#{i}", style: "height:300px"}
