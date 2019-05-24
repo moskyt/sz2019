@@ -217,61 +217,71 @@ class Team < ActiveRecord::Base
       name: "Vrahův kemp",
       lng: 14.1813342,
       lat: 49.8618503,
-      detail: "jáma s pařezem uprostřed"
+      detail: "jáma s pařezem uprostřed",
+      km: [8,3],
     },
     2 => {
       name: "Křižovatka u Klondajku",
       lng: 14.1751272,
       lat: 49.8523947,
-      detail: "jáma s pařezem uprostřed"
+      detail: "jáma s pařezem uprostřed",
+      km: [8,3],
     },
     3 => {
       name: "Posed hřeben",
       lng: 14.1832092,
       lat: 49.8550206,
-      detail: "posed s označením H2"
+      detail: "posed s označením H2",
+      km: [8,2],
     },
     4 => {
       name: "Soudný",
-      lng: 49.8603578,
-      lat: 14.1937092,
-      detail: "pata kříže"
+      lng: 14.1937092,
+      lat: 49.8603578,
+      detail: "pata kříže",
+      km: [7,2],
     },
     5 => {
       name: "Seník na T",
       lng: 14.1914814,
       lat: 49.8527933,
-      detail: "kanálek pod cestou (shora)"
+      detail: "kanálek pod cestou (shora)",
+      km: [9,0],
     },
     6 => {
       name: "Buk u Čunčí",
       lng: 14.2014300,
       lat: 49.8628203,
-      detail: "Buk v J rohu vysokého lesa"
+      detail: "Buk v J rohu vysokého lesa",
+      km: [7,3],
     },
     7 => {
       name: "Vrážky",
       lng: 14.1952628,
       lat: 49.8644525,
-      detail: "pařez s kládou napříč"
+      detail: "pařez s kládou napříč",
+      km: [6,3],
     },
     8 => {
       name: "Adamka",
       lng: 14.2081386,
       lat: 49.8694686,
-      detail: "pařez na světlině na jižní cestě"
+      detail: "pařez na světlině na jižní cestě",
+      km: [6,3],
     },
     9 => {
       name: "Modřín mezi pasekami",
       lng: 14.2016056,
       lat: 49.8678608,
-      detail: "modřín mezi pasekami"
+      detail: "modřín mezi pasekami",
+      km: [6,4],
     },
     10 => {
       name: "Rochoty",
       lng: 14.1930339,
       lat: 49.8702806,
-      detail: "pod lavicí"
+      detail: "pod lavicí",
+      km: [6,4],
     },
   }
 
@@ -289,66 +299,52 @@ class Team < ActiveRecord::Base
     end
   end
 
+  def self.transport_choices_set
+    # train, hotspot
+    [
+      [1, 1 ],
+      [1, 2 ],
+      [1, 3 ],
+      [1, 4 ],
+      [1, 5 ],
+      [2, 6 ],
+      [2, 7 ],
+      [2, 8 ],
+      [2, 9 ],
+      [2, 1 ],
+      [3, 1 ],
+      [3, 2 ],
+      [3, 3 ],
+      [3, 4 ],
+      [3, 5 ],
+      [3, 6 ],
+      [4, 7 ],
+      [4, 8 ],
+      [4, 9 ],
+      [4, 10],
+      [4, 1 ],
+      [5, 7 ],
+      [5, 3 ],
+      [5, 4 ],
+      [5, 9 ],
+      [5, 10],
+    ]
+  end
+
   def self.transport_choices
-    {
-      "vlak 1, HS 1"  =>  "odjezd 16:28 / 8km večer / 3km ráno",
-      "vlak 1, HS 2"  =>  "odjezd 16:28 / 8km večer / 3km ráno",
-      "vlak 1, HS 3"  =>  "odjezd 16:28 / 8km večer / 2km ráno",
-      "vlak 1, HS 4"  =>  "odjezd 16:28 / 7km večer / 2km ráno",
-      "vlak 1, HS 5"  =>  "odjezd 16:28 / 8km večer / 0km ráno",
-      "vlak 2, HS 6"  =>  "odjezd 16:38 / 7km večer / 3km ráno",
-      "vlak 2, HS 7"  =>  "odjezd 16:38 / 6km večer / 3km ráno",
-      "vlak 2, HS 8"  =>  "odjezd 16:38 / 6km večer / 3km ráno",
-      "vlak 2, HS 9"  =>  "odjezd 16:38 / 6km večer / 4km ráno",
-      "vlak 2, HS 1"  =>  "odjezd 16:38 / 7km večer / 3km ráno",
-      "vlak 3, HS 1"  =>  "odjezd 16:58 / 8km večer / 3km ráno",
-      "vlak 3, HS 2"  =>  "odjezd 16:58 / 8km večer / 3km ráno",
-      "vlak 3, HS 3"  =>  "odjezd 16:58 / 8km večer / 2km ráno",
-      "vlak 3, HS 4"  =>  "odjezd 16:58 / 7km večer / 2km ráno",
-      "vlak 3, HS 5"  =>  "odjezd 16:58 / 8km večer / 0km ráno",
-      "vlak 3, HS 6"  =>  "odjezd 16:58 / 7km večer / 3km ráno",
-      "vlak 4, HS 7"  =>  "odjezd 17:08 / 6km večer / 3km ráno",
-      "vlak 4, HS 8"  =>  "odjezd 17:08 / 6km večer / 3km ráno",
-      "vlak 4, HS 9"  =>  "odjezd 17:08 / 6km večer / 4km ráno",
-      "vlak 4, HS 10" =>  "odjezd 17:08 / 6km večer / 4km ráno",
-      "vlak 4, HS 1"  =>  "odjezd 17:08 / 8km večer / 3km ráno",
-      "vlak 5, HS 7"  =>  "odjezd 17:28 / 6km večer / 3km ráno",
-      "vlak 5, HS 3"  =>  "odjezd 17:28 / 8km večer / 2km ráno",
-      "vlak 5, HS 4"  =>  "odjezd 17:28 / 7km večer / 2km ráno",
-      "vlak 5, HS 9"  =>  "odjezd 17:28 / 6km večer / 4km ráno",
-      "vlak 5, HS 10" =>  "odjezd 17:28 / 6km večer / 4km ráno",
-    }
+    m = {}
+    Team.transport_choices_set.each do |tn, hs|
+      t = TRAINS[tn]
+      h = HOTSPOTS[hs]
+      m["vlak #{tn}, HS #{hs}"] = "odjezd #{t[:departure]} / #{h[:km][0]}km večer / #{h[:km][1]}km ráno"
+    end
+    m
   end
 
   def trail
-    {
-      "vlak 1, HS 1"  =>  "žlutá",
-      "vlak 1, HS 2"  =>  "žlutá",
-      "vlak 1, HS 3"  =>  "zelená",
-      "vlak 1, HS 4"  =>  "zelená",
-      "vlak 1, HS 5"  =>  "žlutá",
-      "vlak 2, HS 6"  =>  "žlutá",
-      "vlak 2, HS 7"  =>  "zelená",
-      "vlak 2, HS 8"  =>  "zelená",
-      "vlak 2, HS 9"  =>  "žlutá",
-      "vlak 2, HS 1"  =>  "žlutá",
-      "vlak 3, HS 1"  =>  "zelená",
-      "vlak 3, HS 2"  =>  "zelená",
-      "vlak 3, HS 3"  =>  "žlutá",
-      "vlak 3, HS 4"  =>  "žlutá",
-      "vlak 3, HS 5"  =>  "zelená",
-      "vlak 3, HS 6"  =>  "zelená",
-      "vlak 4, HS 7"  =>  "žlutá",
-      "vlak 4, HS 8"  =>  "žlutá",
-      "vlak 4, HS 9"  =>  "zelená",
-      "vlak 4, HS 10" =>  "zelená",
-      "vlak 4, HS 1"  =>  "žlutá",
-      "vlak 5, HS 7"  =>  "žlutá",
-      "vlak 5, HS 3"  =>  "zelená",
-      "vlak 5, HS 4"  =>  "zelená",
-      "vlak 5, HS 9"  =>  "žlutá",
-      "vlak 5, HS 10" =>  "žlutá",
-      }[preference_departure]
+    return nil unless preference_departure
+    i = Team.transport_choices.keys.index(preference_departure)
+    i % 4 < 2 ? "žlutá" : "zelená"
   end
   
   def self.rules_minutes

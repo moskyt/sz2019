@@ -32,3 +32,24 @@
         %td= team.ts_survival_hotspot || icon("times", style: "color: #ddd")
         %td= team.points_survival_night ? "#{team.points_survival_night} b" : icon("times", style: "color: #ddd")
         %td= team.ts_survival_center || icon("times", style: "color: #ddd")
+
+%h3 Hotspoty
+
+%table.table
+  %tbody
+    - Team::HOTSPOTS.each do |i, x|
+      %tr
+        %th= i
+        %th= x[:name]
+        %td= x[:detail]
+        %td
+          = "#{x[:lat]}N,#{x[:lng]}E"
+          %div{id: "mapa-h#{i}", style: "height:300px"}
+          :javascript
+            $(function() {
+
+              var center = SMap.Coords.fromWGS84(#{x[:lng]}, #{x[:lat]});
+              var m = new SMap(JAK.gel("mapa-h#{i}"), center, 14, SMap.DEF_TURIST);
+              m.addMarker(center);
+            });
+          
