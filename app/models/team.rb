@@ -143,7 +143,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.points_survival_night_max
-    36 * 6
+    18 + 36 * 5
   end
 
   def self.points_survival_max
