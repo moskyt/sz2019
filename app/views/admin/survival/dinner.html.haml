@@ -1,5 +1,5 @@
 %h1 Hodnocení Přežití :: večeře
 
 = bootstrap_form_for @team, url: survival_dinner_path(suid: @team.survival_uid) do |f|
-  = f.text_field :points_survival_dinner
+  = f.text_field :points_survival_dinner, help: "max. #{Team.points_survival_dinner_max} b"
   = f.submit "Uložit", class: "btn btn-primary"

@@ -71,9 +71,29 @@
       %td= @team.points_survival_dinner
       %td= Team.points_survival_dinner_max
     %tr
-      %th Přespání
-      %td= @team.points_survival_night
-      %td= Team.points_survival_night_max
+      %th Výběr tábořiště
+      %td= @team.points_survival_night_spot
+      %td= Team.points_survival_night_spot_max
+    %tr
+      %th Stan
+      %td= @team.points_survival_night_tent
+      %td= Team.points_survival_night_tent_max
+    %tr
+      %th Úklid
+      %td= @team.points_survival_night_cleanup
+      %td= Team.points_survival_night_cleanup_max
+    %tr
+      %th Balení
+      %td= @team.points_survival_night_packing
+      %td= Team.points_survival_night_packing_max
+    %tr
+      %th Navigace
+      %td= @team.points_survival_night_gps
+      %td= Team.points_survival_night_gps_max
+    %tr
+      %th Morál
+      %td= @team.points_survival_night_moral
+      %td= Team.points_survival_night_moral_max
     %tr
       %th Celkem
       %td= @team.sum_survival

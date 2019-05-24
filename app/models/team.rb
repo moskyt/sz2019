@@ -142,10 +142,34 @@ class Team < ActiveRecord::Base
     36
   end
 
-  def self.points_survival_night_max
-    18 + 36 * 5
+  def self.points_survival_night_spot_max
+    18
   end
 
+  def self.points_survival_night_tent_max
+    36
+  end
+
+  def self.points_survival_night_cleanup_max
+    36
+  end
+
+  def self.points_survival_night_packing_max
+    36
+  end
+
+  def self.points_survival_night_gps_max
+    36
+  end
+
+  def self.points_survival_night_moral_max
+    36
+  end
+
+  def self.points_survival_night_max
+    points_survival_night_spot_max + points_survival_night_tent_max + points_survival_night_cleanup_max + points_survival_night_packing_max + points_survival_night_gps_max + points_survival_night_moral_max
+  end
+  
   def self.points_survival_max
     points_survival_travel_max + points_survival_dinner_max + points_survival_night_max
   end

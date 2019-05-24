@@ -9,37 +9,70 @@
     %tr.bg-primary
       %th Modul Před závodem
       %td= @team.sum_before
+      %td= Team.points_before_max
     %tr
       %th Registrace
       %td= @team.points_before_register
+      %td= Team.points_before_register_max
     %tr
       %th Test z pravidel SZ
       %td= @team.points_before_rules
+      %td= Team.points_before_rules_max
     %tr
       %th Představení družiny
       %td= @team.points_before_about
-  %tbody
-    %tr.bg-primary
-      %th Modul Přežití
-      %td= @team.sum_survival
-    %tr
-      %th Doprava
-      %td= @team.points_survival_travel
-    %tr
-      %th Večeře
-      %td= @team.points_survival_dinner
-    %tr
-      %th Přespání
-      %td= @team.points_survival_night
-  %tbody
-    %tr.bg-primary
-      %th Modul Závod
-      %td= @team.sum_race
-    - Team::RACEPOINTS.each do |n, s|
+      %td= Team.points_before_about_max
+  - if true or %w{survival race results}.include?(Parameter["current_module"])
+    %tbody
+      %tr.bg-primary
+        %th Modul Přežití
+        %td= @team.sum_survival
+        %td= Team.points_survival_max
       %tr
-        %th= s[0]
-        %td= @team.send("points_race_%02d" % n) || "---"
+        %th Doprava
+        %td= @team.points_survival_travel
+        %td= Team.points_survival_travel_max
+      %tr
+        %th Večeře
+        %td= @team.points_survival_dinner
+        %td= Team.points_survival_dinner_max
+      %tr
+        %th Výběr tábořiště
+        %td= @team.points_survival_night_spot
+        %td= Team.points_survival_night_spot_max
+      %tr
+        %th Stan
+        %td= @team.points_survival_night_tent
+        %td= Team.points_survival_night_tent_max
+      %tr
+        %th Úklid
+        %td= @team.points_survival_night_cleanup
+        %td= Team.points_survival_night_cleanup_max
+      %tr
+        %th Balení
+        %td= @team.points_survival_night_packing
+        %td= Team.points_survival_night_packing_max
+      %tr
+        %th Navigace
+        %td= @team.points_survival_night_gps
+        %td= Team.points_survival_night_gps_max
+      %tr
+        %th Morál
+        %td= @team.points_survival_night_moral
+        %td= Team.points_survival_night_moral_max
+  - if true or %w{survival race results}.include?(Parameter["current_module"])
+    %tbody
+      %tr.bg-primary
+        %th Modul Závod
+        %td= @team.sum_race
+        %td= Team.points_race_max
+      - Team::RACEPOINTS.each do |n, s|
+        %tr
+          %th= s[0]
+          %td= @team.send("points_race_%02d" % n)
+          %td= s[1]
   %tbody
     %tr.bg-primary
       %th Celkem
       %td= @team.points
+      %td

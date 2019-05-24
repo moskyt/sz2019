@@ -44,12 +44,12 @@
 %h3 Hodnocení přespání
 
 = bootstrap_form_for @team, url: survival_night_path(suid: @team.survival_uid) do |f|
-  = f.text_field :points_survival_night_spot
-  = f.text_field :points_survival_night_tent
-  = f.text_field :points_survival_night_cleanup
-  = f.text_field :points_survival_night_packing
-  = f.text_field :points_survival_night_gps
-  = f.text_field :points_survival_night_moral
+  = f.text_field :points_survival_night_spot, help: "max. #{Team.points_survival_night_spot_max} b"
+  = f.text_field :points_survival_night_tent, help: "max. #{Team.points_survival_night_tent_max} b"
+  = f.text_field :points_survival_night_cleanup, help: "max. #{Team.points_survival_night_cleanup_max} b"
+  = f.text_field :points_survival_night_packing, help: "max. #{Team.points_survival_night_packing_max} b"
+  = f.text_field :points_survival_night_gps, help: "max. #{Team.points_survival_night_gps_max} b"
+  = f.text_field :points_survival_night_moral, help: "max. #{Team.points_survival_night_moral_max} b"
   = f.submit "Uložit", class: "btn btn-primary"
 
 %h3 Odchod na shromaždiště
