@@ -228,7 +228,7 @@ class Team < ActiveRecord::Base
       km: [8,3],
     },
     3 => {
-      name: "Posed hřeben",
+      name: "Posed na hřebeni",
       lng: 14.1832092,
       lat: 49.8550206,
       detail: "posed s označením H2",

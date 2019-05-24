@@ -22,6 +22,8 @@
         %td
           - if team.points_survival_travel
             #{team.points_survival_travel} b
+          - elsif t = team.train
+            #{t[:departure]}-#{t[:arrival]}
           - else
             = icon("times", style: "color: #ddd")
         %td= !team.new_supervisor_data.blank? ? icon("check", "OK") : icon("times", style: "color: #ddd")
@@ -29,7 +31,13 @@
           = team.checkin_photo.file? ? icon("check", "OK") : icon("times", style: "color: #ddd")
           = !team.checkin_data.blank? ? icon("check", "OK") : icon("times", style: "color: #ddd")
         %td= team.points_survival_dinner ? "#{team.points_survival_dinner} b" : icon("times", style: "color: #ddd")
-        %td= team.ts_survival_hotspot || icon("times", style: "color: #ddd")
+        %td 
+          - if team.ts_survival_hotspot
+            = team.ts_survival_hotspot 
+          - elsif h = team.hotspot
+            (#{h[:number]}) #{h[:name]}
+          - else
+            = icon("times", style: "color: #ddd")
         %td= team.points_survival_night ? "#{team.points_survival_night} b" : icon("times", style: "color: #ddd")
         %td= team.ts_survival_center || icon("times", style: "color: #ddd")
 
