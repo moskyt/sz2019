@@ -10,9 +10,9 @@
 
 %h2 Jak to celé bude
 
-%p Jako postupující hlídka do krajského kola SZ jste dostali přístup na tento web. Odteď bude klíčovou součástí celého krajského kola, tj. všech jeho modulů - před závodem, přežití, závod i zpětná vazba. Odkaz z QR kódu si uložte do oblíbených, abyste jej během závodu měli po ruce.
+%p Jako postupující hlídka do krajského kola SZ jste dostali přístup na tento web. Odteď bude klíčovou součástí celého krajského kola, tj. všech jeho modulů - před závodem, přežití, závod i zpětná vazba. #{link_to "Odkaz z QR kódu", dashboard_url(uid: @team.uid)} si uložte do oblíbených, abyste jej během závodu měli po ruce.
 
-%p Nejdříve si důkladně pročtěte tuto záložku, kde jsou informace. Poté se jděte na modul - záložku “Před závodem” a přihlaste se.  Nezapomeňte však sledovat odteď už i záložku “přežití”. Pro účast na akci se seznamte s povinným vybavením a zařiďte se podle něj. 
+%p Nejdříve si důkladně pročtěte tuto záložku, kde jsou informace. Poté se jděte na modul - záložku #{link_to "Před závodem", module_before_team_url(uid: @team.uid)} a přihlaste se.  Nezapomeňte však sledovat odteď už i záložku #{link_to "Přežití", module_survival_team_url(uid: @team.uid)}. Pro účast na akci se seznamte s povinným vybavením a zařiďte se podle něj. 
 
 %p Pro účast na modulu před závodem sledujte a plňte úkoly v záložce před závodem. I během modulu přežití bude třeba mít přístup k webu, kam budete zadávat plnění úkolů a dozvíte se postup na místo, kde přespíte v brdských lesích. Bude třeba se na místo dostat, což je částečně také hodnocená disciplína, uvařit si cestou večeři, najít přesné místo na spaní, zatábořit, uklidit po sobě (zařiďte se předem) a hlavně - ráno se včas dostat na místo srazu k hlavnímu modulu závod.
 
