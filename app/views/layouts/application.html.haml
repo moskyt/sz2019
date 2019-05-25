@@ -34,9 +34,14 @@
           - if @team
             %ul.nav.navbar-nav
               %li
+                - if true or %w{intro before survival race results}.include?(Parameter["current_module"])
+                  = link_to "IN TIME", module_intro_team_path(uid: @team.uid)
+                - else
+                  = link_js "IN TIME", disabled: true
+              %li
                 = link_to "Důležité", info_team_path(uid: @team.uid)
               %li
-                - if true or %w{before survival race results}.include?(Parameter["current_module"])
+                - if true or %w{intro before survival race results}.include?(Parameter["current_module"])
                   = link_to "Před závodem", module_before_team_path(uid: @team.uid)
                 - else
                   = link_js "Před závodem", disabled: true
@@ -55,10 +60,6 @@
                   = link_to "Výsledky", module_results_team_path(uid: @team.uid)
                 - else
                   = link_js "Výsledky", class: "disabled"
-            %ul.nav.navbar-nav.navbar-right
-              %li.time
-                %a
-                  = time_widget(@team)
 
     %div.container#content
       %div(style="padding-top:60px;padding-bottom:20px")

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/team/:uid/info' => "teams#info", as: :info_team
 
+  get '/team/:uid/module_intro' => "teams#module_intro", as: :module_intro_team
   get '/team/:uid/module_before' => "teams#module_before", as: :module_before_team
   get '/team/:uid/module_survival' => "teams#module_survival", as: :module_survival_team
   get '/team/:uid/module_race' => "teams#module_race", as: :module_race_team

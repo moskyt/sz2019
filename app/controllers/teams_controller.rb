@@ -40,6 +40,9 @@ class TeamsController < ApplicationController
   def info
   end
 
+  def module_intro
+  end
+
   def module_before
   end
 
