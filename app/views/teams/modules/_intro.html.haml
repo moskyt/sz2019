@@ -4,7 +4,7 @@
   .hytPlayerWrap.paused::after{content:""; position: absolute; top: 70px; left: 0; bottom: 50px; right: 0; cursor: pointer; background-color: black; background-repeat: no-repeat; background-position: center; background-size: 40px 40px; background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHdpZHRoPSIxNzA2LjY2NyIgaGVpZ2h0PSIxNzA2LjY2NyIgdmlld0JveD0iMCAwIDEyODAgMTI4MCI+PHBhdGggZD0iTTE1Ny42MzUgMi45ODRMMTI2MC45NzkgNjQwIDE1Ny42MzUgMTI3Ny4wMTZ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+);}
 %div.hytPlayerWrapOuter
   %div.hytPlayerWrap
-    %iframe(width="640" height="360" src="https://www.youtube.com/embed/PtdrV5lKDBI?rel=0&enablejsapi=1" frameborder="0")
+    %iframe(width="640" height="480" src="https://www.youtube.com/embed/PtdrV5lKDBI?rel=0&enablejsapi=1" frameborder="0" style="max-width:100%; max-height:calc(100vh - 60px);")
 :javascript
   "use strict";
   $(function(){
