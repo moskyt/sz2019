@@ -1,0 +1,44 @@
+<p>Nazdar,</p>
+
+<p>jako vedoucímu oddílu <%= @team.district %>, jehož hlídka <%= @team.name %> se účastní krajského kola Svojsíkova závodu 2019 pro Prahu ti posíláme odkazy na web závodu.</p>
+
+<p>Odkaz pro hlídku prosím předej rádci hlídky, hlídka jej použije pro přípravu na závod a plnění modulů Před závodem a Přežití. Úkoly jsou časově omezeny, tedy není radno se započetím otálet.</p>
+
+<p>Druhý odkaz je určen doprovodům, které jej využijí pro online hodnocení disciplín prvních dvou modulů. Na webu jsou také uvedeny podrobné informace pro doprovody, se kterými by se též měly seznámit obratem.</p>
+
+<p>Pozor, bylo by opravdu nevhodné, kdyby se link pro doprovod dostal do rukou závodníkům (mohli by si pak sami zapisovat body a podobně).</p>
+
+<table>
+  <tr>
+    <% u = dashboard_url(uid: @team.uid) %>
+    <td>Hlídka</td>
+    <td><%= link_to u,u%></td>
+    <td><%= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe%></td>
+    <td>informace k závodu, plnění úkolů modulu Před závodem a později Přežití</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <% u = survival_dashboard_url(suid: @team.survival_uid) %>
+    <td>Doprovod</td>
+    <td><%= link_to u,u%></td>
+    <td><%= RQRCode::QRCode.new(u).as_svg(module_size: 4).html_safe%></td>
+    <td>informace k hodnocení a online zápis bodů z modulu Přežití</td>
+  </tr>
+</table>
+
+<p>
+  QR kódy jsou totéž, co odkazy, tak stačí předat jedno z toho, jak to bude vhodné.
+</p>
+
+<p>
+  Za tým pořadatelů krajského kola
+  <br />
+  Moskyt
+  <br />
+  hlavní rozhodčí
+</p>

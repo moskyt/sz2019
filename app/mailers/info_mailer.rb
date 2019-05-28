@@ -1,12 +1,12 @@
 class InfoMailer < ApplicationMailer
 
-  def initial_links_email(event_registration)
-    @event_registration = event_registration
-    @event = event_registration.event
+  def initial_links_email(team)
+    @team = team
     
     mail(
-      to: RAMACH_EMAIL,
-      subject: "Pražská MTBO liga -- objednávka mapníku na trénink #{@event.date.strftime("%d. %m. %Y")} (#{@event})"
+      to: @team.initial_emails,
+      from: "moskyt@rozhled.cz",
+      subject: "SZ 2019 / krajské kolo Praha / přístupy na web pro závodníky a doprovody -- hlídka #{@team.name} -- #{@team.district}"
     )
   end
   

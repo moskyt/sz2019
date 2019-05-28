@@ -39,4 +39,13 @@ class Admin::TeamsController < Admin::AdminController
     end
   end
     
+  
+  def send_links
+    flash[:notice] = "pos..áno"
+    Team.find_each do |t|
+      InfoMailer.initial_links_email(t).deliver
+    end
+    redirect_to action: :index
+  end  
+    
 end

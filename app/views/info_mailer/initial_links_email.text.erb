@@ -1,0 +1,24 @@
+Nazdar,
+
+jako vedoucímu oddílu <%= @team.district %>, jehož hlídka <%= @team.name %> se účastní krajského kola Svojsíkova závodu 2019 pro Prahu ti posíláme odkazy na web závodu.
+
+Odkaz pro hlídku prosím předej rádci hlídky, hlídka jej použije pro přípravu na závod a plnění modulů Před závodem a Přežití. Úkoly jsou časově omezeny, tedy není radno se započetím otálet.
+
+Druhý odkaz je určen doprovodům, které jej využijí pro online hodnocení disciplín prvních dvou modulů. Na webu jsou také uvedeny podrobné informace pro doprovody, se kterými by se též měly seznámit obratem.
+
+Pozor, bylo by opravdu nevhodné, kdyby se link pro doprovod dostal do rukou závodníkům (mohli by si pak sami zapisovat body a podobně).
+
+<% u = dashboard_url(uid: @team.uid) %>
+Hlídka:
+  <%= u %>
+  informace k závodu, plnění úkolů modulu Před závodem a později Přežití
+
+<% u = survival_dashboard_url(suid: @team.survival_uid) %>
+Doprovod:
+  <%= u %>
+  informace k hodnocení a online zápis bodů z modulu Přežití
+
+
+Za tým pořadatelů krajského kola
+Moskyt
+hlavní rozhodčí

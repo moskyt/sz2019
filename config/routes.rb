@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     post "/parameters" => "parameters#update"
     resources :teams do
       collection do
+        post :send_links
         get :race
         get :before
         get :survival

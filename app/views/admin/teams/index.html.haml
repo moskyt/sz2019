@@ -23,6 +23,12 @@
 
 %hr
 
-%h5 Všechny maily (z webu SZ)
 
-%p= Team.all.map{|t| t.initial_emails.split(",")}.flatten.uniq * ", "
+%div.well.well-sm
+  %h5 Všechny maily (z webu SZ)
+
+  %p= Team.all.map{|t| t.initial_emails.split(",")}.flatten.uniq * ", "
+  
+%div.well.well-sm
+  %h5 Rozeslat QR kódy
+  %p= link_to "poslat", [:send_links, :admin, :teams], method: :post
