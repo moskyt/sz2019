@@ -4,4 +4,5 @@
   = f.text_field :name
   = f.text_field :district
   = f.select :category, %w{H D}
+  = f.text_field :initial_emails
   = f.submit(f.object.new_record? ? "Vytvořit" : "Uložit změny")
