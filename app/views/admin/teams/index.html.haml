@@ -9,6 +9,7 @@
       %th Název
       %th Středisko / oddíl
       %th Kategorie
+      %th Email
   %tbody
     - Team.order(:name).each do |team|
       %tr
@@ -16,6 +17,7 @@
         %td= link_to team.name, [:admin, team]
         %td= team.district
         %td= team.category
+        %td= team.initial_emails
         %td
           = link_to icon("times", "smazat hlídku"), [:admin, team], method: :delete, data: {confirm: "Opravdu smazat #{team}?"}
 

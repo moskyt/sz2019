@@ -16,3 +16,4 @@ cs:
         points_survival_travel: "Body / přežití / cesta"
         points_survival_dinner: "Body / přežití / večeře"
         medical_data: "Zdravotní omezení členů (léky, alergie, epilepsie apod.)"
+        initial_emails: "Email na vedoucího oddílu"
