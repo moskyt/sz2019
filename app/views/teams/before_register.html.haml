@@ -1,6 +1,6 @@
 = bootstrap_form_tag url: before_register_submit_team_path(uid: @team.uid) do |f|
   = f.form_group do
-    = f.label "name"
+    = f.label :name, "Jméno hlídky"
     %br
     = @team.name
   = f.form_group do
@@ -32,5 +32,5 @@
   = f.text_area "register[medical]", label: "Uveďte zdravotní omezení členů hlídky, případně napište, že nejsou", value: @data["medical"], rows: 4
   %h4 Odjezd a postup
   %p Vyberte si, kdy chcete odjíždět vlakem ze Smíchovského nádraží a kolik km chcete jít večer a kolik ráno (před osmou hodinou). Vzdálenosti jsou vzdušnou čarou. Kdo dřív přijde, ten dřív mele.
-  = f.select "preference_departure", options_for_select(Team.available_transport_options(@team).map{|k| [Team.transport_choices[k],k]}, selected: @team.preference_departure), label: "Odjezd a km"
+  = f.select "preference_departure", options_for_select([["--- vyber ---", nil]] + Team.available_transport_options(@team).map{|k| [Team.transport_choices[k],k]}, selected: @team.preference_departure), label: "Odjezd a km"
   = submit_tag "Uložit", class: "btn btn-success"

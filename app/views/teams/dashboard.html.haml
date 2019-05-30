@@ -1,6 +1,7 @@
-= render partial: "teams/time"   
-= render partial: "teams/modules/#{Parameter["current_module"]}"  
+= render partial: "teams/time"
+= render partial: "teams/modules/#{Parameter["current_module"]}"
 
-- unless Parameter["current_module"] == "intro"
-  %div.bs-callout.bs-callout-info(style="margin-top:2em")
-    Něco nefunguje? I to se může stát, však víte, jakou cenu má čas... v případě, že je něco rozbité nebo něco nedává smysl, napište mail na #{mail_to "moskyt@rozhled.cz"}.
+/- unless Parameter["current_module"] == "intro"
+
+%div.bs-callout.bs-callout-info(style="margin-top:2em")
+  Něco nefunguje? I to se může stát, však víte, jakou cenu má čas... v případě, že je něco rozbité nebo něco nedává smysl, napište mail na #{mail_to "moskyt@rozhled.cz"}.
