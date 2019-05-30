@@ -5,5 +5,5 @@
   = f.text_field :district
   = f.select :category, %w{H D}
   = f.text_field :initial_emails
-  = f.select :preference_departure, Team.transport_choices.to_a.map(&:reverse)
+  = f.select :preference_departure, Team.transport_choices.to_a.map(&:reverse), include_blank: true
   = f.submit(f.object.new_record? ? "Vytvořit" : "Uložit změny")
