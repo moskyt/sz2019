@@ -398,6 +398,7 @@ class Team < ActiveRecord::Base
   def trail
     return nil unless preference_departure
     i = Team.transport_choices.keys.index(preference_departure)
+    return nil unless i
     i % 4 < 2 ? "žlutá" : "zelená"
   end
 
