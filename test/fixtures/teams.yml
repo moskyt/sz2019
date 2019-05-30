@@ -6,7 +6,6 @@
 #  name                          :string(255)
 #  number                        :integer
 #  district                      :string(255)
-#  stage                         :string(255)
 #  ts_registered                 :datetime
 #  ts_rules_submitted            :datetime
 #  ts_about_submitted            :datetime
@@ -15,7 +14,6 @@
 #  participants_json             :text(65535)
 #  points                        :integer
 #  preference_departure          :string(255)
-#  hotspot                       :integer
 #  points_before_about           :integer
 #  points_before_rules           :integer
 #  points_before_register        :integer
@@ -60,6 +58,8 @@
 #  checkin_photo_file_size       :bigint
 #  checkin_photo_updated_at      :datetime
 #  checkin_data                  :text(65535)
+#  medical_data                  :text(65535)
+#  new_supervisor_data           :text(65535)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

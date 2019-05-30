@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190523112228) do
+ActiveRecord::Schema.define(version: 20190530133753) do
 
   create_table "parameters", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20190523112228) do
     t.string   "name",                          limit: 255
     t.integer  "number",                        limit: 4
     t.string   "district",                      limit: 255
-    t.string   "stage",                         limit: 255
     t.datetime "ts_registered"
     t.datetime "ts_rules_submitted"
     t.datetime "ts_about_submitted"
@@ -33,7 +32,6 @@ ActiveRecord::Schema.define(version: 20190523112228) do
     t.text     "participants_json",             limit: 65535
     t.integer  "points",                        limit: 4
     t.string   "preference_departure",          limit: 255
-    t.integer  "hotspot",                       limit: 4
     t.integer  "points_before_about",           limit: 4
     t.integer  "points_before_rules",           limit: 4
     t.integer  "points_before_register",        limit: 4

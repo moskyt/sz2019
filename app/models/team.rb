@@ -6,7 +6,6 @@
 #  name                          :string(255)
 #  number                        :integer
 #  district                      :string(255)
-#  stage                         :string(255)
 #  ts_registered                 :datetime
 #  ts_rules_submitted            :datetime
 #  ts_about_submitted            :datetime
@@ -15,7 +14,6 @@
 #  participants_json             :text(65535)
 #  points                        :integer
 #  preference_departure          :string(255)
-#  hotspot                       :integer
 #  points_before_about           :integer
 #  points_before_rules           :integer
 #  points_before_register        :integer
@@ -60,6 +58,8 @@
 #  checkin_photo_file_size       :bigint
 #  checkin_photo_updated_at      :datetime
 #  checkin_data                  :text(65535)
+#  medical_data                  :text(65535)
+#  new_supervisor_data           :text(65535)
 #
 
 class Team < ActiveRecord::Base
@@ -71,20 +71,74 @@ class Team < ActiveRecord::Base
   validates_attachment_content_type :checkin_photo, :content_type => /image/
 
   RACEPOINTS = {
-    1 =>  ["Na pile",                     36],
-    2 =>  ["Redakce",                     36],
-    3 =>  ["Logistické centrum",          36],
-    4 =>  ["Čínská restaurace",           36],
-    5 =>  ["Dispečink záchranné služby",  36],
-    6 =>  ["Televizní stanice",           36],
-    7 =>  ["scénická krize",              36],
-    8 =>  ["Dopravní policie",            36],
-    9 =>  ["Seznamovací agentura",        36],
-    10 => ["Doručovací služba",           36],
-    11 => ["Stavba?",                     36],
-    12 => ["teoretická krize",            36],
-    13 => ["1188",                        36],
+    1 =>  ["Televizní stanice", 36],
+    2 =>  ["Přijímací pohovor do dispečinku záchranky", 36],
+    3 =>  ["Redakce", 36],
+    4 =>  ["Stavba", 36],
+    5 =>  ["Call centrum", 36],
+    6 =>  ["Seznamovací agentura", 36],
+    7 =>  ["Doručovací služba", 36],
+    8 =>  ["Cykloškola", 36],
+    9 =>  ["Na pile", 36],
+    10 => ["Truhlářská dílna", 36],
+    11 => ["Logistické centrum", 36],
+    12 => ["Čínská restaurace", 36],
+    13 => ["Autobus", 36],
   }
+
+  def clear_everything_this_is_dangerous!
+    update_attributes({
+      ts_registered: nil,
+      ts_rules_submitted: nil,
+      ts_about_submitted: nil,
+      ts_departed: nil,
+      ts_arrived: nil,
+      participants_json: nil,
+      points: nil,
+      preference_departure: nil,
+      points_before_about: nil,
+      points_before_rules: nil,
+      points_before_register: nil,
+      points_survival_travel: nil,
+      points_survival_dinner: nil,
+      points_survival_night_spot: nil,
+      points_survival_night_tent: nil,
+      points_survival_night_cleanup: nil,
+      points_survival_night_packing: nil,
+      points_survival_night_gps: nil,
+      points_survival_night_moral: nil,
+      points_race_01: nil,
+      points_race_02: nil,
+      points_race_03: nil,
+      points_race_04: nil,
+      points_race_05: nil,
+      points_race_06: nil,
+      points_race_07: nil,
+      points_race_08: nil,
+      points_race_09: nil,
+      points_race_10: nil,
+      points_race_11: nil,
+      points_race_12: nil,
+      points_race_13: nil,
+      about_photo_file_name: nil,
+      about_photo_content_type: nil,
+      about_photo_file_size: nil,
+      about_photo_updated_at: nil,
+      replies_register: nil,
+      replies_rules: nil,
+      ts_rules_started: nil,
+      ts_rules_done: nil,
+      ts_survival_center: nil,
+      ts_survival_hotspot: nil,
+      checkin_photo_file_name: nil,
+      checkin_photo_content_type: nil,
+      checkin_photo_file_size: nil,
+      checkin_photo_updated_at: nil,
+      checkin_data: nil,
+      medical_data: nil,
+      new_supervisor_data: nil,
+    })
+  end
 
   def self.time0
     DateTime.civil_from_format(:local, 2019, 5, 15, 12, 0, 0)
@@ -169,7 +223,7 @@ class Team < ActiveRecord::Base
   def self.points_survival_night_max
     points_survival_night_spot_max + points_survival_night_tent_max + points_survival_night_cleanup_max + points_survival_night_packing_max + points_survival_night_gps_max + points_survival_night_moral_max
   end
-  
+
   def self.points_survival_max
     points_survival_travel_max + points_survival_dinner_max + points_survival_night_max
   end
@@ -346,7 +400,7 @@ class Team < ActiveRecord::Base
     i = Team.transport_choices.keys.index(preference_departure)
     i % 4 < 2 ? "žlutá" : "zelená"
   end
-  
+
   def self.rules_minutes
     20
   end
