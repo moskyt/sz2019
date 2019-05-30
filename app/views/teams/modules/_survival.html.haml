@@ -2,7 +2,7 @@
 
 %h2 Obecně a hodnocení
 
-%p V rámci modulu přežití se hodnotí doprava na závod, vaření večeře, plánování trasy a orientace v terénu. Tyto disciplíny jsou podrobně popsány níže.
+%p V rámci modulu přežití se hodnotí doprava na závod, vaření večeře, plánování trasy a orientace v terénu.
 
 %p Kromě toho se po celou dobu trvání modulu Přežití hodnotí i všeobecná morálka hlídky, chování vůči sobě navzájem i k ostatním a míra a kvalita spolupráce hlídky (až #{Team.points_survival_night_moral_max} b).
 
@@ -20,21 +20,21 @@
   %p Doprava na závod je první disciplínou modulu Přežití: ve vaší režii je plánování srazu a cesty na nádraží, nákup lístků i včasné a správné nalezení vašeho vlaku.
 
   %p Pojedete vlakem #{@team.train[:number]}, který odjíždí v #{@team.train[:departure]} ze Smíchovského nádraží do Řevnic, kam přijíždí v #{@team.train[:arrival]}.
-  
-  %p 
-    Zvolený vlakový spoj je povinný, musíte ho stihnout. V opačném případě můžete 
-    %strong přijít o veškeré body z modulu přežití (tedy až #{Team.points_survival_max} bodů) 
-    a ztratili byste nezměrné množství času. Mějte proto při plánování odjezdu dostatečnou časovou rezervu. 
-  
+
+  %p
+    Zvolený vlakový spoj je povinný, musíte ho stihnout. V opačném případě můžete
+    %strong přijít o veškeré body z modulu přežití (tedy až #{Team.points_survival_max} bodů)
+    a ztratili byste nezměrné množství času. Mějte proto při plánování odjezdu dostatečnou časovou rezervu.
+
   %p Za tuto disciplínu můžete získat až #{Team.points_survival_travel_max} bodů.
 
   %h2 Prezentace po příjezdu do Řevnic
 
   %p Po vystoupení z vlaku nikam neodcházejte!
-    
+
   %p Hned na nádraží vyfoťte skupinové selfie, na kterém budou všichni členové hlídky a rozpoznatelný nápis Řevnice (např. na staniční budově). Fotku nahrajte pomocí formuláře níže a do textového pole vyplňte jména všech členů na fotce zleva doprava. Tento úkol není bodovaný, ale slouží jako prezentace na závod a bez jeho splnění nebudete moci pokračovat dále.
 
-  %p 
+  %p
     Dále na místě vyčkejte připojení kontrolora - doprovodu jiné hlídky. Od nyní až do nástupu na srazu závodu zítra ráno budete pod dohledem, kontrolou a bodováním vašeho nového doprovázejícího vedoucího. Nesmí vám pomáhat, ale bude vás pozorovat a hodnotit vaše výkony. Jeho příkazy, zejm. bezpečnostní jste od teď povinni se řídit.
 
   - unless @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
@@ -49,7 +49,7 @@
         %strong Nahraná fotka:
         = link_to File.basename(@team.checkin_photo.path), @team.checkin_photo.url
         = "[%.1f kB]" % (@team.checkin_photo.size / 1000)
-    - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?  
+    - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
       %p
         %strong Popisek:
         = @team.checkin_data
@@ -67,22 +67,22 @@
 
   - if !@team.new_supervisor_data.blank?
     %p Váš doprovod je #{@team.new_supervisor_data}.
-  - else  
+  - else
     %p Váš nový doprovod se zatím nezaregistroval ...
 
-  - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?  
+  - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
     %h2 Odchod z Řevnic
-    
-    %p Z Řevnic odejděte po #{@team.trail.sub("á", "é")} turistické značce směrem na Kytín (pozor, od nádraží jde zelená dvěma směry – ta na Halouny pokračuje do Kytína jako zelená a ta na Řevnický les jde od kraje Řevnic na hřeben jako žlutá). Po značce jděte alespoň ke konci zástavby, zbytek cesty si plánujete sami. 
-    
+
+    %p Z Řevnic odejděte po #{@team.trail.sub("á", "é")} turistické značce směrem na Kytín (pozor, od nádraží jde zelená dvěma směry – ta na Halouny pokračuje do Kytína jako zelená a ta na Řevnický les jde od kraje Řevnic na hřeben jako žlutá). Po značce jděte alespoň ke konci zástavby, zbytek cesty si plánujete sami.
+
     %h2 Večeře
 
     %p Vaším úkolem je cestou si uvařit večeři. Musíte tak učinit před vstupem do lesa nebo na vhodném místě. Za vhodné místo se považuje i turistický přístřešek u cesty. Můžete použít své vařiče, naopak nesmíte rozdělávat oheň na ohništi. Místo po sobě musíte uklidit a naložit s odpadem. Nedoporučujeme, abyste s celou večeří vč. úklidu strávili více než hodinu.
-    
+
     %p Hodnotí se nápaditost receptu, výsledná chuť a váš postup.
-    
+
     %p Za tuto disciplínu můžete získat max. #{Team.points_survival_dinner_max} bodů.
-    
+
     %p Poté, co váš doprovod večeři oboduje, se vám níže na této stránce zobrazí instrukce k dalšímu postupu.
 
     - if @team.points_survival_dinner and @team.hotspot
@@ -90,20 +90,20 @@
       %h2 Přespání
 
       %p Vydejte se neprodleně na místo určené souřadnicemi #{@team.hotspot[:lat]}N, #{@team.hotspot[:lng]}E (GPS souřadnice - WGS84).
-      
+
       %p Vaše volba trasy, schopnost práce s mapou a s GPS a vhodné plánování postupu večer i zítra ráno do cíle se hodnotí jako jedna z disciplín, můžete získat až #{Team.points_survival_night_gps_max} bodů.
-      
+
       - if @team.ts_survival_hotspot
         %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.
-        
+
         %p Vaším úkolem je najít si místo na táboření v okruhu do 200 m od místa nalezení této zprávy, ovšem tak, abyste nebyli na dohled k jiné hlídce. Místo táboření volte podle sebe, musíte si postavit alespoň jeden stan. Spát v něm nemusíte. Oheň nesmíte rozdělávat. (ani na stávajících ohništích, ani na vařičích).
-        
+
         %p Táboření v lese se hodnotí v několika disciplínách: volba vhodného místa (až #{Team.points_survival_night_spot_max} b), stavba stanu (až #{Team.points_survival_night_tent_max} b), balení (až #{Team.points_survival_night_packing_max} b) a úklid tábořiště (až #{Team.points_survival_night_cleanup_max} b).
       - else
         %p Po příchodu na zadané místo hledejte tubu od šumáku (upřesňující popis místa: #{@team.hotspot[:detail]}). V ní najdete QR kód, který použijte, čímž ověříte svůj příchod na hotspot a následně se vám na této stránce níže zobrazí další instrukce.
 
       - if @team.ts_survival_hotspot
-      
+
         %h2 Příchod na shromaždiště závodu
 
         %p Ráno se zařiďte tak, abyste byli v 7:00-7:30 na tomto místě: 49.8527933N, 14.1914814E. Nasnídáte se až tam, budete na to mít po příchodu čas (cca do osmi). Pozdní příchod bude trestán nejen bodovou ztrátou, ale v případě většího zdržení i diskvalifikací, neboť začátek závodu nelze přesouvat kvůli čekání na pozdní příchod. Trasu a čas ranního vstávání si proto dobře naplánujte už nyní. Připomínáme vám povinnost nerušit klid v lese.
