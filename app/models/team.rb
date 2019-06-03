@@ -145,7 +145,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.time1
-    DateTime.civil_from_format(:local, 2019, 6,  7, 12, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 6,  8,  8, 0, 0)
   end
 
   def self.time2
