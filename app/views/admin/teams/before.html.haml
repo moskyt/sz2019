@@ -11,6 +11,8 @@
       %th Spoj
       %th Značka
       %th Hotspot
+      %th Busík
+      %th MED
   %tbody
     - Team.order(:name).each do |team|
       %tr
@@ -42,3 +44,5 @@
         %td= team.train ? "#{team.train[:departure]}-#{team.train[:arrival]}" : icon("times", style: "color: #ddd")
         %td= team.trail || icon("times", style: "color: #ddd")
         %td= team.hotspot ? link_to(team.hotspot[:name], "https://mapy.cz/zakladni?vlastni-body&x=#{team.hotspot[:lng]}&y=#{team.hotspot[:lat]}&z=15", target: "_blank") : icon("times", style: "color: #ddd")
+        %td= team.replies_register_&.dig("bus")
+        %td= team.medical_data
