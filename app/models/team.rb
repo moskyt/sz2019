@@ -181,7 +181,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.points_before_register_max
-    18
+    0
   end
 
   def self.points_before_rules_max
@@ -555,9 +555,9 @@ class Team < ActiveRecord::Base
   end
 
   def should_grade_before_register?
-    return false if points_before_register
-    return true if !replies_register.blank?
-    return true if Team.register_deadline < Time.now.to_datetime
+    # return false if points_before_register
+    # return true if !replies_register.blank?
+    # return true if Team.register_deadline < Time.now.to_datetime
     false
   end
 

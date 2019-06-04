@@ -5,11 +5,9 @@
 %h2 Registrace na SZ
 
 - if @team.points_before_register
-  %p Vyhodnoceno. Získali jste #{@team.points_before_register} / #{Team.points_before_register_max} b.
+  %p Vaši přihlášku jsme dostali, děkujeme.
 - elsif Time.now < Team.register_deadline
   %p Vyplňte přihlášku na závod. Kromě kontaktních údajů a seznamu členů hlídky, kteří opravdu pojedou, si zvolíte variantu postupu na modulu Přežití a čas odjezdu vašeho vlaku na závod (kdo dřív přijde, ten dřív mele).
-
-  %p Maximum za tuto disciplínu je #{Team.points_before_register_max} bodů.
 
   - if !@team.replies_register.blank?
     %p Vaši přihlášku jsme dostali a po uzávěrce ji vyhodnotíme.
@@ -19,9 +17,9 @@
     = link_to((@team.replies_register.blank? ? "Vyplnit přihlášku na závod" : "Upravit přihlášku na závod"), before_register_team_path(uid: @team.uid), class: "btn btn-#{@team.replies_register.blank? ? "success" : "primary"}")
 - else Time.now < Team.register_deadline
   - if !@team.replies_register.blank?
-    %p Vaši přihlášku jsme dostali a pracujeme na jejím vyhodnocení.
+    %p Vaši přihlášku jsme dostali, děkujeme.
   - else
-    %p Už je po uzávěrce a test jste nevyplnili – škoda, mohli jste mít až #{Team.points_before_register_max} bodů.
+    %p Už je po uzávěrce a přihlášku jste nevyplnili – škoda, mohli jste mít až #{Team.points_before_register_max} bodů.
 
 %h2 Představení družiny
 
