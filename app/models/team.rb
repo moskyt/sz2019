@@ -153,11 +153,11 @@ class Team < ActiveRecord::Base
   end
 
   def self.about_deadline
-    DateTime.civil_from_format(:local, 2019, 6, 6, 22, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 6, 7, 12, 0, 0)
   end
 
   def self.rules_deadline
-    DateTime.civil_from_format(:local, 2019, 6, 6, 22, 0, 0)
+    DateTime.civil_from_format(:local, 2019, 6, 7, 12, 0, 0)
   end
 
   def self.register_deadline
