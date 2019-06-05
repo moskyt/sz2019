@@ -48,7 +48,19 @@
     - Team::HOTSPOTS.each do |i, x|
       %tr
         %th= i
-        %th= x[:name]
+        %th
+          = x[:name]
+          %br
+          - u = survival_checkin_hotspot_team_url(huid: Team.hotspot_uid(i))
+          = link_to u,u
+          %br
+          - tfn = File.join(Rails.root, "public", "images", "hotspot_#{i}.png")
+          - unless File.exist?(tfn)
+            - FileUtils.mkdir_p(File.join(Rails.root, "public", "images"))
+            - png = RQRCode::QRCode.new(u).as_png(module_px_size: 6)
+            - File.open(tfn, "wb"){|f| f.write(png.to_s)}
+          = image_tag "hotspot_#{i}.png"
+          
         %td
           = x[:detail]
           %p
@@ -66,4 +78,20 @@
               var m = new SMap(JAK.gel("mapa-h#{i}"), center, 14, SMap.DEF_TURIST);
               m.addMarker(center);
             });
+          
+%h3 Vlaky
+
+- tmap = {}
+- Team.find_each{|t| next unless t.train; tmap[t.train] ||= []; tmap[t.train] << t}
+
+%table.table
+  %tbody
+    - tmap.keys.sort_by{|x| x[:departure]}.each do |tk|
+      %tr
+        %th #{tk[:departure]} -- #{tk[:arrival]} (#{tk[:number]})
+        %td
+          %ul
+            - tmap[tk].each do |t|
+              %li= link_to t.name, [:admin, t]
+  
           
