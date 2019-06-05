@@ -56,6 +56,9 @@
 
 - if @team.points_before_rules
   %p Vyhodnoceno. Získali jste #{@team.points_before_rules} / #{Team.points_before_rules_max} b.
+- elsif !@team.replies_rules.blank?
+  %p Vaše odpovědi na test z pravidel závodu jsme dostali a po uzávěrce je vyhodnotíme.
+  %p Maximum za tuto disciplínu je #{Team.points_before_rules_max} bodů.
 - elsif @team.ts_rules_started and (@team.ts_rules_started + Team.rules_minutes.minutes).to_datetime < Time.now.to_datetime
   %p Test jste spustili a čas vám vypršel v #{(@team.ts_rules_started + Team.rules_minutes.minutes).to_datetime.strftime("%d. %m. %Y %H:%M")} – škoda, mohli jste mít až #{Team.points_before_rules_max} bodů.
 - elsif Time.now < Team.rules_deadline
