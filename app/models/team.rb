@@ -161,7 +161,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.register_deadline
-    DateTime.civil_from_format(:local, 2019, 6, 5, 23, 59, 0)
+    DateTime.civil_from_format(:local, 2019, 6, 6, 23, 59, 0)
   end
 
   def self.max_points
