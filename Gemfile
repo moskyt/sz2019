@@ -18,7 +18,7 @@ gem "paperclip"
 gem "RedCloth"
 gem "rinku"
 gem "exception_notification"
-
+gem "rails-latex"
 
 group :development, :test do
   gem "capistrano", "~> 2.0"
