@@ -24,7 +24,9 @@ class Admin::TeamsController < Admin::AdminController
   def grade_before_rules
     if request.post?
       params["points_rules"].each do |tid, tx|
-        Team.find(tid).update_attribute :points_rules, tx.map(&:to_i).inject(0,:+)
+        unless tx.empty? or tx.reject(&:blank?).empty?
+          Team.find(tid).update_attribute :points_before_rules, tx.map(&:to_i).inject(0,:+)
+        end
       end
       redirect_to action: :before
     end
