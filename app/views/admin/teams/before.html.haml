@@ -22,7 +22,7 @@
           - if team.points_before_register
             #{team.points_before_register} b
           - elsif !team.replies_register.blank?
-            = icon("circle", "vyplnili, vyhodnotit!")
+            = icon("check", "vyplnili")
           - else
             = icon("times", style: "color: #ddd")
         %td
