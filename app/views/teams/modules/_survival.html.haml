@@ -37,40 +37,40 @@
   %p
     Dále na místě vyčkejte připojení kontrolora - doprovodu jiné hlídky. Od nyní až do nástupu na srazu závodu zítra ráno budete pod dohledem, kontrolou a bodováním vašeho nového doprovázejícího vedoucího. Nesmí vám pomáhat, ale bude vás pozorovat a hodnotit vaše výkony. Jeho příkazy, zejm. bezpečnostní jste od teď povinni se řídit.
 
-  - unless @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
+  - unless ((@team.checkin_photo.file? and !@team.checkin_data.blank?) or @team.ts_checkin_override) and !@team.new_supervisor_data.blank?
     %p
       Po nahrání fotky a poté, co se pomocí webu zaregistruje váš nový doprovod, se na této stránce níže zobrazí pokyny pro další postup.
 
-
-  %div.well.well-sm(style="overflow: auto")
-    - if @team.checkin_photo.file?
-      %div.pull-right= image_tag @team.checkin_photo.url, style: "max-width: 33vw; max-height: 150px"
-      %p
-        %strong Nahraná fotka:
-        = link_to File.basename(@team.checkin_photo.path), @team.checkin_photo.url
-        = "[%.1f kB]" % (@team.checkin_photo.size / 1000)
-    - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
-      %p
-        %strong Popisek:
-        = @team.checkin_data
-    - else
-      = form_tag survival_checkin_upload_team_path(uid: @team.uid), {multipart: true, method: :post} do
+  - unless @team.ts_checkin_override
+    %div.well.well-sm(style="overflow: auto")
+      - if @team.checkin_photo.file?
+        %div.pull-right= image_tag @team.checkin_photo.url, style: "max-width: 33vw; max-height: 150px"
         %p
-          Nahrát fotku:
-          = file_field_tag "checkin_photo" #, "PDF prezentace"
+          %strong Nahraná fotka:
+          = link_to File.basename(@team.checkin_photo.path), @team.checkin_photo.url
+          = "[%.1f kB]" % (@team.checkin_photo.size / 1000)
+      - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
         %p
-          Jména členů hlídky na fotce zleva doprava:
-          %br
-          = text_field_tag "checkin_data", @team.checkin_data, style: "width: 56vw"
-        %p
-          = submit_tag "Nahrát", class: "btn btn-primary"
+          %strong Popisek:
+          = @team.checkin_data
+      - else
+        = form_tag survival_checkin_upload_team_path(uid: @team.uid), {multipart: true, method: :post} do
+          %p
+            Nahrát fotku:
+            = file_field_tag "checkin_photo" #, "PDF prezentace"
+          %p
+            Jména členů hlídky na fotce zleva doprava:
+            %br
+            = text_field_tag "checkin_data", @team.checkin_data, style: "width: 56vw"
+          %p
+            = submit_tag "Nahrát", class: "btn btn-primary"
 
   - if !@team.new_supervisor_data.blank?
     %p Váš doprovod je #{@team.new_supervisor_data}.
   - else
     %p Váš nový doprovod se zatím nezaregistroval ...
 
-  - if @team.checkin_photo.file? and !@team.checkin_data.blank? and !@team.new_supervisor_data.blank?
+  - if ((@team.checkin_photo.file? and !@team.checkin_data.blank?) or @team.ts_checkin_override) and !@team.new_supervisor_data.blank?
     %h2 Odchod z Řevnic
 
     %p Z Řevnic odejděte po #{@team.trail.sub("á", "é")} turistické značce směrem na Kytín (pozor, od nádraží jde zelená dvěma směry – ta na Halouny pokračuje do Kytína jako zelená a ta na Řevnický les jde od kraje Řevnic na hřeben jako žlutá). Po značce jděte alespoň ke konci zástavby, zbytek cesty si plánujete sami.
@@ -93,8 +93,9 @@
 
       %p Vaše volba trasy, schopnost práce s mapou a s GPS a vhodné plánování postupu večer i zítra ráno do cíle se hodnotí jako jedna z disciplín, můžete získat až #{Team.points_survival_night_gps_max} bodů.
 
-      - if @team.ts_survival_hotspot
-        %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.
+      - if @team.ts_survival_hotspot or @team.ts_hotspot_override
+        - if @team.ts_survival_hotspot
+          %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.
 
         %p Vaším úkolem je najít si místo na táboření v okruhu do 200 m od místa nalezení této zprávy, ovšem tak, abyste nebyli na dohled k jiné hlídce. Místo táboření volte podle sebe, musíte si postavit alespoň jeden stan. Spát v něm nemusíte. Oheň nesmíte rozdělávat. (ani na stávajících ohništích, ani na vařičích).
 
@@ -102,7 +103,7 @@
       - else
         %p Po příchodu na zadané místo hledejte tubu od šumáku (upřesňující popis místa: #{@team.hotspot[:detail]}). V ní najdete QR kód, který použijte, čímž ověříte svůj příchod na hotspot a následně se vám na této stránce níže zobrazí další instrukce.
 
-      - if @team.ts_survival_hotspot
+      - if @team.ts_survival_hotspot or @team.ts_hotspot_override
 
         %h2 Příchod na shromaždiště závodu
 

@@ -60,6 +60,8 @@
 #  checkin_data                  :text(65535)
 #  medical_data                  :text(65535)
 #  new_supervisor_data           :text(65535)
+#  ts_checkin_override           :datetime
+#  ts_hotspot_override           :datetime
 #
 
 require 'test_helper'

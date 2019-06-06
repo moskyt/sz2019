@@ -21,3 +21,9 @@
   %p Zatím nenahráli.
 - else
   %p= @team.checkin_data
+
+- if @team.checkin_data.blank? or @team.checkin_photo.file?
+  %p
+    Hlídka nedokázala selfie vyfotit a nahrát a jste pořád v Řevnicích? Klikni na tlačítko níže a zobrazí se jim pokyny k dalšímu postupu i tak.
+  %p
+    = link_to "Odškrtnout - nesplnili, ale jdeme dál", survival_checkin_override_path(suid: @team.survival_uid), method: :post, class: "btn btn-danger"

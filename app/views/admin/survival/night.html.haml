@@ -40,6 +40,10 @@
   %p Příchod na místo přespání ověřen v #{@team.ts_survival_hotspot}.
 - else
   %p Zatím ne.
+  %p Nenašli jste kešku nebo jste museli zakempit někde jinde, protože hlídka na dané místo nedošla? Klikni na tlačítko níže a zobrazí se jim pokyny k dalšímu postupu i tak.
+  %p
+    = link_to "Odškrtnout - nesplnili, ale jdeme dál", survival_hotspot_override_path(suid: @team.survival_uid), method: :post, class: "btn btn-danger"
+
 
 %h3 Hodnocení přespání
 

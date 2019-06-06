@@ -47,6 +47,9 @@ Rails.application.routes.draw do
   patch '/hps/:suid/night' => "admin/survival#night"
   get '/hps/:suid/travel' => "admin/survival#travel", as: :survival_travel
   patch '/hps/:suid/travel' => "admin/survival#travel"
+  post '/hps/:suid/checkin_override' => "admin/survival#checkin_override", as: :survival_checkin_override
+  post '/hps/:suid/hotspot_override' => "admin/survival#hotspot_override", as: :survival_hotspot_override
+
 
   get '/race/point/:rpuid' => "admin/race#point", as: :race_point
   post '/race/point/:rpuid' => "admin/race#point"

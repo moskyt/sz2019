@@ -17,15 +17,27 @@ class Admin::SurvivalController < ApplicationController
   def supervisor
     if request.patch?
       @team.update_attribute :new_supervisor_data, params.dig(:team, :new_supervisor_data)
-      flash[:notice] = "Změny uloženy."
+      flash.now[:notice] = "Změny uloženy."
     end
+  end
+
+  def checkin_override
+    @team.update_attribute :ts_checkin_override, Time.now
+    flash.now[:notice] = "Marnisti označeni, jede se dál"
+    render action: :travel
+  end
+
+  def hotspot_override
+    @team.update_attribute :ts_hotspot_override, Time.now
+    flash.now[:notice] = "Marnisti označeni, jede se dál"
+    render action: :night
   end
 
   def travel
     if request.patch?
       @team.update_attribute :points_survival_travel, params.dig(:team, :points_survival_travel)
       @team.update_attribute :medical_data, params.dig(:team, :medical_data)
-      flash[:notice] = "Změny uloženy."
+      flash.now[:notice] = "Změny uloženy."
     end
   end
 
@@ -37,14 +49,14 @@ class Admin::SurvivalController < ApplicationController
       @team.update_attribute :points_survival_night_packing, params.dig(:team, :points_survival_night_packing)
       @team.update_attribute :points_survival_night_gps,     params.dig(:team, :points_survival_night_gps)
       @team.update_attribute :points_survival_night_moral,   params.dig(:team, :points_survival_night_moral)
-      flash[:notice] = "Změny uloženy."
+      flash.now[:notice] = "Změny uloženy."
     end
   end
 
   def dinner
     if request.patch?
       @team.update_attribute :points_survival_dinner, params.dig(:team, :points_survival_dinner)
-      flash[:notice] = "Změny uloženy. Za večeři #{@team.points_survival_dinner} b."
+      flash.now[:notice] = "Změny uloženy. Za večeři #{@team.points_survival_dinner} b."
     end
   end
 

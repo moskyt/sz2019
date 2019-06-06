@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190530133753) do
+ActiveRecord::Schema.define(version: 20190606083613) do
 
   create_table "parameters", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20190530133753) do
     t.text     "checkin_data",                  limit: 65535
     t.text     "medical_data",                  limit: 65535
     t.text     "new_supervisor_data",           limit: 65535
+    t.datetime "ts_checkin_override"
+    t.datetime "ts_hotspot_override"
   end
 
 end
