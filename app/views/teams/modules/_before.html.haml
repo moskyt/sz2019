@@ -10,7 +10,7 @@
   %p Vyplňte přihlášku na závod. Kromě kontaktních údajů a seznamu členů hlídky, kteří opravdu pojedou, si zvolíte variantu postupu na modulu Přežití a čas odjezdu vašeho vlaku na závod (kdo dřív přijde, ten dřív mele).
 
   - if !@team.replies_register.blank?
-    %p Vaši přihlášku jsme dostali a po uzávěrce ji vyhodnotíme.
+    %p Vaši přihlášku jsme dostali, děkujeme.
   - else
     %p Přihlášku na závod jste ještě nevyplnili, máte čas do #{Team.register_deadline.strftime("%d. %m. %Y %H:%M")} - zbývá #{test_time_widget(Team.register_deadline)}.
   %p
@@ -62,7 +62,7 @@
 - elsif @team.ts_rules_started and (@team.ts_rules_started + Team.rules_minutes.minutes).to_datetime < Time.now.to_datetime
   %p Test jste spustili a čas vám vypršel v #{(@team.ts_rules_started + Team.rules_minutes.minutes).to_datetime.strftime("%d. %m. %Y %H:%M")} – škoda, mohli jste mít až #{Team.points_before_rules_max} bodů.
 - elsif Time.now < Team.rules_deadline
-  %p Seznamte se s #{link_to "pravidly Svojsíkova závodu", "https://krizovatka.skaut.cz/zpravodajstvi/4120-pravidla-svojsikova-zavodu-2019?autologin=1", target: "_blank"}. Seznámení věnujte čas podle potřeby, při samotném vyplňování testu pravidla můžete použít také. V testu je #{Team.rules_questions.size} otázek, na odpovědi máte #{Team.rules_minutes} minut. 
+  %p Seznamte se s #{link_to "pravidly Svojsíkova závodu", "https://krizovatka.skaut.cz/zpravodajstvi/4120-pravidla-svojsikova-zavodu-2019?autologin=1", target: "_blank"}. Seznámení věnujte čas podle potřeby, při samotném vyplňování testu pravidla můžete použít také. V testu je #{Team.rules_questions.size} otázek, na odpovědi máte #{Team.rules_minutes} minut.
 
   %p Maximum za tuto disciplínu je #{Team.points_before_rules_max} bodů.
 
