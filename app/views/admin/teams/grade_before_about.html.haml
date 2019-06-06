@@ -11,9 +11,29 @@
       %table.table
         %tbody
           %tr
-            %th Představení družiny
+            %th Udělali to
             %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
-            %td (max=36)
+            %td (max=6)
+          %tr
+            %th Jsou tam fotky
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=6)
+          %tr
+            %th Vypadá to hezky
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=6)
+          %tr
+            %th Je to vtipné
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=6)
+          %tr
+            %th Jsou tam členové
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=6)
+          %tr
+            %th Dozvěděl jsem se o nich něco
+            %td= text_field_tag "points_about[#{team.id}][]", "", autocomplete: "off"
+            %td (max=6)
 
 
   = submit_tag "Uložit", class: "btn btn-primary"
