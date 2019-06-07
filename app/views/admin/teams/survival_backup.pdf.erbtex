@@ -26,7 +26,7 @@
 \begin{tabular}{p{6cm}p{10cm}}
 Hlídka: & <%= team.name %> \\
 Příjezd vlakem: & <%= team.train[:number] %>, <%= team.train[:departure] %> -- <%= team.train[:arrival] %> \\
-Hotspot pro přespání: & <%= team.hotspot[:name] %> \\
+Hotspot pro přespání: & (<%= team.hotspot[:number] %>) <%= team.hotspot[:name] %> \\
 Odchod po značce: & <%= team.trail %> \\
 Známá zdravotní omezení: & <%= team.medical_data %> \\
 Odkaz pro hodnocení a info: & <%= u = survival_dashboard_url(suid: team.survival_uid) %> \par
