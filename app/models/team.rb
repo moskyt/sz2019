@@ -74,18 +74,17 @@ class Team < ActiveRecord::Base
 
   RACEPOINTS = {
     1 =>  ["Televizní stanice", 36],
-    2 =>  ["Přijímací pohovor do dispečinku záchranky", 36],
-    3 =>  ["Redakce", 36],
-    4 =>  ["Stavba", 36],
-    5 =>  ["Call centrum", 36],
-    6 =>  ["Seznamovací agentura", 36],
-    7 =>  ["Doručovací služba", 36],
-    8 =>  ["Cykloškola", 36],
-    9 =>  ["Na pile", 36],
-    10 => ["Truhlářská dílna", 36],
-    11 => ["Logistické centrum", 36],
-    12 => ["Čínská restaurace", 36],
-    13 => ["Autobus", 36],
+    2 =>  ["Redakce", 36],
+    3 =>  ["Stavba", 36],
+    4 =>  ["Call centrum", 36],
+    5 =>  ["Seznamovací agentura", 36],
+    6 =>  ["Doručovací služba", 36],
+    7 =>  ["Cykloškola", 36],
+    8 =>  ["Na pile", 36],
+    9 ==> ["Truhlářská dílna", 36],
+    10 => ["Logistické centrum", 36],
+    11 => ["Čínská restaurace", 36],
+    12 => ["Autobus", 36],
   }
 
   def clear_everything_this_is_dangerous!
