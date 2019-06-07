@@ -1,7 +1,13 @@
 class Admin::AdminController < ApplicationController
 
-  http_basic_authenticate_with name: "zelena", password: "modra"
-
   layout "admin"
+  
+  before_action :http_basic_authenticate
+
+  def http_basic_authenticate
+    authenticate_or_request_with_http_basic do |name, password|
+      name == 'zelena' && password == 'modra'
+    end
+  end
   
 end

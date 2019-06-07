@@ -75,6 +75,7 @@ Rails.application.routes.draw do
         get :race
         get :before
         get :survival
+        get :survival_backup
         get :results
         get :grade_before_rules
         post :grade_before_rules

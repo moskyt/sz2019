@@ -1,0 +1,103 @@
+<% @latex_config={:parse_runs => 4} %>
+
+\documentclass[a4paper,twoside]{article}
+
+\usepackage{graphicx,array,longtable,booktabs,lscape,multicol,multirow}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1cm]{geometry}
+\sloppy
+
+\pagestyle{empty}
+\thispagestyle{empty}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+<% Team.find_each do |team| %>
+<% next unless team.train and team.hotspot and team.trail %>
+
+\section*{INFO PRO DOPROVOD -- rozhodčího}
+
+\subsection*{(ne pro původní doprovod hlídky -- doprovod musí být z jiného oddílu / střediska)}
+
+{\Large
+\begin{tabular}{p{6cm}p{10cm}}
+Hlídka: & <%= team.name %> \\
+Příjezd vlakem: & <%= team.train[:number] %>, <%= team.train[:departure] %> -- <%= team.train[:arrival] %> \\
+Hotspot pro přespání: & <%= team.hotspot[:name] %> \\
+Odchod po značce: & <%= team.trail %> \\
+Známá zdravotní omezení: & <%= team.medical_data %> \\
+Odkaz pro hodnocení a info: & <%= survival_dashboard_url(suid: team.survival_uid) %> \\
+\end{tabular}
+}
+
+\bigskip
+
+Jako první věc po převzetí nové hlídky (<%= team.name %>) na webu zadej svoje jméno+telefon do sekce Doprovod/odchod. \textbf{Pozor, je to jiný odkaz, než jaký jsi měl pro svoji původní hlídku, kam jsi zadával zdravotní omezení a body za disciplínu Doprava.} Přečti si zdravotní omezení svých dočasných svěřenců. Spočítej si je.
+
+\bigskip
+
+Toto jsou pokyny pro případ, že by se něco rozbilo, nepovedlo, nefungovalo, selhalo. Všechny informace již máš z webu, ale pro jistotu to hlavní opakujeme včetně záložních a nouzových postupů.
+
+\subsection*{Průběh v kostce}
+
+\begin{itemize}
+  \item hlídky se vyfotí na nádraží a nahrají fotku na web (= prezentace na závod, víme kdo tu skutečně je), pokud to hlídky nedají, můžeš jim na stránce pro doprovod (odkaz výše) odkliknout, že to nezvládli a že mají pokračovat dál
+  \item hlídky vědí, že mají vyrazit směr Vrážky (kóta 577 nad Kytínem)
+  \item cestou (před vstupem do lesa, příp. v turistickém přístřešku -- kvůli riziku požáru) vaří večeři, na kterou mají nakoupené suroviny, mohou použít vařič, NESMÍ ROZDĚLÁVAT OHEŇ
+  \item po ohodnocení večeře (až zadáš body na web) se hlídkám zobrazí hotspot na přespání (ten vidíš níže) 
+  \item na hotspotu hlídky hledají kešku s QR kódem, ten naskenují, zobrazí se jim instrukce na ráno
+  \item hlídky zatáboří, musí stavět stan (resp. celty, pokud je místo stanu používají), nezapomeň vše bodovoat
+  \item ráno ohlídej včasný odchod, i když pokud to hlídky zvládnou samostatně, dáš jim více bodů
+  \item doražte na start mezi sedmou a půl osmou, posnídejte a připravte se na modul Závod
+\end{itemize}
+
+\subsection*{Cíle (v pořadí priority)}
+
+\begin{enumerate}
+  \item být ráno na shromaždišti - na lesní křižovatce tvaru T nad Kytínem u velkého seníku, v mapě značeno jako `U Boudy', souřadnice 49.8527933N, 14.1914814E - tam je nutné být v 7:00 až 7:30 - pak začne modul závod! I kdyby se nic nepovedlo, spali jste pod kamenem a bez večeře, tak hlavně buďte ráno na startu = zabraň postupu úplně špatným směrem apod.
+  
+  \item přespat v lese, ideálně na zadaném hotspotu:
+
+\begin{tabular}{ll}
+místo: & <%= team.hotspot[:name] %> \\
+souřadnice: & <%= team.hotspot[:lat] %>N, <%= team.hotspot[:lng] %>E \\
+dohledávka kešky: & <%= team.hotspot[:detail] %> \\
+% mapa: & TBD \\
+\end{tabular}
+
+Pokud na hotspot nedojdete, nebo pokud tam nenajdete kešku s QR kódem (kindervajíčko) nebo pokud tam nebude signál apod., tak řekni hlídce, že má být v sedm ráno na shromaždišti a kde to je! Případně pokud signál je, tak jim můžeš opět odkliknout nenalezení a pokračování
+
+\item uvařit večeři (ale nezačít míchat těsto na knedlíky se setměním) -- ohlídej volbu místa kvůli riziku požáru
+\item odejít z Řevnic správným směrem po správné značce (jde jen o to, aby se hlídky co nejvíce rozprostřely do krajiny)
+\end{enumerate}
+
+\subsection*{Tvoje role:}
+\begin{itemize}
+  \item dohlédnout na bezpečný průběh
+  \item hlídku směřovat ke splnění časového plánu -- ano, chceme, aby to hlídka zvládla sama, ale je na tobě zamezit špatným nápadům a nevhodnému časovému postupu -- viz cíl (1) maximální priority viz výše -- hlavně ať jsou včas v cíli
+  \item obodovat, co je třeba
+\end{itemize}
+
+\subsection*{Bodování:}
+máš zhodnotit večeři, přespání a postup do cíle
+disciplíny a kritéria jsou na webu, stránku INFO máš mít s sebou vytištěnou
+nezapomeň, že jsi měl obodovat svoji původní hlídku v disciplíně Doprava na SZ modulu Před závodem (záložka Cesta/MED -- pozor, vyplň to své původní hlídce, ne této, kterou jsi právě přebral....!)
+
+\subsection*{V cíli:}
+
+\begin{itemize}
+  \item nahlaš rozhodčímu, že jste přišli (najdeš ho u cílového QR kódu)
+  \item pokud jsi nějaké body nevyplnil na webu (proto, že něco nefungovalo nebo proto, že nám to nechceš zjednodušit), nahlaš body 
+  \item vrať se k vlastním dětem, můžeš s nimi řešit snídani, baťůžky, pitný režim, dojmy a pojmy ...
+\end{itemize}
+
+\cleardoublepage
+<% end %>
+
+\end{document}
+
+
+

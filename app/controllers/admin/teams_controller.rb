@@ -1,8 +1,19 @@
 class Admin::TeamsController < Admin::AdminController
 
+  skip_before_action :http_basic_authenticate, only: [:survival_backup]
+  
   def index
   end
-
+  
+  def survival_backup
+    respond_to do |format|
+      format.pdf do
+        response.headers['Content-Disposition'] = "inline; filename=\"sz2019_preziti.pdf\""
+        render :layout => true
+      end
+    end
+  end
+  
   def new
     @team = Team.new
   end
