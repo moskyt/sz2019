@@ -81,7 +81,7 @@ class Team < ActiveRecord::Base
     6 =>  ["Doručovací služba", 36],
     7 =>  ["Cykloškola", 36],
     8 =>  ["Na pile", 36],
-    9 ==> ["Truhlářská dílna", 36],
+    9 =>  ["Truhlářská dílna", 36],
     10 => ["Logistické centrum", 36],
     11 => ["Čínská restaurace", 36],
     12 => ["Autobus", 36],
